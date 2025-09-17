@@ -1,0 +1,106 @@
+// MinecraftUI Layout Utilities
+
+// Display utilities
+.mc-d-none { display: none; }
+.mc-d-inline { display: inline; }
+.mc-d-inline-block { display: inline-block; }
+.mc-d-block { display: block; }
+.mc-d-table { display: table; }
+.mc-d-table-row { display: table-row; }
+.mc-d-table-cell { display: table-cell; }
+.mc-d-flex { display: flex; }
+.mc-d-inline-flex { display: inline-flex; }
+.mc-d-grid { display: grid; }
+
+// Flexbox utilities
+.mc-flex-row { flex-direction: row; }
+.mc-flex-row-reverse { flex-direction: row-reverse; }
+.mc-flex-col { flex-direction: column; }
+.mc-flex-col-reverse { flex-direction: column-reverse; }
+
+.mc-flex-wrap { flex-wrap: wrap; }
+.mc-flex-nowrap { flex-wrap: nowrap; }
+.mc-flex-wrap-reverse { flex-wrap: wrap-reverse; }
+
+.mc-justify-start { justify-content: flex-start; }
+.mc-justify-end { justify-content: flex-end; }
+.mc-justify-center { justify-content: center; }
+.mc-justify-between { justify-content: space-between; }
+.mc-justify-around { justify-content: space-around; }
+.mc-justify-evenly { justify-content: space-evenly; }
+
+.mc-items-start { align-items: flex-start; }
+.mc-items-end { align-items: flex-end; }
+.mc-items-center { align-items: center; }
+.mc-items-baseline { align-items: baseline; }
+.mc-items-stretch { align-items: stretch; }
+
+.mc-content-start { align-content: flex-start; }
+.mc-content-end { align-content: flex-end; }
+.mc-content-center { align-content: center; }
+.mc-content-between { align-content: space-between; }
+.mc-content-around { align-content: space-around; }
+.mc-content-stretch { align-content: stretch; }
+
+.mc-self-auto { align-self: auto; }
+.mc-self-start { align-self: flex-start; }
+.mc-self-end { align-self: flex-end; }
+.mc-self-center { align-self: center; }
+.mc-self-stretch { align-self: stretch; }
+.mc-self-baseline { align-self: baseline; }
+
+// Flex grow/shrink
+.mc-flex-1 { flex: 1 1 0; }
+.mc-flex-auto { flex: 1 1 auto; }
+.mc-flex-initial { flex: 0 1 auto; }
+.mc-flex-none { flex: none; }
+
+.mc-grow { flex-grow: 1; }
+.mc-grow-0 { flex-grow: 0; }
+.mc-shrink { flex-shrink: 1; }
+.mc-shrink-0 { flex-shrink: 0; }
+
+// Position utilities
+.mc-static { position: static; }
+.mc-fixed { position: fixed; }
+.mc-absolute { position: absolute; }
+.mc-relative { position: relative; }
+.mc-sticky { position: sticky; }
+
+// Width and height utilities
+.mc-w-auto { width: auto; }
+.mc-w-full { width: 100%; }
+.mc-w-screen { width: 100vw; }
+.mc-w-min { width: min-content; }
+.mc-w-max { width: max-content; }
+
+.mc-h-auto { height: auto; }
+.mc-h-full { height: 100%; }
+.mc-h-screen { height: 100vh; }
+.mc-h-min { height: min-content; }
+.mc-h-max { height: max-content; }
+
+// Overflow utilities
+.mc-overflow-auto { overflow: auto; }
+.mc-overflow-hidden { overflow: hidden; }
+.mc-overflow-visible { overflow: visible; }
+.mc-overflow-scroll { overflow: scroll; }
+
+.mc-overflow-x-auto { overflow-x: auto; }
+.mc-overflow-x-hidden { overflow-x: hidden; }
+.mc-overflow-x-visible { overflow-x: visible; }
+.mc-overflow-x-scroll { overflow-x: scroll; }
+
+.mc-overflow-y-auto { overflow-y: auto; }
+.mc-overflow-y-hidden { overflow-y: hidden; }
+.mc-overflow-y-visible { overflow-y: visible; }
+.mc-overflow-y-scroll { overflow-y: scroll; }
+
+// Z-index utilities
+.mc-z-0 { z-index: 0; }
+.mc-z-10 { z-index: 10; }
+.mc-z-20 { z-index: 20; }
+.mc-z-30 { z-index: 30; }
+.mc-z-40 { z-index: 40; }
+.mc-z-50 { z-index: 50; }
+.mc-z-auto { z-index: auto; }

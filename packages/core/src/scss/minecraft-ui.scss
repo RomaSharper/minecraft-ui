@@ -1,0 +1,36 @@
+// MinecraftUI Core Styles
+// Main entry point for all styles
+
+// 1. Core variables and functions
+@import 'core/mixins';
+@import 'core/variables';
+@import 'core/functions';
+
+// 2. Base styles
+@import 'base/reset';
+@import 'utilities/typography';
+@import 'base/animations';
+
+// 3. Component styles
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/forms';
+@import 'components/navigation';
+@import 'components/modals';
+@import 'components/progress';
+@import 'components/tabs';
+@import 'components/inventory';
+@import 'components/tooltips';
+@import 'components/toasts';
+
+// 4. Layout utilities
+@import 'utilities/spacing';
+@import 'utilities/typography';
+@import 'utilities/colors';
+@import 'utilities/layout';
+@import 'utilities/responsive';
+
+// 5. Themes
+@import 'themes/default';
+@import 'themes/dark';
+@import 'themes/neon';

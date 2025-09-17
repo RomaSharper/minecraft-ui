@@ -1,0 +1,63 @@
+@import '../core/mixins';
+@import '../core/variables';
+
+// MinecraftUI Typography
+
+.mc-base {
+  font-family: $mc-font-family-base;
+  font-size: $mc-font-size-base;
+  line-height: $mc-line-height-base;
+  color: $mc-ui-text;
+  @include mc-pixelated();
+}
+
+// Headings
+.mc-h1, .mc-h2, .mc-h3, .mc-h4, .mc-h5, .mc-h6,
+h1, h2, h3, h4, h5, h6 {
+  font-family: $mc-font-family-heading;
+  font-weight: $mc-font-weight-bold;
+  line-height: $mc-line-height-sm;
+  color: $mc-ui-text;
+  margin-bottom: $mc-space-3;
+}
+
+.mc-h1, h1 { @include mc-heading(1); }
+.mc-h2, h2 { @include mc-heading(2); }
+.mc-h3, h3 { @include mc-heading(3); }
+.mc-h4, h4 { @include mc-heading(4); }
+.mc-h5, h5 { @include mc-heading(5); }
+.mc-h6, h6 { @include mc-heading(6); }
+
+// Text utilities
+.mc-text-xs { font-size: $mc-font-size-xs; }
+.mc-text-sm { font-size: $mc-font-size-sm; }
+.mc-text-base { font-size: $mc-font-size-base; }
+.mc-text-lg { font-size: $mc-font-size-lg; }
+.mc-text-xl { font-size: $mc-font-size-xl; }
+.mc-text-2xl { font-size: $mc-font-size-2xl; }
+.mc-text-3xl { font-size: $mc-font-size-3xl; }
+
+.mc-font-normal { font-weight: $mc-font-weight-normal; }
+.mc-font-bold { font-weight: $mc-font-weight-bold; }
+
+.mc-text-left { text-align: left; }
+.mc-text-center { text-align: center; }
+.mc-text-right { text-align: right; }
+
+.mc-text-uppercase { text-transform: uppercase; }
+.mc-text-lowercase { text-transform: lowercase; }
+.mc-text-capitalize { text-transform: capitalize; }
+
+// Color utilities
+.mc-text-primary { color: $mc-info; }
+.mc-text-success { color: $mc-success; }
+.mc-text-warning { color: $mc-warning; }
+.mc-text-error { color: $mc-error; }
+.mc-text-muted { color: $mc-ui-text-muted; }
+
+// Minecraft block colors
+.mc-text-grass { color: $mc-grass; }
+.mc-text-stone { color: $mc-stone; }
+.mc-text-gold { color: $mc-gold; }
+.mc-text-diamond { color: $mc-diamond; }
+.mc-text-redstone { color: $mc-redstone; }

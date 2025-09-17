@@ -1,0 +1,31 @@
+// MinecraftUI Color Utilities
+
+@import '../core/variables';
+
+// Background colors
+.mc-bg-primary { background-color: $mc-info; }
+.mc-bg-success { background-color: $mc-success; }
+.mc-bg-warning { background-color: $mc-warning; }
+.mc-bg-error { background-color: $mc-error; }
+
+// Minecraft block backgrounds
+.mc-bg-grass { background-color: $mc-grass; }
+.mc-bg-stone { background-color: $mc-stone; }
+.mc-bg-dirt { background-color: $mc-dirt; }
+.mc-bg-wood { background-color: $mc-wood; }
+.mc-bg-gold { background-color: $mc-gold; }
+.mc-bg-diamond { background-color: $mc-diamond; }
+.mc-bg-redstone { background-color: $mc-redstone; }
+.mc-bg-coal { background-color: $mc-coal; }
+
+// UI backgrounds
+.mc-bg-base { background-color: $mc-ui-bg; }
+.mc-bg-dark { background-color: $mc-ui-bg-dark; }
+.mc-bg-light { background-color: $mc-ui-bg-light; }
+
+// Border colors
+.mc-border-primary { border-color: $mc-info; }
+.mc-border-success { border-color: $mc-success; }
+.mc-border-warning { border-color: $mc-warning; }
+.mc-border-error { border-color: $mc-error; }
+.mc-border-base { border-color: $mc-ui-border; }

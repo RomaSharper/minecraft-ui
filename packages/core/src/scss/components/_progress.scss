@@ -1,0 +1,85 @@
+// MinecraftUI Progress Components
+
+@import '../core/mixins';
+@import '../core/variables';
+
+.mc-progress {
+  display: flex;
+  height: $mc-progress-height;
+  background: $mc-progress-bg;
+  @include mc-block-inset($mc-ui-border);
+  position: relative;
+  overflow: hidden;
+  margin: $mc-space-2 0;
+
+  .mc-progress-bar {
+    height: 100%;
+    background: $mc-info;
+    transition: width $mc-transition-duration-slow $mc-transition-timing-function;
+    position: relative;
+    min-width: 0;
+
+    // Animated shine effect
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+                      90deg,
+                      transparent,
+                      rgba(255, 255, 255, 0.3),
+                      transparent
+      );
+      animation: mcShine 2s infinite;
+    }
+  }
+
+  .mc-progress-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: $mc-font-size-sm;
+    font-weight: $mc-font-weight-bold;
+    color: $mc-ui-text;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    z-index: 1;
+  }
+}
+
+// Progress variants
+.mc-progress-health {
+  @include mc-progress-variant($mc-error);
+}
+
+.mc-progress-hunger {
+  @include mc-progress-variant(#CD853F);
+}
+
+.mc-progress-xp {
+  @include mc-progress-variant(#7CFC00);
+}
+
+.mc-progress-mana {
+  @include mc-progress-variant($mc-info);
+}
+
+// Progress sizes
+.mc-progress-sm {
+  height: 16px;
+
+  .mc-progress-label {
+    font-size: $mc-font-size-xs;
+  }
+}
+
+.mc-progress-lg {
+  height: 24px;
+
+  .mc-progress-label {
+    font-size: $mc-font-size-base;
+  }
+}

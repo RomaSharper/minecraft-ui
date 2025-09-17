@@ -1,0 +1,135 @@
+// MinecraftUI Toast Components
+
+@import '../core/mixins';
+@import '../core/variables';
+
+.mc-toast-container {
+  position: fixed;
+  top: $mc-toast-offset;
+  right: $mc-toast-offset;
+  z-index: $mc-z-index-toast;
+  display: flex;
+  flex-direction: column;
+  gap: $mc-space-2;
+  max-width: $mc-toast-width;
+  pointer-events: none;
+}
+
+.mc-toast {
+  display: flex;
+  align-items: flex-start;
+  padding: $mc-space-3;
+  background: $mc-ui-bg;
+  @include mc-block-border($mc-ui-border);
+  pointer-events: auto;
+  transform: translateX(100%);
+  transition: transform $mc-transition-duration-slow $mc-transition-timing-function;
+  margin-bottom: $mc-space-2;
+
+  &.mc-toast-show {
+    transform: translateX(0);
+  }
+
+  &.mc-toast-hide {
+    transform: translateX(100%);
+  }
+
+  .mc-toast-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: $mc-space-2;
+
+    .mc-toast-icon {
+      width: 24px;
+      height: 24px;
+      background: $mc-info;
+      @include mc-block-border($mc-info);
+      margin-right: $mc-space-2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: $mc-font-weight-bold;
+      font-size: $mc-font-size-sm;
+      color: $mc-ui-text;
+    }
+
+    .mc-toast-title {
+      flex: 1;
+      font-weight: $mc-font-weight-bold;
+      color: $mc-ui-text;
+      margin: 0;
+    }
+
+    .mc-toast-close {
+      background: none;
+      border: none;
+      color: $mc-ui-text-muted;
+      cursor: pointer;
+      font-size: $mc-font-size-lg;
+      line-height: 1;
+      padding: 0;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        color: $mc-ui-text;
+      }
+    }
+  }
+
+  .mc-toast-body {
+    color: $mc-ui-text;
+    font-size: $mc-font-size-sm;
+    line-height: $mc-line-height-base;
+  }
+}
+
+// Toast variants
+.mc-toast-success {
+  .mc-toast-icon {
+    background: $mc-success;
+    @include mc-block-border($mc-success);
+  }
+
+  .mc-toast-title {
+    color: $mc-success;
+  }
+}
+
+.mc-toast-warning {
+  .mc-toast-icon {
+    background: $mc-warning;
+    @include mc-block-border($mc-warning);
+    color: $mc-ui-text-dark;
+  }
+
+  .mc-toast-title {
+    color: $mc-warning;
+  }
+}
+
+.mc-toast-error {
+  .mc-toast-icon {
+    background: $mc-error;
+    @include mc-block-border($mc-error);
+  }
+
+  .mc-toast-title {
+    color: $mc-error;
+  }
+}
+
+.mc-toast-info {
+  .mc-toast-icon {
+    background: $mc-info;
+    @include mc-block-border($mc-info);
+  }
+
+  .mc-toast-title {
+    color: $mc-info;
+  }
+}

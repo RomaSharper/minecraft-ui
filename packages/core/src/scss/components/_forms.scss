@@ -1,0 +1,119 @@
+// MinecraftUI Form Components
+
+@import '../core/mixins';
+@import '../core/variables';
+
+.mc-form-group {
+  margin-bottom: $mc-form-group-margin;
+}
+
+.mc-label {
+  display: block;
+  margin-bottom: $mc-space-1;
+  font-weight: $mc-font-weight-bold;
+  font-size: $mc-font-size-base;
+  color: $mc-ui-text;
+}
+
+.mc-input,
+.mc-textarea,
+.mc-select {
+  @include mc-form-control-base();
+  @include mc-block-inset($mc-ui-border);
+
+  &.mc-input-sm {
+    padding: $mc-space-1;
+    font-size: $mc-font-size-sm;
+  }
+
+  &.mc-input-lg {
+    padding: $mc-space-3;
+    font-size: $mc-font-size-lg;
+  }
+}
+
+.mc-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.mc-select {
+  cursor: pointer;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23ffffff" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  padding-right: 40px;
+}
+
+// Form validation states
+.mc-input-success,
+.mc-textarea-success,
+.mc-select-success {
+  @include mc-form-validation-state($mc-success);
+}
+
+.mc-input-warning,
+.mc-textarea-warning,
+.mc-select-warning {
+  @include mc-form-validation-state($mc-warning);
+}
+
+.mc-input-error,
+.mc-textarea-error,
+.mc-select-error {
+  @include mc-form-validation-state($mc-error);
+}
+
+// Form feedback
+.mc-form-help {
+  margin-top: $mc-space-1;
+  font-size: $mc-font-size-sm;
+  color: $mc-ui-text-muted;
+}
+
+.mc-form-error {
+  margin-top: $mc-space-1;
+  font-size: $mc-font-size-sm;
+  color: $mc-error;
+}
+
+.mc-form-success {
+  margin-top: $mc-space-1;
+  font-size: $mc-font-size-sm;
+  color: $mc-success;
+}
+
+// Checkbox and radio
+.mc-checkbox,
+.mc-radio {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: $mc-space-2;
+  cursor: pointer;
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    margin-right: $mc-space-2;
+    cursor: pointer;
+    @include mc-block-inset($mc-ui-border);
+
+    &:checked {
+      background: $mc-info;
+      @include mc-block-border($mc-info);
+    }
+
+    &:focus {
+      @include mc-focus-ring($mc-info);
+    }
+  }
+
+  .mc-checkbox-label,
+  .mc-radio-label {
+    font-size: $mc-font-size-base;
+    color: $mc-ui-text;
+    cursor: pointer;
+  }
+}

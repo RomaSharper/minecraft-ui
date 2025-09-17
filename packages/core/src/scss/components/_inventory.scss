@@ -1,0 +1,98 @@
+// MinecraftUI Inventory Components
+
+@import '../core/mixins';
+@import '../core/variables';
+
+.mc-inventory {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: $mc-inventory-gap;
+  background: $mc-ui-bg;
+  @include mc-block-border($mc-ui-border);
+  padding: $mc-space-2;
+  margin: $mc-space-3 0;
+
+  .mc-slot {
+    aspect-ratio: 1;
+    width: $mc-inventory-slot-size;
+    height: $mc-inventory-slot-size;
+    background: $mc-ui-bg-dark;
+    @include mc-block-inset($mc-ui-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: $mc-font-size-lg;
+    position: relative;
+    transition: $mc-transition-background;
+
+    &:hover {
+      background: $mc-ui-hover;
+    }
+
+    &:active {
+      @include mc-block-pressed($mc-ui-border);
+      transform: translate(1px, 1px);
+    }
+
+    &.occupied {
+      background: lighten($mc-ui-bg-dark, 5%);
+      @include mc-block-outset($mc-ui-border);
+    }
+
+    &.selected {
+      background: $mc-info;
+      @include mc-block-border($mc-info);
+    }
+
+    .mc-slot-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .mc-slot-icon {
+      font-size: $mc-font-size-xl;
+      line-height: 1;
+      @include mc-pixelated();
+    }
+
+    .mc-slot-count {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      font-size: $mc-font-size-xs;
+      font-weight: $mc-font-weight-bold;
+      color: $mc-ui-text;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 1px 3px;
+      border-radius: 2px;
+      min-width: 14px;
+      text-align: center;
+    }
+  }
+}
+
+// Inventory variants
+.mc-inventory-hotbar {
+  grid-template-columns: repeat(9, 1fr);
+  padding: $mc-space-1;
+
+  .mc-slot {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.mc-inventory-chest {
+  grid-template-columns: repeat(9, 1fr);
+}
+
+.mc-inventory-crafting {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 200px;
+}

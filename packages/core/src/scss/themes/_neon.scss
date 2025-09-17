@@ -1,0 +1,86 @@
+// MinecraftUI Neon Theme
+
+@import '../core/variables';
+
+.mc-theme-neon {
+  $neon-primary: #00FFFF;
+  $neon-secondary: #FF00FF;
+  $neon-accent: #FFFF00;
+  $neon-bg: #0A0A0A;
+
+  --mc-ui-bg: #{$neon-bg};
+  --mc-ui-bg-dark: #{darken($neon-bg, 2%)};
+  --mc-ui-text: #{$neon-primary};
+  --mc-ui-border: #{$neon-primary};
+
+  background: var(--mc-ui-bg);
+  color: var(--mc-ui-text);
+
+  .mc-btn {
+    background: transparent;
+    color: $neon-primary;
+    border: $mc-border-width solid $neon-primary;
+    box-shadow: 0 0 10px $neon-primary;
+    text-shadow: 0 0 5px $neon-primary;
+
+    &:hover:not(:disabled) {
+      box-shadow: 0 0 20px $neon-primary;
+      background: rgba($neon-primary, 0.1);
+    }
+
+    &.mc-btn-redstone {
+      color: $neon-secondary;
+      border-color: $neon-secondary;
+      box-shadow: 0 0 10px $neon-secondary;
+      text-shadow: 0 0 5px $neon-secondary;
+
+      &:hover:not(:disabled) {
+        box-shadow: 0 0 20px $neon-secondary;
+        background: rgba($neon-secondary, 0.1);
+      }
+    }
+
+    &.mc-btn-gold {
+      color: $neon-accent;
+      border-color: $neon-accent;
+      box-shadow: 0 0 10px $neon-accent;
+      text-shadow: 0 0 5px $neon-accent;
+
+      &:hover:not(:disabled) {
+        box-shadow: 0 0 20px $neon-accent;
+        background: rgba($neon-accent, 0.1);
+      }
+    }
+  }
+
+  .mc-card {
+    background: rgba($neon-bg, 0.8);
+    border: $mc-border-width solid $neon-primary;
+    box-shadow: 0 0 15px rgba($neon-primary, 0.5);
+  }
+
+  .mc-input,
+  .mc-textarea,
+  .mc-select {
+    background: rgba($neon-bg, 0.9);
+    border: $mc-border-width solid $neon-primary;
+    color: $neon-primary;
+    box-shadow: inset 0 0 10px rgba($neon-primary, 0.3);
+
+    &:focus {
+      box-shadow: inset 0 0 15px rgba($neon-primary, 0.5);
+      border-color: $neon-primary;
+    }
+  }
+
+  .mc-progress-bar {
+    background: linear-gradient(90deg, $neon-primary, $neon-secondary);
+    box-shadow: 0 0 10px $neon-primary;
+  }
+
+  .mc-modal-content {
+    background: $neon-bg;
+    border: $mc-border-width solid $neon-primary;
+    box-shadow: 0 0 30px rgba($neon-primary, 0.7);
+  }
+}

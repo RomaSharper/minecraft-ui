@@ -1,0 +1,203 @@
+// MinecraftUI Core Variables
+
+// ================================
+// COLOR PALETTE
+// ================================
+
+// Minecraft block colors
+$mc-grass: #7CB342 !default;
+$mc-dirt: #8D6E63 !default;
+$mc-stone: #9E9E9E !default;
+$mc-cobblestone: #757575 !default;
+$mc-wood: #8D6E63 !default;
+$mc-leaves: #4CAF50 !default;
+$mc-water: #2196F3 !default;
+$mc-lava: #FF5722 !default;
+$mc-gold: #FFC107 !default;
+$mc-iron: #ECEFF1 !default;
+$mc-diamond: #00BCD4 !default;
+$mc-redstone: #F44336 !default;
+$mc-coal: #424242 !default;
+$mc-sand: #FDD835 !default;
+$mc-snow: #FAFAFA !default;
+$mc-night: #1A1A1A !default;
+
+// UI base colors
+$mc-ui-bg: #3E3E3E !default;
+$mc-ui-bg-dark: #2E2E2E !default;
+$mc-ui-bg-light: #4E4E4E !default;
+$mc-ui-border: #8B8B8B !default;
+$mc-ui-border-light: #ABABAB !default;
+$mc-ui-border-dark: #5B5B5B !default;
+$mc-ui-hover: #5E5E5E !default;
+$mc-ui-active: #1E1E1E !default;
+$mc-ui-text: #FFFFFF !default;
+$mc-ui-text-dark: #3E3E3E !default;
+$mc-ui-text-muted: #AAAAAA !default;
+
+// State colors
+$mc-success: $mc-grass !default;
+$mc-warning: $mc-gold !default;
+$mc-error: $mc-redstone !default;
+$mc-info: $mc-diamond !default;
+
+// ================================
+// TYPOGRAPHY
+// ================================
+
+// Font families (pixel-style fonts)
+$mc-font-family-base: 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace !default;
+$mc-font-family-heading: $mc-font-family-base !default;
+
+// Font sizes
+$mc-font-size-xs: 10px !default;
+$mc-font-size-sm: 12px !default;
+$mc-font-size-base: 14px !default;
+$mc-font-size-md: $mc-font-size-base !default;
+$mc-font-size-lg: 16px !default;
+$mc-font-size-xl: 20px !default;
+$mc-font-size-2xl: 24px !default;
+$mc-font-size-3xl: 32px !default;
+
+// Font weights
+$mc-font-weight-normal: 400 !default;
+$mc-font-weight-bold: 700 !default;
+
+// Line heights
+$mc-line-height-base: 1.5 !default;
+$mc-line-height-sm: 1.25 !default;
+$mc-line-height-lg: 1.75 !default;
+
+// ================================
+// SPACING
+// ================================
+
+// Base unit (8px grid like Minecraft blocks)
+$mc-spacer: 8px !default;
+
+// Spacing scale
+$mc-space-0: 0 !default;
+$mc-space-1: $mc-spacer !default; // 8px
+$mc-space-2: $mc-spacer * 2 !default; // 16px
+$mc-space-3: $mc-spacer * 3 !default; // 24px
+$mc-space-4: $mc-spacer * 4 !default; // 32px
+$mc-space-5: $mc-spacer * 5 !default; // 40px
+$mc-space-6: $mc-spacer * 6 !default; // 48px
+$mc-space-8: $mc-spacer * 8 !default; // 64px
+
+// Component specific spacing
+$mc-btn-padding-y: $mc-space-2 !default;
+$mc-btn-padding-x: $mc-space-3 !default;
+$mc-btn-padding-sm-y: $mc-space-1 !default;
+$mc-btn-padding-sm-x: $mc-space-2 !default;
+$mc-btn-padding-lg-y: $mc-space-3 !default;
+$mc-btn-padding-lg-x: $mc-space-4 !default;
+
+$mc-card-padding: $mc-space-3 !default;
+$mc-modal-padding: $mc-space-3 !default;
+$mc-form-group-margin: $mc-space-3 !default;
+
+// ================================
+// BORDERS
+// ================================
+
+// Border widths
+$mc-border-width: 2px !default;
+$mc-border-width-thick: 4px !default;
+
+// Border radius (minimal for pixel art style)
+$mc-border-radius-base: 0px !default;
+$mc-border-radius-sm: 2px !default;
+$mc-border-radius-md: 4px !default;
+
+// ================================
+// SHADOWS AND EFFECTS
+// ================================
+
+// Block shadow effect (3D appearance)
+$mc-shadow-light: rgba(255, 255, 255, 0.3) !default;
+$mc-shadow-dark: rgba(0, 0, 0, 0.3) !default;
+
+// Box shadows
+$mc-box-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1) !default;
+$mc-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !default;
+$mc-box-shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.15) !default;
+
+// ================================
+// TRANSITIONS
+// ================================
+
+// Transition durations
+$mc-transition-duration-fast: 0.1s !default;
+$mc-transition-duration-base: 0.2s !default;
+$mc-transition-duration-slow: 0.3s !default;
+
+// Transition timing functions
+$mc-transition-timing-function: ease !default;
+
+// Common transitions
+$mc-transition-color: color $mc-transition-duration-base $mc-transition-timing-function !default;
+$mc-transition-background: background-color $mc-transition-duration-base $mc-transition-timing-function !default;
+$mc-transition-border: border-color $mc-transition-duration-base $mc-transition-timing-function !default;
+$mc-transition-transform: transform $mc-transition-duration-fast $mc-transition-timing-function !default;
+$mc-transition-all: all $mc-transition-duration-base $mc-transition-timing-function !default;
+
+// ================================
+// Z-INDEX SCALE
+// ================================
+
+$mc-z-index-dropdown: 1000 !default;
+$mc-z-index-sticky: 1010 !default;
+$mc-z-index-fixed: 1020 !default;
+$mc-z-index-modal-backdrop: 1040 !default;
+$mc-z-index-modal: 1050 !default;
+$mc-z-index-popover: 1060 !default;
+$mc-z-index-tooltip: 1070 !default;
+$mc-z-index-toast: 1080 !default;
+
+// ================================
+// BREAKPOINTS (Responsive)
+// ================================
+
+$mc-breakpoint-xs: 0 !default;
+$mc-breakpoint-sm: 576px !default;
+$mc-breakpoint-md: 768px !default;
+$mc-breakpoint-lg: 992px !default;
+$mc-breakpoint-xl: 1200px !default;
+$mc-breakpoint-xxl: 1400px !default;
+
+// Breakpoints map for easier iteration
+$mc-breakpoints: (
+        xs: $mc-breakpoint-xs,
+        sm: $mc-breakpoint-sm,
+        md: $mc-breakpoint-md,
+        lg: $mc-breakpoint-lg,
+        xl: $mc-breakpoint-xl,
+        xxl: $mc-breakpoint-xxl
+) !default;
+
+// ================================
+// COMPONENT SPECIFIC VARIABLES
+// ================================
+
+// Progress bars
+$mc-progress-height: 20px !default;
+$mc-progress-bg: $mc-ui-bg-dark !default;
+
+// Inventory
+$mc-inventory-slot-size: 48px !default;
+$mc-inventory-gap: 2px !default;
+
+// Modal
+$mc-modal-backdrop-opacity: 0.8 !default;
+$mc-modal-max-width: 90vw !default;
+$mc-modal-max-height: 90vh !default;
+
+// Tooltips
+$mc-tooltip-bg: $mc-ui-bg !default;
+$mc-tooltip-color: $mc-ui-text !default;
+$mc-tooltip-padding: $mc-space-1 $mc-space-2 !default;
+
+// Toast notifications
+$mc-toast-width: 320px !default;
+$mc-toast-offset: 20px !default;

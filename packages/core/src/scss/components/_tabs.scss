@@ -1,0 +1,77 @@
+// MinecraftUI Tab Components
+
+@import '../core/mixins';
+@import '../core/variables';
+
+.mc-tabs {
+  margin: $mc-space-3 0;
+
+  .mc-tab-nav {
+    display: flex;
+    background: $mc-ui-bg-dark;
+    @include mc-block-border($mc-ui-border);
+    margin-bottom: 0;
+    list-style: none;
+    padding: 0;
+
+    .mc-tab-button {
+      display: block;
+      padding: $mc-space-2 $mc-space-3;
+      background: darken($mc-ui-bg, 5%);
+      color: $mc-ui-text;
+      border: none;
+      border-right: $mc-border-width solid $mc-ui-border;
+      cursor: pointer;
+      font-family: $mc-font-family-base;
+      font-size: $mc-font-size-base;
+      transition: $mc-transition-background;
+
+      &:last-child {
+        border-right: none;
+      }
+
+      &:hover:not(.active) {
+        background: $mc-ui-hover;
+      }
+
+      &:active {
+        @include mc-block-pressed($mc-ui-border);
+        transform: translate(1px, 1px);
+      }
+
+      &.active {
+        background: $mc-ui-bg;
+        border-bottom-color: $mc-ui-bg;
+        position: relative;
+        z-index: 1;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -#{$mc-border-width};
+          left: 0;
+          right: 0;
+          height: $mc-border-width;
+          background: $mc-ui-bg;
+        }
+      }
+    }
+  }
+
+  .mc-tab-content {
+    background: $mc-ui-bg;
+    @include mc-block-border($mc-ui-border);
+    border-top: none;
+    padding: $mc-space-3;
+    min-height: 200px;
+
+    .mc-tab-pane {
+      display: none;
+
+      &.active {
+        display: block;
+        animation: mcFadeIn $mc-transition-duration-slow ease-out;
+      }
+    }
+  }
+}

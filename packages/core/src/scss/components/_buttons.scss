@@ -1,0 +1,127 @@
+// MinecraftUI Button Components
+
+@import '../core/mixins';
+@import '../core/variables';
+
+.mc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $mc-btn-padding-y $mc-btn-padding-x;
+  font-family: $mc-font-family-base;
+  font-size: $mc-font-size-base;
+  font-weight: $mc-font-weight-bold;
+  line-height: $mc-line-height-base;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background: $mc-ui-bg;
+  color: $mc-ui-text;
+  @include mc-block-border($mc-ui-border);
+  transition: $mc-transition-all;
+
+  &:hover:not(:disabled) {
+    background: $mc-ui-hover;
+    text-decoration: none;
+  }
+
+  &:active:not(:disabled) {
+    @include mc-block-pressed($mc-ui-border);
+    transform: translate(1px, 1px);
+  }
+
+  &:focus {
+    @include mc-focus-ring($mc-info);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+
+    &:active {
+      transform: none;
+      @include mc-block-border($mc-ui-border);
+    }
+  }
+}
+
+// Button variants
+.mc-btn-grass {
+  @include mc-button-variant($mc-grass, $mc-ui-text);
+}
+
+.mc-btn-stone {
+  @include mc-button-variant($mc-stone, $mc-ui-text-dark);
+}
+
+.mc-btn-gold {
+  @include mc-button-variant($mc-gold, $mc-ui-text-dark);
+}
+
+.mc-btn-diamond {
+  @include mc-button-variant($mc-diamond, $mc-ui-text);
+}
+
+.mc-btn-redstone {
+  @include mc-button-variant($mc-redstone, $mc-ui-text);
+}
+
+.mc-btn-success {
+  @include mc-button-variant($mc-success, $mc-ui-text);
+}
+
+.mc-btn-warning {
+  @include mc-button-variant($mc-warning, $mc-ui-text-dark);
+}
+
+.mc-btn-error {
+  @include mc-button-variant($mc-error, $mc-ui-text);
+}
+
+// Button sizes
+.mc-btn-sm {
+  @include mc-button-size($mc-btn-padding-sm-y, $mc-btn-padding-sm-x, $mc-font-size-sm);
+}
+
+.mc-btn-lg {
+  @include mc-button-size($mc-btn-padding-lg-y, $mc-btn-padding-lg-x, $mc-font-size-lg);
+}
+
+// Button groups
+.mc-btn-group {
+  display: inline-flex;
+  vertical-align: middle;
+
+  .mc-btn {
+    margin-right: -#{$mc-border-width};
+
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:last-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      margin-right: 0;
+    }
+
+    &:not(:first-child):not(:last-child) {
+      border-radius: 0;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      z-index: 1;
+    }
+  }
+}
+
+// Block button
+.mc-btn-block {
+  display: block;
+  width: 100%;
+}

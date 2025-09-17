@@ -1,0 +1,67 @@
+// MinecraftUI SCSS Functions
+
+@import 'variables';
+
+// Color functions
+@function mc-lighten($color, $amount) {
+  @return lighten($color, $amount);
+}
+
+@function mc-darken($color, $amount) {
+  @return darken($color, $amount);
+}
+
+@function mc-opacity($color, $alpha) {
+  @return rgba($color, $alpha);
+}
+
+// Spacing functions
+@function mc-space($multiplier) {
+  @return $mc-spacer * $multiplier;
+}
+
+// Convert pixels to rem
+@function mc-rem($pixels) {
+  @return #{$pixels / 16}rem;
+}
+
+// Get breakpoint value
+@function mc-breakpoint($name) {
+  @return map-get($mc-breakpoints, $name);
+}
+
+// Calculate contrast ratio
+@function mc-contrast-ratio($color1, $color2) {
+  $luminance1: mc-luminance($color1);
+  $luminance2: mc-luminance($color2);
+
+  @if $luminance1 > $luminance2 {
+    @return ($luminance1 + 0.05) / ($luminance2 + 0.05);
+  } @else {
+    @return ($luminance2 + 0.05) / ($luminance1 + 0.05);
+  }
+}
+
+// Calculate luminance
+@function mc-luminance($color) {
+  $red: red($color) / 255;
+  $green: green($color) / 255;
+  $blue: blue($color) / 255;
+
+  $red: if($red < 0.03928, $red / 12.92, pow(($red + 0.055) / 1.055, 2.4));
+  $green: if($green < 0.03928, $green / 12.92, pow(($green + 0.055) / 1.055, 2.4));
+  $blue: if($blue < 0.03928, $blue / 12.92, pow(($blue + 0.055) / 1.055, 2.4));
+
+  @return 0.2126 * $red + 0.7152 * $green + 0.0722 * $blue;
+}
+
+// Generate block texture pattern
+@function mc-block-texture($color, $size: 4px) {
+  $light: lighten($color, 10%);
+  $dark: darken($color, 10%);
+
+  @return linear-gradient(45deg, $light 25%, transparent 25%),
+  linear-gradient(-45deg, $light 25%, transparent 25%),
+  linear-gradient(45deg, transparent 75%, $dark 75%),
+  linear-gradient(-45deg, transparent 75%, $dark 75%);
+}

@@ -1,0 +1,143 @@
+// MinecraftUI Navigation Components
+
+@import '../core/mixins';
+@import '../core/variables';
+
+.mc-navbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: $mc-space-2 $mc-space-3;
+  background: $mc-ui-bg;
+  @include mc-block-border($mc-ui-border);
+  margin-bottom: $mc-space-3;
+
+  .mc-navbar-brand {
+    display: inline-block;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right: $mc-space-4;
+    font-size: $mc-font-size-xl;
+    font-weight: $mc-font-weight-bold;
+    line-height: inherit;
+    color: $mc-ui-text;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      color: $mc-info;
+      text-decoration: none;
+    }
+  }
+
+  .mc-navbar-nav {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    gap: $mc-space-2;
+
+    .mc-nav-item {
+      .mc-nav-link {
+        display: block;
+        padding: $mc-space-1 $mc-space-2;
+        color: $mc-ui-text;
+        text-decoration: none;
+        background: transparent;
+        border: $mc-border-width solid transparent;
+        transition: $mc-transition-all;
+
+        &:hover {
+          background: $mc-ui-hover;
+          @include mc-block-border($mc-ui-border);
+          text-decoration: none;
+        }
+
+        &:focus {
+          @include mc-focus-ring($mc-info);
+        }
+
+        &.active {
+          background: $mc-info;
+          color: $mc-ui-text;
+          @include mc-block-border($mc-info);
+        }
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  .mc-navbar-toggle {
+    display: none;
+    padding: $mc-space-1;
+    background: transparent;
+    border: $mc-border-width solid $mc-ui-border;
+    color: $mc-ui-text;
+    cursor: pointer;
+
+    &:hover {
+      background: $mc-ui-hover;
+    }
+
+    @include mc-media-down(md) {
+      display: block;
+    }
+  }
+
+  @include mc-media-down(md) {
+    flex-direction: column;
+    align-items: stretch;
+
+    .mc-navbar-nav {
+      flex-direction: column;
+      width: 100%;
+      margin-top: $mc-space-2;
+
+      .mc-nav-item {
+        width: 100%;
+
+        .mc-nav-link {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+// Breadcrumb navigation
+.mc-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  padding: $mc-space-2 $mc-space-3;
+  margin-bottom: $mc-space-3;
+  list-style: none;
+  background: $mc-ui-bg-dark;
+  @include mc-block-inset($mc-ui-border);
+
+  .mc-breadcrumb-item {
+    &:not(:last-child)::after {
+      content: ">";
+      margin: 0 $mc-space-2;
+      color: $mc-ui-text-muted;
+    }
+
+    a {
+      color: $mc-info;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &.active {
+      color: $mc-ui-text-muted;
+    }
+  }
+}

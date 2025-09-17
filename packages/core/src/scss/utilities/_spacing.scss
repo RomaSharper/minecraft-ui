@@ -1,0 +1,52 @@
+// MinecraftUI Spacing Utilities
+
+@import '../core/mixins';
+@import '../core/variables';
+
+// Margin utilities
+@each $size, $value in (
+        0: $mc-space-0,
+        1: $mc-space-1,
+        2: $mc-space-2,
+        3: $mc-space-3,
+        4: $mc-space-4,
+        5: $mc-space-5,
+        6: $mc-space-6,
+        8: $mc-space-8
+) {
+  .mc-m-#{$size} { margin: $value; }
+  .mc-mt-#{$size} { margin-top: $value; }
+  .mc-mr-#{$size} { margin-right: $value; }
+  .mc-mb-#{$size} { margin-bottom: $value; }
+  .mc-ml-#{$size} { margin-left: $value; }
+  .mc-mx-#{$size} { margin-left: $value; margin-right: $value; }
+  .mc-my-#{$size} { margin-top: $value; margin-bottom: $value; }
+}
+
+@each $size, $value in (
+        0: $mc-space-0,
+        1: $mc-space-1,
+        2: $mc-space-2,
+        3: $mc-space-3,
+        4: $mc-space-4,
+        5: $mc-space-5,
+        6: $mc-space-6,
+        8: $mc-space-8
+) {
+  .mc-p-#{$size} { padding: $value; }
+  .mc-pt-#{$size} { padding-top: $value; }
+  .mc-pr-#{$size} { padding-right: $value; }
+  .mc-pb-#{$size} { padding-bottom: $value; }
+  .mc-pl-#{$size} { padding-left: $value; }
+  .mc-px-#{$size} { padding-left: $value; padding-right: $value; }
+  .mc-py-#{$size} { padding-top: $value; padding-bottom: $value; }
+}
+
+// Auto margins
+.mc-m-auto { margin: auto; }
+.mc-mt-auto { margin-top: auto; }
+.mc-mr-auto { margin-right: auto; }
+.mc-mb-auto { margin-bottom: auto; }
+.mc-ml-auto { margin-left: auto; }
+.mc-mx-auto { margin-left: auto; margin-right: auto; }
+.mc-my-auto { margin-top: auto; margin-bottom: auto; }

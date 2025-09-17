@@ -1,0 +1,35 @@
+// MinecraftUI Responsive Utilities
+
+@import '../core/mixins';
+@import '../core/variables';
+
+// Responsive display utilities
+@each $breakpoint in map-keys($mc-breakpoints) {
+  @include mc-media-up($breakpoint) {
+    .mc-d-#{$breakpoint}-none { display: none; }
+    .mc-d-#{$breakpoint}-inline { display: inline; }
+    .mc-d-#{$breakpoint}-inline-block { display: inline-block; }
+    .mc-d-#{$breakpoint}-block { display: block; }
+    .mc-d-#{$breakpoint}-flex { display: flex; }
+    .mc-d-#{$breakpoint}-inline-flex { display: inline-flex; }
+    .mc-d-#{$breakpoint}-grid { display: grid; }
+  }
+}
+
+// Responsive flex utilities
+@each $breakpoint in map-keys($mc-breakpoints) {
+  @include mc-media-up($breakpoint) {
+    .mc-flex-#{$breakpoint}-row { flex-direction: row; }
+    .mc-flex-#{$breakpoint}-col { flex-direction: column; }
+
+    .mc-justify-#{$breakpoint}-start { justify-content: flex-start; }
+    .mc-justify-#{$breakpoint}-center { justify-content: center; }
+    .mc-justify-#{$breakpoint}-end { justify-content: flex-end; }
+    .mc-justify-#{$breakpoint}-between { justify-content: space-between; }
+
+    .mc-items-#{$breakpoint}-start { align-items: flex-start; }
+    .mc-items-#{$breakpoint}-center { align-items: center; }
+    .mc-items-#{$breakpoint}-end { align-items: flex-end; }
+    .mc-items-#{$breakpoint}-stretch { align-items: stretch; }
+  }
+}

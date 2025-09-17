@@ -1,0 +1,57 @@
+// MinecraftUI Card Components
+
+@import '../core/mixins';
+@import '../core/variables';
+
+.mc-card {
+  display: block;
+  background: $mc-ui-bg;
+  @include mc-block-border($mc-ui-border);
+  padding: $mc-card-padding;
+  margin-bottom: $mc-space-3;
+  overflow: hidden;
+
+  .mc-card-header {
+    background: $mc-ui-bg-dark;
+    margin: (-$mc-card-padding) (-$mc-card-padding) $mc-card-padding (-$mc-card-padding);
+    padding: $mc-space-2 $mc-card-padding;
+    @include mc-block-border($mc-ui-border);
+    font-weight: $mc-font-weight-bold;
+    font-size: $mc-font-size-lg;
+    color: $mc-ui-text;
+  }
+
+  .mc-card-body {
+    color: $mc-ui-text;
+    line-height: $mc-line-height-base;
+
+    &:not(:last-child) {
+      margin-bottom: $mc-space-3;
+    }
+  }
+
+  .mc-card-footer {
+    margin: $mc-card-padding (-$mc-card-padding) (-$mc-card-padding) (-$mc-card-padding);
+    padding: $mc-space-2 $mc-card-padding;
+    background: darken($mc-ui-bg, 3%);
+    @include mc-block-border($mc-ui-border);
+    border-top-color: darken($mc-ui-border, 10%);
+    border-left-color: darken($mc-ui-border, 10%);
+  }
+}
+
+// Card variants
+.mc-card-grass {
+  @include mc-card-variant($mc-grass, $mc-grass);
+  color: $mc-ui-text;
+}
+
+.mc-card-stone {
+  @include mc-card-variant($mc-stone, $mc-stone);
+  color: $mc-ui-text-dark;
+}
+
+.mc-card-gold {
+  @include mc-card-variant($mc-gold, $mc-gold);
+  color: $mc-ui-text-dark;
+}

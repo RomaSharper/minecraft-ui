@@ -1,0 +1,9 @@
+// MinecraftUI Default Theme
+
+@import '../core/mixins';
+
+.mc-theme-default {
+  // This is the base theme - variables are already defined
+  // Just ensure pixelated rendering
+  @include mc-pixelated();
+}

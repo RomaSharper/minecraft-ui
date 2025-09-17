@@ -1,0 +1,125 @@
+// MinecraftUI Tooltip Components
+
+@import '../core/mixins';
+@import '../core/variables';
+
+.mc-tooltip {
+  position: relative;
+
+  &::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: $mc-ui-bg;
+    color: $mc-ui-text;
+    padding: $mc-space-1 $mc-space-2;
+    font-size: $mc-font-size-sm;
+    font-weight: $mc-font-weight-normal;
+    line-height: $mc-line-height-base;
+    white-space: nowrap;
+    @include mc-block-border($mc-ui-border);
+    z-index: $mc-z-index-tooltip;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $mc-transition-duration-base $mc-transition-timing-function;
+    margin-bottom: $mc-space-1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid $mc-ui-border;
+    z-index: $mc-z-index-tooltip;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $mc-transition-duration-base $mc-transition-timing-function;
+    margin-bottom: #{$mc-space-1 - 4px};
+  }
+
+  &:hover::before,
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+// Tooltip positions
+.mc-tooltip-top {
+  &::before {
+    bottom: 100%;
+    margin-bottom: $mc-space-1;
+  }
+
+  &::after {
+    bottom: 100%;
+    border-top: 4px solid $mc-ui-border;
+    border-bottom: none;
+    margin-bottom: #{$mc-space-1 - 4px};
+  }
+}
+
+.mc-tooltip-bottom {
+  &::before {
+    top: 100%;
+    bottom: auto;
+    margin-top: $mc-space-1;
+  }
+
+  &::after {
+    top: 100%;
+    bottom: auto;
+    border-bottom: 4px solid $mc-ui-border;
+    border-top: none;
+    margin-top: #{$mc-space-1 - 4px};
+  }
+}
+
+.mc-tooltip-left {
+  &::before {
+    right: 100%;
+    bottom: 50%;
+    left: auto;
+    transform: translateY(50%);
+    margin-right: $mc-space-1;
+  }
+
+  &::after {
+    right: 100%;
+    bottom: 50%;
+    left: auto;
+    transform: translateY(50%);
+    border-left: 4px solid $mc-ui-border;
+    border-right: none;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    margin-right: #{$mc-space-1 - 4px};
+  }
+}
+
+.mc-tooltip-right {
+  &::before {
+    left: 100%;
+    bottom: 50%;
+    transform: translateY(50%);
+    margin-left: $mc-space-1;
+  }
+
+  &::after {
+    left: 100%;
+    bottom: 50%;
+    transform: translateY(50%);
+    border-right: 4px solid $mc-ui-border;
+    border-left: none;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    margin-left: #{$mc-space-1 - 4px};
+  }
+}

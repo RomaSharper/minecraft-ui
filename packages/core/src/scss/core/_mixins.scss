@@ -1,0 +1,325 @@
+// MinecraftUI Core Mixins
+
+@import 'variables';
+
+// ================================
+// PIXEL ART UTILITIES
+// ================================
+
+// Make images and elements pixelated
+@mixin mc-pixelated() {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+// ================================
+// MINECRAFT BLOCK EFFECTS
+// ================================
+
+// Create 3D block border effect
+@mixin mc-block-border($color: $mc-ui-border, $width: $mc-border-width) {
+  border: solid lighten($color, 20%);
+  border-right-color: darken($color, 20%);
+  border-bottom-color: darken($color, 20%);
+}
+
+// Pressed/active block effect (inverted borders)
+@mixin mc-block-pressed($color: $mc-ui-border, $width: $mc-border-width) {
+  border: solid darken($color, 20%);
+  border-right-color: lighten($color, 20%);
+  border-bottom-color: lighten($color, 20%);
+}
+
+// Inset border effect (for inputs)
+@mixin mc-block-inset($color: $mc-ui-border, $width: $mc-border-width) {
+  border: $width inset $color;
+}
+
+// Outset border effect (for raised elements)
+@mixin mc-block-outset($color: $mc-ui-border, $width: $mc-border-width) {
+  border: $width outset $color;
+}
+
+// ================================
+// RESPONSIVE UTILITIES
+// ================================
+
+// Media query mixin
+@mixin mc-media-up($breakpoint) {
+  @if map-has-key($mc-breakpoints, $breakpoint) {
+    $bp: map-get($mc-breakpoints, $breakpoint);
+    @if $bp > 0 {
+      @media (min-width: $bp) {
+        @content;
+      }
+    } @else {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint: #{$breakpoint}";
+  }
+}
+
+@mixin mc-media-down($breakpoint) {
+  @if map-has-key($mc-breakpoints, $breakpoint) {
+    $bp: map-get($mc-breakpoints, $breakpoint);
+    @if $bp > 0 {
+      @media (max-width: $bp - 0.02px) {
+        @content;
+      }
+    }
+  } @else {
+    @warn "Unknown breakpoint: #{$breakpoint}";
+  }
+}
+
+@mixin mc-media-between($lower, $upper) {
+  @if map-has-key($mc-breakpoints, $lower) and map-has-key($mc-breakpoints, $upper) {
+    $lower-bp: map-get($mc-breakpoints, $lower);
+    $upper-bp: map-get($mc-breakpoints, $upper);
+
+    @if $lower-bp <= $upper-bp {
+      @media (min-width: $lower-bp) and (max-width: $upper-bp - 0.02px) {
+        @content;
+      }
+    } @else {
+      @warn "Lower breakpoint must be smaller than upper breakpoint";
+    }
+  } @else {
+    @warn "Unknown breakpoint in mc-media-between";
+  }
+}
+
+// ================================
+// COMPONENT MIXINS
+// ================================
+
+// Button variant mixin
+@mixin mc-button-variant($bg-color, $text-color: null) {
+  $text: if($text-color, $text-color, if(lightness($bg-color) > 50%, $mc-ui-text-dark, $mc-ui-text));
+
+  background: $bg-color;
+  color: $text;
+  @include mc-block-border($bg-color);
+
+  &:hover:not(:disabled) {
+    background: darken($bg-color, 8%);
+  }
+
+  &:active:not(:disabled) {
+    @include mc-block-pressed($bg-color);
+    transform: translate(1px, 1px);
+  }
+}
+
+// Button size mixin
+@mixin mc-button-size($padding-y, $padding-x, $font-size: null) {
+  padding: $padding-y $padding-x;
+  @if $font-size {
+    font-size: $font-size;
+  }
+}
+
+// Card variant mixin
+@mixin mc-card-variant($bg-color, $border-color: null) {
+  $border: if($border-color, $border-color, $bg-color);
+
+  background: $bg-color;
+  @include mc-block-border($border);
+}
+
+// Progress bar variant mixin
+@mixin mc-progress-variant($color) {
+  .mc-progress-bar {
+    background: $color;
+
+    &::after {
+      background: linear-gradient(
+                      90deg,
+                      transparent,
+                      rgba(255, 255, 255, 0.3),
+                      transparent
+      );
+    }
+  }
+}
+
+// ================================
+// ANIMATION MIXINS
+// ================================
+
+// Fade in animation
+@mixin mc-fade-in($duration: $mc-transition-duration-slow) {
+  opacity: 0;
+  animation: mcFadeIn $duration $mc-transition-timing-function forwards;
+}
+
+// Slide in animation
+@mixin mc-slide-in($direction: up, $distance: 20px, $duration: $mc-transition-duration-slow) {
+  $transform: translateY($distance);
+
+  @if $direction == down {
+    $transform: translateY(-$distance);
+  } @else if $direction == left {
+    $transform: translateX($distance);
+  } @else if $direction == right {
+    $transform: translateX(-$distance);
+  }
+
+  transform: $transform;
+  opacity: 0;
+  animation: mcSlideIn#{capitalize($direction)} $duration $mc-transition-timing-function forwards;
+}
+
+// Pulse animation
+@mixin mc-pulse($duration: 1s) {
+  animation: mcPulse $duration infinite;
+}
+
+// Shake animation
+@mixin mc-shake($duration: 0.5s) {
+  animation: mcShake $duration $mc-transition-timing-function;
+}
+
+// ================================
+// UTILITY MIXINS
+// ================================
+
+// Visually hidden (for screen readers)
+@mixin mc-sr-only() {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// Clear fix for floated elements
+@mixin mc-clearfix() {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+// Truncate text with ellipsis
+@mixin mc-text-truncate() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Center element absolutely
+@mixin mc-center-absolute() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Full size overlay
+@mixin mc-overlay() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+// ================================
+// FOCUS UTILITIES
+// ================================
+
+// Custom focus ring for accessibility
+@mixin mc-focus-ring($color: $mc-info, $width: 2px, $offset: 2px) {
+  outline: $width solid $color;
+  outline-offset: $offset;
+}
+
+// Remove focus outline (use with caution!)
+@mixin mc-focus-none() {
+  outline: none;
+  box-shadow: none;
+}
+
+// ================================
+// FORM MIXINS
+// ================================
+
+// Form control base styles
+@mixin mc-form-control-base() {
+  display: block;
+  width: 100%;
+  padding: $mc-space-2;
+  font-family: $mc-font-family-base;
+  font-size: $mc-font-size-base;
+  line-height: $mc-line-height-base;
+  color: $mc-ui-text;
+  background: $mc-ui-bg-dark;
+  border: $mc-border-width solid $mc-ui-border;
+  transition: $mc-transition-border, $mc-transition-background;
+
+  &:focus {
+    border-color: $mc-info;
+    background: $mc-ui-bg;
+    outline: none;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &::placeholder {
+    color: $mc-ui-text-muted;
+    opacity: 1;
+  }
+}
+
+// Form validation states
+@mixin mc-form-validation-state($color) {
+  border-color: $color;
+
+  &:focus {
+    border-color: $color;
+  }
+}
+
+// ================================
+// TYPOGRAPHY MIXINS
+// ================================
+
+// Heading styles
+@mixin mc-heading($level: 1) {
+  $sizes: (
+          1: $mc-font-size-3xl,
+          2: $mc-font-size-2xl,
+          3: $mc-font-size-xl,
+          4: $mc-font-size-lg,
+          5: $mc-font-size-base,
+          6: $mc-font-size-sm
+  );
+
+  font-family: $mc-font-family-heading;
+  font-size: map-get($sizes, $level);
+  font-weight: $mc-font-weight-bold;
+  line-height: $mc-line-height-sm;
+  color: $mc-ui-text;
+  margin-bottom: $mc-space-3;
+}
+
+// Text styles
+@mixin mc-text-style($size: base, $weight: normal, $color: null) {
+  font-size: var(--mc-font-size-#{$size});
+  font-weight: $weight;
+  @if $color {
+    color: $color;
+  }
+}
