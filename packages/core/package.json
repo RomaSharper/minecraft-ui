@@ -1,0 +1,63 @@
+{
+  "name": "@minecraft-ui/core",
+  "version": "1.0.0",
+  "description": "Core styles and utilities for MinecraftUI components library",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "style": "dist/minecraft-ui.css",
+  "sass": "src/scss/minecraft-ui.scss",
+  "files": [
+    "dist/",
+    "src/"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run build:scss && npm run build:js",
+    "build:scss": "sass src/scss/minecraft-ui.scss dist/minecraft-ui.css --style=expanded --source-map && npm run build:scss:min",
+    "build:scss:min": "sass src/scss/minecraft-ui.scss dist/minecraft-ui.min.css --style=compressed --no-source-map",
+    "build:js": "tsc && rollup -c",
+    "clean": "rimraf dist",
+    "watch": "concurrently \"npm run watch:scss\" \"npm run watch:js\"",
+    "watch:scss": "sass src/scss/minecraft-ui.scss dist/minecraft-ui.css --style=expanded --source-map --watch",
+    "watch:js": "tsc --watch",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "test": "jest"
+  },
+  "keywords": [
+    "minecraft",
+    "ui",
+    "css",
+    "scss",
+    "components",
+    "gaming",
+    "pixel-art"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "@types/jest": "^29.5.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "concurrently": "^8.2.0",
+    "eslint": "^8.42.0",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "rimraf": "^5.0.0",
+    "rollup": "^3.25.0",
+    "sass": "^1.66.0",
+    "typescript": "^5.1.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie <= 11"
+  ],
+  "dependencies": {
+    "@minecraft-ui/core": "^1.0.0"
+  }
+}
