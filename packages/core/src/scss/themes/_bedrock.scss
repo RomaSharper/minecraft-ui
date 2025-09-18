@@ -1,0 +1,272 @@
+// Bedrock Edition Theme - современная версия Minecraft
+
+@import '../core/functions';
+@import '../core/variables';
+
+.mc-theme-bedrock {
+  // Bedrock Edition цветовая палитра
+  --mc-bedrock-gui-background: #2D2D30;
+  --mc-bedrock-gui-surface: #383838;
+  --mc-bedrock-gui-elevated: #404040;
+  --mc-bedrock-button: #48484A;
+  --mc-bedrock-button-hover: #5A5A5C;
+  --mc-bedrock-button-pressed: #363638;
+  --mc-bedrock-accent: #00B4D8;
+  --mc-bedrock-accent-hover: #0077BE;
+  --mc-bedrock-success: #4CAF50;
+  --mc-bedrock-warning: #FF9800;
+  --mc-bedrock-error: #F44336;
+  --mc-bedrock-text-primary: #FFFFFF;
+  --mc-bedrock-text-secondary: #B3B3B3;
+  --mc-bedrock-text-disabled: #666666;
+  --mc-bedrock-border: #555555;
+  --mc-bedrock-border-light: #777777;
+
+  // Общие стили
+  background: linear-gradient(135deg, #1E1E1E, #2A2A2A);
+  color: var(--mc-bedrock-text-primary);
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+
+  .mc-card,
+  .mc-modal-content {
+    background: var(--mc-bedrock-gui-background);
+    border: 1px solid var(--mc-bedrock-border);
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    color: var(--mc-bedrock-text-primary);
+
+    .mc-card-header,
+    .mc-modal-header {
+      background: var(--mc-bedrock-gui-elevated);
+      color: var(--mc-bedrock-text-primary);
+      border-bottom: 1px solid var(--mc-bedrock-border);
+      border-radius: 8px 8px 0 0;
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
+
+  // Современные кнопки Bedrock Edition
+  .mc-btn {
+    background: var(--mc-bedrock-button);
+    color: var(--mc-bedrock-text-primary);
+    border: 1px solid var(--mc-bedrock-border-light);
+    border-radius: 4px;
+    font-weight: 500;
+    text-shadow: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background: var(--mc-bedrock-button-hover);
+      border-color: var(--mc-bedrock-border-light);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      background: var(--mc-bedrock-button-pressed);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+      transform: translateY(1px);
+    }
+
+    &:disabled {
+      background: #333333;
+      color: var(--mc-bedrock-text-disabled);
+      border-color: #444444;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+  }
+
+  // Акцентные кнопки Bedrock
+  .mc-btn-primary {
+    background: linear-gradient(135deg, var(--mc-bedrock-accent), #0077BE);
+    border-color: var(--mc-bedrock-accent);
+
+    &:hover:not(:disabled) {
+      background: linear-gradient(135deg, var(--mc-bedrock-accent-hover), #005A8B);
+    }
+  }
+
+  .mc-btn-grass {
+    background: linear-gradient(135deg, #4CAF50, #388E3C);
+    border-color: #66BB6A;
+  }
+
+  .mc-btn-gold {
+    background: linear-gradient(135deg, #FFC107, #FFA000);
+    color: #1A1A1A;
+    border-color: #FFD54F;
+  }
+
+  .mc-btn-diamond {
+    background: linear-gradient(135deg, #00BCD4, #0097A7);
+    border-color: #26C6DA;
+  }
+
+  .mc-btn-redstone {
+    background: linear-gradient(135deg, #F44336, #D32F2F);
+    border-color: #EF5350;
+  }
+
+  // Формы Bedrock Edition
+  .mc-input,
+  .mc-textarea,
+  .mc-select {
+    background: var(--mc-bedrock-gui-surface);
+    color: var(--mc-bedrock-text-primary);
+    border: 1px solid var(--mc-bedrock-border);
+    border-radius: 4px;
+    padding: 10px 12px;
+    transition: all 0.2s ease;
+
+    &:focus {
+      background: var(--mc-bedrock-gui-elevated);
+      border-color: var(--mc-bedrock-accent);
+      box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.2);
+      outline: none;
+    }
+
+    &::placeholder {
+      color: var(--mc-bedrock-text-secondary);
+    }
+  }
+
+  // Современный инвентарь Bedrock
+  .mc-inventory {
+    background: var(--mc-bedrock-gui-background);
+    border: 1px solid var(--mc-bedrock-border);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+    .mc-slot {
+      background: var(--mc-bedrock-gui-surface);
+      border: 1px solid var(--mc-bedrock-border);
+      border-radius: 4px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: var(--mc-bedrock-gui-elevated);
+        border-color: var(--mc-bedrock-border-light);
+        transform: scale(1.05);
+      }
+
+      &.occupied {
+        background: var(--mc-bedrock-gui-elevated);
+        border-color: var(--mc-bedrock-accent);
+        box-shadow: inset 0 0 4px rgba(0, 180, 216, 0.3);
+      }
+
+      &.selected {
+        background: rgba(0, 180, 216, 0.2);
+        border: 2px solid var(--mc-bedrock-accent);
+        box-shadow: 0 0 8px rgba(0, 180, 216, 0.4);
+      }
+    }
+  }
+
+  // Прогресс бары Bedrock Edition
+  .mc-progress {
+    background: var(--mc-bedrock-gui-surface);
+    border: 1px solid var(--mc-bedrock-border);
+    border-radius: 10px;
+    overflow: hidden;
+
+    .mc-progress-bar {
+      border-radius: 8px;
+      transition: width 0.3s ease, background 0.2s ease;
+
+      &.mc-progress-health {
+        background: linear-gradient(90deg, #E53E3E, #C53030);
+        box-shadow: 0 0 8px rgba(229, 62, 62, 0.3);
+      }
+
+      &.mc-progress-hunger {
+        background: linear-gradient(90deg, #D69E2E, #B7791F);
+        box-shadow: 0 0 8px rgba(214, 158, 46, 0.3);
+      }
+
+      &.mc-progress-xp {
+        background: linear-gradient(90deg, #38A169, #2F855A);
+        box-shadow: 0 0 8px rgba(56, 161, 105, 0.3);
+      }
+    }
+  }
+
+  // Навигация Bedrock Edition
+  .mc-navbar {
+    background: var(--mc-bedrock-gui-background);
+    border: 1px solid var(--mc-bedrock-border);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+    .mc-navbar-brand {
+      color: var(--mc-bedrock-accent);
+      font-weight: 600;
+    }
+
+    .mc-nav-link {
+      color: var(--mc-bedrock-text-secondary);
+      border-radius: 4px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: var(--mc-bedrock-text-primary);
+        background: var(--mc-bedrock-gui-surface);
+      }
+
+      &.active {
+        color: var(--mc-bedrock-text-primary);
+        background: var(--mc-bedrock-accent);
+      }
+    }
+  }
+
+  // Тултипы Bedrock Edition
+  .mc-tooltip::before {
+    background: rgba(45, 45, 48, 0.95);
+    color: var(--mc-bedrock-text-primary);
+    border: 1px solid var(--mc-bedrock-border);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  // Табы Bedrock Edition
+  .mc-tabs {
+    .mc-tab-nav {
+      background: transparent;
+      border: none;
+
+      .mc-tab-button {
+        background: transparent;
+        color: var(--mc-bedrock-text-secondary);
+        border: none;
+        border-bottom: 2px solid transparent;
+        border-radius: 4px 4px 0 0;
+        padding: 12px 20px;
+        transition: all 0.2s ease;
+
+        &:hover:not(.active) {
+          color: var(--mc-bedrock-text-primary);
+          background: var(--mc-bedrock-gui-surface);
+        }
+
+        &.active {
+          color: var(--mc-bedrock-text-primary);
+          background: var(--mc-bedrock-gui-background);
+          border-bottom-color: var(--mc-bedrock-accent);
+        }
+      }
+    }
+
+    .mc-tab-content {
+      background: var(--mc-bedrock-gui-background);
+      border: 1px solid var(--mc-bedrock-border);
+      border-radius: 0 8px 8px 8px;
+    }
+  }
+}

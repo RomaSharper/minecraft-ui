@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="ru">
+<!doctype html>
+<html lang="ru" data-panel-url="https://server37.hosting.reg.ru/manager">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MinecraftUI Demo - Полная демонстрация</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="noindex">
+    <title>Minecraft UI Demo</title>
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="/node_modules/@minecraft-ui/core/dist/minecraft-ui.css">
-    <link rel="stylesheet" href="style.css">
 </head>
 <body class="mc-base">
 <div class="demo-container">
@@ -113,12 +114,12 @@
                 <div style="display: flex; flex-direction: column; gap: 16px;">
                     <div class="mc-form-group">
                         <label class="mc-label">Выбор блока
-                        <select class="mc-select">
-                            <option>Камень</option>
-                            <option>Дерево</option>
-                            <option>Земля</option>
-                            <option>Алмаз</option>
-                        </select>
+                            <select class="mc-select">
+                                <option>Камень</option>
+                                <option>Дерево</option>
+                                <option>Земля</option>
+                                <option>Алмаз</option>
+                            </select>
                         </label>
                     </div>
 
@@ -277,9 +278,9 @@
             <div class="demo-item">
                 <h3>Темы</h3>
                 <div style="display: flex; gap: 20px; justify-content: center; margin: 20px 0;">
-                    <div class="theme-preview theme-default" data-theme="default" title="Стандартная тема"></div>
-                    <div class="theme-preview theme-dark" data-theme="dark" title="Тёмная тема"></div>
-                    <div class="theme-preview theme-neon" data-theme="neon" title="Неоновая тема"></div>
+                    <div class="theme-preview theme-default mc-tooltip mc-tooltip-bottom" data-theme="default" data-tooltip="Default"></div>
+                    <div class="theme-preview theme-dark mc-tooltip mc-tooltip-bottom" data-theme="java" data-tooltip="Java"></div>
+                    <div class="theme-preview theme-neon mc-tooltip mc-tooltip-bottom" data-theme="bedrock" data-tooltip="Bedrock"></div>
                 </div>
             </div>
 
@@ -326,7 +327,7 @@
             <p>Это демонстрация модального окна MinecraftUI. Здесь может быть любая информация!</p>
             <div class="mc-form-group" style="margin-top: 20px;">
                 <label class="mc-label">Ваше мнение:
-                <textarea class="mc-textarea" placeholder="Напишите что-нибудь..." rows="3"></textarea>
+                    <textarea class="mc-textarea" placeholder="Напишите что-нибудь..." rows="3"></textarea>
                 </label>
             </div>
         </div>
@@ -340,6 +341,6 @@
 <!-- Контейнер для уведомлений -->
 <div class="toast-container" id="toast-container"></div>
 
-<script type="module" src="index.js"></script>
+<script type="module" src="./js/index.js"></script>
 </body>
 </html>

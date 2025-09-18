@@ -2,6 +2,7 @@ import typescript from '@rollup/plugin-typescript';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
+import copy from 'rollup-plugin-copy';
 
 export default [
     // ES Module build
@@ -15,6 +16,14 @@ export default [
         plugins: [
             resolve(),
             commonjs(),
+            copy({
+                targets: [
+                    {
+                        src: 'src/fonts/*',
+                        dest: 'dist/fonts/',
+                    }
+                ]
+            }),
             typescript({
                 tsconfig: './tsconfig.json',
                 declaration: true,
@@ -33,6 +42,14 @@ export default [
         plugins: [
             resolve(),
             commonjs(),
+            copy({
+                targets: [
+                    {
+                        src: 'src/fonts/*',
+                        dest: 'dist/fonts/',
+                    }
+                ]
+            }),
             typescript({
                 tsconfig: './tsconfig.json'
             })
@@ -50,6 +67,14 @@ export default [
         plugins: [
             resolve(),
             commonjs(),
+            copy({
+                targets: [
+                    {
+                        src: 'src/fonts/*',
+                        dest: 'dist/fonts/',
+                    }
+                ]
+            }),
             typescript({
                 tsconfig: './tsconfig.json'
             }),

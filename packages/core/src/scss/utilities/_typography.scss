@@ -1,7 +1,15 @@
+// MinecraftUI Typography
+
 @import '../core/mixins';
 @import '../core/variables';
 
-// MinecraftUI Typography
+@font-face {
+  font-family: 'Minecraft';
+  src: url('../../fonts/minecraft.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 .mc-base {
   font-family: $mc-font-family-base;

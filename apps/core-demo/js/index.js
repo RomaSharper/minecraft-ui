@@ -1,5 +1,4 @@
-
-import { MinecraftUI, minecraftSounds, themeManager } from '../../dist/index.esm.js';
+import { MinecraftUI, minecraftSounds, themeManager } from '/packages/core/dist/index.esm.js';
 
 // Инициализация MinecraftUI
 const ui = new MinecraftUI({

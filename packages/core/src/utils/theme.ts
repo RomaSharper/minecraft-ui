@@ -1,6 +1,6 @@
 // Theme management utilities
 
-export type MinecraftTheme = 'default' | 'dark' | 'neon' | 'custom';
+export type MinecraftTheme = 'default' | 'java' | 'bedrock' | string;
 
 export interface ThemeConfig {
     name: string;
@@ -24,7 +24,7 @@ export class ThemeManager {
         const root = document.documentElement;
 
         // Remove existing theme classes
-        root.classList.remove('mc-theme-default', 'mc-theme-dark', 'mc-theme-neon');
+        root.classList.remove('mc-theme-default', 'mc-theme-java', 'mc-theme-bedrock');
 
         if (this.isBuiltInTheme(theme)) {
             root.classList.add(`mc-theme-${theme}`);
@@ -38,7 +38,7 @@ export class ThemeManager {
         }
 
         // Dispatch theme change event
-        document.dispatchEvent(new CustomEvent('themechange', {
+        document.dispatchEvent(new CustomEvent('theme:change', {
             detail: { theme, previousTheme: this.currentTheme }
         }));
     }
@@ -55,11 +55,11 @@ export class ThemeManager {
 
     // Get available themes
     public getAvailableThemes(): string[] {
-        return ['default', 'dark', 'neon', ...this.customThemes.keys()];
+        return ['default', 'java', 'bedrock', ...this.customThemes.keys()];
     }
 
     private isBuiltInTheme(theme: string): theme is MinecraftTheme {
-        return ['default', 'dark', 'neon'].includes(theme);
+        return ['default', 'java', 'bedrock'].includes(theme);
     }
 
     private applyCustomTheme(config: ThemeConfig): void {

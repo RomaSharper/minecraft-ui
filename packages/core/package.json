@@ -1,6 +1,6 @@
 {
   "name": "@minecraft-ui/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Core styles and utilities for MinecraftUI components library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,8 +12,8 @@
   ],
   "scripts": {
     "build": "npm run clean && npm run build:scss && npm run build:js",
-    "build:scss": "sass src/scss/minecraft-ui.scss dist/minecraft-ui.css --style=expanded --source-map && npm run build:scss:min",
-    "build:scss:min": "sass src/scss/minecraft-ui.scss dist/minecraft-ui.min.css --style=compressed --no-source-map",
+    "build:scss": "sass src/scss/minecraft-ui.scss dist/minecraft-ui.css --style=expanded --source-map && npm run build:scss:min --quiet",
+    "build:scss:min": "sass src/scss/minecraft-ui.scss dist/minecraft-ui.min.css --style=compressed --no-source-map --quiet",
     "build:js": "tsc && rollup -c",
     "clean": "rimraf dist",
     "watch": "concurrently \"npm run watch:scss\" \"npm run watch:js\"",
