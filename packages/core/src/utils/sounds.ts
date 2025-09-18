@@ -55,40 +55,75 @@ export class MinecraftSounds {
         }
     }
 
-    // Predefined Minecraft-style sounds
-    public playBlockBreak(): void {
-        this.playSound({ frequency: 220, duration: 0.1, type: 'square' });
-    }
+    // ========================================
+    // UI INTERACTION SOUNDS ONLY
+    // ========================================
 
-    public playBlockPlace(): void {
-        this.playSound({ frequency: 440, duration: 0.08, type: 'square' });
-    }
-
+    // Button interactions
     public playButtonClick(): void {
         this.playSound({ frequency: 550, duration: 0.05, type: 'square' });
     }
 
+    public playButtonHover(): void {
+        this.playSound({ frequency: 440, duration: 0.03, type: 'square', volume: 0.2 });
+    }
+
+    // Modal/Dialog sounds
+    public playModalOpen(): void {
+        this.playSound({ frequency: 400, duration: 0.12, type: 'square' });
+    }
+
+    public playModalClose(): void {
+        this.playSound({ frequency: 300, duration: 0.12, type: 'square' });
+    }
+
+    // Navigation sounds
+    public playTabSwitch(): void {
+        this.playSound({ frequency: 660, duration: 0.08, type: 'square' });
+    }
+
+    // Feedback sounds
     public playError(): void {
         this.playSound({ frequency: 150, duration: 0.2, type: 'sawtooth' });
     }
 
     public playSuccess(): void {
-        this.playSound({ frequency: 660, duration: 0.15, type: 'sine' });
+        this.playSound({ frequency: 880, duration: 0.15, type: 'sine' });
     }
 
     public playNotification(): void {
         this.playSound({ frequency: 800, duration: 0.1, type: 'triangle' });
     }
 
+    // ========================================
+    // LEGACY METHODS (для обратной совместимости)
+    // ========================================
+
+    // @deprecated - используйте playButtonClick()
+    public playBlockBreak(): void {
+        this.playButtonClick();
+    }
+
+    // @deprecated - используйте playButtonClick()
+    public playBlockPlace(): void {
+        this.playButtonClick();
+    }
+
+    // @deprecated - используйте playModalOpen()
     public playInventoryOpen(): void {
-        this.playSound({ frequency: 400, duration: 0.12, type: 'square' });
+        this.playModalOpen();
     }
 
+    // @deprecated - используйте playModalClose()
     public playInventoryClose(): void {
-        this.playSound({ frequency: 300, duration: 0.12, type: 'square' });
+        this.playModalClose();
     }
 
-    // Custom sound method
+    // ========================================
+    // UTILITY METHODS
+    // ========================================
+
+    // Custom sound method for advanced users
     public playCustomSound(options: SoundOptions): void {
         this.playSound(options);
     }

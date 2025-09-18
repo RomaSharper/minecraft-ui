@@ -1,14 +1,16 @@
 // MinecraftUI SCSS Functions
 
-@import 'variables';
+@use 'sass:map';
+@use 'sass:color';
+@import './variables';
 
 // Color functions
 @function mc-lighten($color, $amount) {
-  @return lighten($color, $amount);
+  @return color.adjust($color, $lightness: $amount);
 }
 
 @function mc-darken($color, $amount) {
-  @return darken($color, $amount);
+  @return color.adjust($color, $lightness: -$amount);
 }
 
 @function mc-opacity($color, $alpha) {
@@ -27,7 +29,7 @@
 
 // Get breakpoint value
 @function mc-breakpoint($name) {
-  @return map-get($mc-breakpoints, $name);
+  @return map.get($mc-breakpoints, $name);
 }
 
 // Calculate contrast ratio
@@ -57,8 +59,8 @@
 
 // Generate block texture pattern
 @function mc-block-texture($color, $size: 4px) {
-  $light: lighten($color, 10%);
-  $dark: darken($color, 10%);
+  $light: mc-lighten($color, 10%);
+  $dark: mc-darken($color, 10%);
 
   @return linear-gradient(45deg, $light 25%, transparent 25%),
   linear-gradient(-45deg, $light 25%, transparent 25%),

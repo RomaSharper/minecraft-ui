@@ -1,6 +1,8 @@
 // MinecraftUI Core Mixins
 
-@import 'variables';
+@use 'sass:map';
+@import './functions';
+@import './variables';
 
 // ================================
 // PIXEL ART UTILITIES
@@ -20,16 +22,16 @@
 
 // Create 3D block border effect
 @mixin mc-block-border($color: $mc-ui-border, $width: $mc-border-width) {
-  border: solid lighten($color, 20%);
-  border-right-color: darken($color, 20%);
-  border-bottom-color: darken($color, 20%);
+  border: solid mc-lighten($color, 20%);
+  border-right-color: mc-darken($color, 20%);
+  border-bottom-color: mc-darken($color, 20%);
 }
 
 // Pressed/active block effect (inverted borders)
 @mixin mc-block-pressed($color: $mc-ui-border, $width: $mc-border-width) {
-  border: solid darken($color, 20%);
-  border-right-color: lighten($color, 20%);
-  border-bottom-color: lighten($color, 20%);
+  border: solid mc-darken($color, 20%);
+  border-right-color: mc-lighten($color, 20%);
+  border-bottom-color: mc-lighten($color, 20%);
 }
 
 // Inset border effect (for inputs)
@@ -48,8 +50,8 @@
 
 // Media query mixin
 @mixin mc-media-up($breakpoint) {
-  @if map-has-key($mc-breakpoints, $breakpoint) {
-    $bp: map-get($mc-breakpoints, $breakpoint);
+  @if map.has-key($mc-breakpoints, $breakpoint) {
+    $bp: map.get($mc-breakpoints, $breakpoint);
     @if $bp > 0 {
       @media (min-width: $bp) {
         @content;
@@ -63,8 +65,8 @@
 }
 
 @mixin mc-media-down($breakpoint) {
-  @if map-has-key($mc-breakpoints, $breakpoint) {
-    $bp: map-get($mc-breakpoints, $breakpoint);
+  @if map.has-key($mc-breakpoints, $breakpoint) {
+    $bp: map.get($mc-breakpoints, $breakpoint);
     @if $bp > 0 {
       @media (max-width: $bp - 0.02px) {
         @content;
@@ -76,9 +78,9 @@
 }
 
 @mixin mc-media-between($lower, $upper) {
-  @if map-has-key($mc-breakpoints, $lower) and map-has-key($mc-breakpoints, $upper) {
-    $lower-bp: map-get($mc-breakpoints, $lower);
-    $upper-bp: map-get($mc-breakpoints, $upper);
+  @if map.has-key($mc-breakpoints, $lower) and map.has-key($mc-breakpoints, $upper) {
+    $lower-bp: map.get($mc-breakpoints, $lower);
+    $upper-bp: map.get($mc-breakpoints, $upper);
 
     @if $lower-bp <= $upper-bp {
       @media (min-width: $lower-bp) and (max-width: $upper-bp - 0.02px) {
@@ -105,7 +107,7 @@
   @include mc-block-border($bg-color);
 
   &:hover:not(:disabled) {
-    background: darken($bg-color, 8%);
+    background: mc-darken($bg-color, 8%);
   }
 
   &:active:not(:disabled) {
@@ -308,7 +310,7 @@
   );
 
   font-family: $mc-font-family-heading;
-  font-size: map-get($sizes, $level);
+  font-size: map.get($sizes, $level);
   font-weight: $mc-font-weight-bold;
   line-height: $mc-line-height-sm;
   color: $mc-ui-text;

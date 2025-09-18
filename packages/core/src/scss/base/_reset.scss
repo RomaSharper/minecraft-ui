@@ -46,7 +46,7 @@ a {
   text-decoration: underline;
 
   &:hover {
-    color: lighten($mc-info, 10%);
+    color: mc-lighten($mc-info, 10%);
   }
 
   &:focus {

@@ -36,7 +36,7 @@
     }
 
     &.occupied {
-      background: lighten($mc-ui-bg-dark, 5%);
+      background: mc-lighten($mc-ui-bg-dark, 5%);
       @include mc-block-outset($mc-ui-border);
     }
 

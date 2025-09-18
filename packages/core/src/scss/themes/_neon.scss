@@ -1,5 +1,6 @@
 // MinecraftUI Neon Theme
 
+@import '../core/functions';
 @import '../core/variables';
 
 .mc-theme-neon {
@@ -9,7 +10,7 @@
   $neon-bg: #0A0A0A;
 
   --mc-ui-bg: #{$neon-bg};
-  --mc-ui-bg-dark: #{darken($neon-bg, 2%)};
+  --mc-ui-bg-dark: #{mc-darken($neon-bg, 2%)};
   --mc-ui-text: #{$neon-primary};
   --mc-ui-border: #{$neon-primary};
 

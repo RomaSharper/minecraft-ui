@@ -1,6 +1,7 @@
 // Main entry point for MinecraftUI Core
 
-import {EventCallback, EventEmitter} from "./utils/events";
+import {UIEventCallback, UIEventEmitter, UIEvents} from "./utils/events";
+import {minecraftSounds} from "./utils/sounds";
 import {themeManager} from "./utils/theme";
 
 // Export utilities
@@ -19,17 +20,10 @@ export interface MinecraftUIConfig {
     animations?: boolean;
 }
 
-export interface MinecraftUIEvents {
-    configChange: { theme?: string, sounds?: boolean, animations?: boolean, pixelated?: boolean };
-    themeChanges: { theme: string };
-    soundsToggled: { enabled: boolean };
-    [key: string]: any;
-}
-
 // Global MinecraftUI class
 export class MinecraftUI {
     private readonly config: MinecraftUIConfig;
-    private readonly eventEmitter = new EventEmitter<MinecraftUIEvents>();
+    private readonly eventEmitter = new UIEventEmitter();
 
     constructor(config: MinecraftUIConfig = {}) {
         this.config = {
@@ -61,18 +55,55 @@ export class MinecraftUI {
         if (!this.config.animations) {
             document.body.classList.add('mc-no-animations');
         }
+
+        // Auto-add sound effects to buttons if enabled
+        if (this.config.sounds) {
+            this.initButtonSounds();
+        }
+    }
+
+    private getButtonVariant(button: HTMLElement): string | undefined {
+        const classes = Array.from(button.classList);
+        const variantClass = classes.find(
+            cls => cls.startsWith('mc-btn-') && cls !== 'mc-btn');
+        return variantClass?.replace('mc-btn-', '');
+    }
+
+    private initButtonSounds(): void {
+        // Add click sounds to all mc-btn elements
+        document.addEventListener('click', (e) => {
+            const target = e.target as HTMLElement;
+            if (target.classList.contains('mc-btn')) {
+                minecraftSounds.playButtonClick();
+                this.eventEmitter.emit('button:click', {
+                    element: target,
+                    variant: this.getButtonVariant(target)
+                });
+            }
+        });
+
+        // Add hover sounds to buttons
+        document.addEventListener('mouseenter', (e) => {
+            const target = e.target as HTMLElement;
+            if (target.classList.contains('mc-btn')) {
+                minecraftSounds.playButtonHover();
+            }
+        }, true);
     }
 
     // Configuration methods
     public setTheme(theme: string): void {
+        const previousTheme = this.config.theme || 'default';
         themeManager.applyTheme(theme);
         this.config.theme = theme;
-        this.eventEmitter.emit('configChange', { theme });
+        this.eventEmitter.emit('theme:change', { theme, previousTheme });
     }
 
     public setSounds(enabled: boolean): void {
         this.config.sounds = enabled;
-        this.eventEmitter.emit('configChange', { sounds: enabled });
+        if (enabled) {
+            this.initButtonSounds();
+        }
     }
 
     public getConfig(): MinecraftUIConfig {
@@ -80,11 +111,11 @@ export class MinecraftUI {
     }
 
     // Event methods
-    public on<K extends keyof MinecraftUIEvents>(event: K, callback: EventCallback): () => void {
+    public on<K extends keyof UIEvents>(event: K, callback: UIEventCallback): () => void {
         return this.eventEmitter.on(event, callback);
     }
 
-    public emit<K extends keyof MinecraftUIEvents>(event: K, data?: any): void {
+    public emit<K extends keyof UIEvents>(event: K, data: UIEvents[K]): void {
         this.eventEmitter.emit(event, data);
     }
 }

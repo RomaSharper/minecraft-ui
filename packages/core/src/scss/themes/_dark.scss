@@ -1,17 +1,18 @@
 // MinecraftUI Dark Theme
 
+@import '../core/functions';
 @import '../core/variables';
 
 .mc-theme-dark {
   --mc-ui-bg: #{$mc-night};
-  --mc-ui-bg-dark: #{darken($mc-night, 5%)};
-  --mc-ui-bg-light: #{lighten($mc-night, 10%)};
-  --mc-ui-border: #{lighten($mc-night, 20%)};
-  --mc-ui-border-light: #{lighten($mc-night, 30%)};
-  --mc-ui-border-dark: #{lighten($mc-night, 10%)};
-  --mc-ui-hover: #{lighten($mc-night, 15%)};
+  --mc-ui-bg-dark: #{mc-darken($mc-night, 5%)};
+  --mc-ui-bg-light: #{mc-lighten($mc-night, 10%)};
+  --mc-ui-border: #{mc-lighten($mc-night, 20%)};
+  --mc-ui-border-light: #{mc-lighten($mc-night, 30%)};
+  --mc-ui-border-dark: #{mc-lighten($mc-night, 10%)};
+  --mc-ui-hover: #{mc-lighten($mc-night, 15%)};
   --mc-ui-text: #{$mc-snow};
-  --mc-ui-text-muted: #{darken($mc-snow, 30%)};
+  --mc-ui-text-muted: #{mc-darken($mc-snow, 30%)};
 
   background: var(--mc-ui-bg);
   color: var(--mc-ui-text);

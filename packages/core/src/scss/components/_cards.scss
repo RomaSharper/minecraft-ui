@@ -33,10 +33,11 @@
   .mc-card-footer {
     margin: $mc-card-padding (-$mc-card-padding) (-$mc-card-padding) (-$mc-card-padding);
     padding: $mc-space-2 $mc-card-padding;
-    background: darken($mc-ui-bg, 3%);
+    color: mc-lighten($mc-ui-text, 3%);
+    background: mc-darken($mc-ui-bg, 3%);
     @include mc-block-border($mc-ui-border);
-    border-top-color: darken($mc-ui-border, 10%);
-    border-left-color: darken($mc-ui-border, 10%);
+    border-top-color: mc-darken($mc-ui-border, 10%);
+    border-left-color: mc-darken($mc-ui-border, 10%);
   }
 }
 

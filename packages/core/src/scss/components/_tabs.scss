@@ -1,6 +1,7 @@
 // MinecraftUI Tab Components
 
 @import '../core/mixins';
+@import '../core/functions';
 @import '../core/variables';
 
 .mc-tabs {
@@ -17,7 +18,7 @@
     .mc-tab-button {
       display: block;
       padding: $mc-space-2 $mc-space-3;
-      background: darken($mc-ui-bg, 5%);
+      background: mc-darken($mc-ui-bg, 5%);
       color: $mc-ui-text;
       border: none;
       border-right: $mc-border-width solid $mc-ui-border;

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MinecraftUI Demo - Полная демонстрация</title>
+    <link rel="stylesheet" href="/node_modules/@minecraft-ui/core/dist/minecraft-ui.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="mc-base">
+<div class="demo-container">
+    <header style="text-align: center; margin-bottom: 40px;">
+        <h1 style="color: #00bcd4; font-size: 36px; margin-bottom: 16px;">🎮 MinecraftUI Demo</h1>
+        <p style="color: #aaa; font-size: 18px;">Полная демонстрация возможностей библиотеки</p>
+    </header>
+
+    <!-- Кнопки -->
+    <section class="demo-section">
+        <h2>🎯 Кнопки</h2>
+        <div class="demo-grid">
+            <div class="demo-item">
+                <h3>Основные кнопки</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px; margin: 16px 0;">
+                    <button class="mc-btn mc-btn-grass">Трава</button>
+                    <button class="mc-btn mc-btn-stone">Камень</button>
+                    <button class="mc-btn mc-btn-gold">Золото</button>
+                    <button class="mc-btn mc-btn-diamond">Алмаз</button>
+                    <button class="mc-btn mc-btn-redstone">Редстоун</button>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h3>Состояния кнопок</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px; margin: 16px 0;">
+                    <button class="mc-btn mc-btn-success">Успех</button>
+                    <button class="mc-btn mc-btn-warning">Предупреждение</button>
+                    <button class="mc-btn mc-btn-error">Ошибка</button>
+                    <button class="mc-btn" disabled>Отключена</button>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h3>Размеры кнопок</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px; margin: 16px 0;">
+                    <button class="mc-btn mc-btn-sm mc-btn-grass">Маленькая</button>
+                    <button class="mc-btn mc-btn-grass">Стандартная</button>
+                    <button class="mc-btn mc-btn-lg mc-btn-grass">Большая</button>
+                    <button class="mc-btn mc-btn-block mc-btn-grass">Во всю ширину</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Карточки -->
+    <section class="demo-section">
+        <h2>🃏 Карточки</h2>
+        <div class="demo-grid">
+            <div class="mc-card">
+                <div class="mc-card-header">Обычная карточка</div>
+                <div class="mc-card-body">
+                    <p>Это стандартная карточка с заголовком и содержимым. Идеально подходит для отображения информации.</p>
+                </div>
+            </div>
+
+            <div class="mc-card mc-card-grass">
+                <div class="mc-card-header">Травяная карточка</div>
+                <div class="mc-card-body">
+                    <p>Карточка с тематикой травы. Отлично смотрится для природных тем.</p>
+                </div>
+            </div>
+
+            <div class="mc-card mc-card-gold">
+                <div class="mc-card-header">Золотая карточка</div>
+                <div class="mc-card-body">
+                    <p>Блестящая золотая карточка для важного контента.</p>
+                </div>
+                <div class="mc-card-footer">
+                    <small>С футером</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Формы -->
+    <section class="demo-section">
+        <h2>📝 Формы</h2>
+        <div class="demo-grid">
+            <div class="demo-item">
+                <h3>Поля ввода</h3>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div class="mc-form-group">
+                        <label class="mc-label">Имя игрока
+                            <input type="text" class="mc-input" placeholder="Введите ваше имя">
+                        </label>
+                    </div>
+
+                    <div class="mc-form-group">
+                        <label class="mc-label">Пароль
+                            <input type="password" class="mc-input" placeholder="Введите пароль">
+                        </label>
+                    </div>
+
+                    <div class="mc-form-group">
+                        <label class="mc-label">Сообщение
+                            <textarea class="mc-textarea" placeholder="Напишите сообщение..." rows="3"></textarea>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h3>Выбор и чекбоксы</h3>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div class="mc-form-group">
+                        <label class="mc-label">Выбор блока
+                        <select class="mc-select">
+                            <option>Камень</option>
+                            <option>Дерево</option>
+                            <option>Земля</option>
+                            <option>Алмаз</option>
+                        </select>
+                        </label>
+                    </div>
+
+                    <div class="mc-checkbox">
+                        <input type="checkbox" id="demo-checkbox">
+                        <label class="mc-checkbox-label" for="demo-checkbox">Согласен с правилами</label>
+                    </div>
+
+                    <div class="mc-radio">
+                        <input type="radio" name="demo-radio" id="radio1">
+                        <label class="mc-radio-label" for="radio1">Лёгкий режим</label>
+                    </div>
+
+                    <div class="mc-radio">
+                        <input type="radio" name="demo-radio" id="radio2" checked>
+                        <label class="mc-radio-label" for="radio2">Сложный режим</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h3>Состояния форм</h3>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <input type="text" class="mc-input mc-input-success" placeholder="Успешное поле" value="Всё правильно!">
+                    <div class="mc-form-success">✓ Валидация пройдена</div>
+
+                    <input type="text" class="mc-input mc-input-warning" placeholder="Предупреждение" value="Почти правильно">
+                    <div class="mc-form-warning">⚠ Почти правильно</div>
+
+                    <input type="text" class="mc-input mc-input-error" placeholder="Ошибка" value="Неправильно">
+                    <div class="mc-form-error">✗ Ошибка валидации</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Навигация -->
+    <section class="demo-section">
+        <h2>🧭 Навигация</h2>
+
+        <div class="mc-navbar">
+            <a href="#" class="mc-navbar-brand">🎮 MinecraftUI</a>
+            <ul class="mc-navbar-nav">
+                <li class="mc-nav-item">
+                    <a href="#" class="mc-nav-link active">Главная</a>
+                </li>
+                <li class="mc-nav-item">
+                    <a href="#" class="mc-nav-link">Демо</a>
+                </li>
+                <li class="mc-nav-item">
+                    <a href="#" class="mc-nav-link">Документация</a>
+                </li>
+                <li class="mc-nav-item">
+                    <a href="#" class="mc-nav-link">О проекте</a>
+                </li>
+            </ul>
+        </div>
+
+        <div style="margin: 24px 0;">
+            <nav class="mc-breadcrumb">
+                <span class="mc-breadcrumb-item"><a href="#">Главная</a></span>
+                <span class="mc-breadcrumb-item"><a href="#">Демо</a></span>
+                <span class="mc-breadcrumb-item active">Навигация</span>
+            </nav>
+        </div>
+
+        <div class="mc-tabs">
+            <ul class="mc-tab-nav">
+                <li><button class="mc-tab-button active" data-tab="tab1">Вкладка 1</button></li>
+                <li><button class="mc-tab-button" data-tab="tab2">Вкладка 2</button></li>
+                <li><button class="mc-tab-button" data-tab="tab3">Вкладка 3</button></li>
+            </ul>
+            <div class="mc-tab-content">
+                <div class="mc-tab-pane active" id="tab1">
+                    <p>Содержимое первой вкладки. Здесь может быть любой контент.</p>
+                </div>
+                <div class="mc-tab-pane" id="tab2">
+                    <p>Вторая вкладка с другим содержимым.</p>
+                </div>
+                <div class="mc-tab-pane" id="tab3">
+                    <p>Третья вкладка демонстрирует переключение.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Игровые компоненты -->
+    <section class="demo-section">
+        <h2>🎮 Игровые компоненты</h2>
+
+        <div class="demo-item">
+            <h3>Инвентарь</h3>
+            <div class="inventory-demo">
+                <div class="mc-slot occupied">⚔️</div>
+                <div class="mc-slot occupied">🛡️<span class="mc-slot-count">1</span></div>
+                <div class="mc-slot occupied">🍖<span class="mc-slot-count">16</span></div>
+                <div class="mc-slot occupied">🔥<span class="mc-slot-count">3</span></div>
+                <div class="mc-slot occupied">💎<span class="mc-slot-count">5</span></div>
+                <div class="mc-slot occupied">🌰<span class="mc-slot-count">32</span></div>
+                <div class="mc-slot occupied">🧭</div>
+                <div class="mc-slot occupied">📜</div>
+                <div class="mc-slot selected">✨</div>
+            </div>
+        </div>
+
+        <div class="demo-item">
+            <h3>Прогресс-бары</h3>
+            <div class="progress-demo">
+                <label>Здоровье:</label>
+                <div class="mc-progress mc-progress-health">
+                    <div class="mc-progress-bar" style="width: 75%"></div>
+                    <span class="mc-progress-label">15/20</span>
+                </div>
+
+                <label>Голод:</label>
+                <div class="mc-progress mc-progress-hunger">
+                    <div class="mc-progress-bar" style="width: 60%"></div>
+                    <span class="mc-progress-label">6/10</span>
+                </div>
+
+                <label>Опыт:</label>
+                <div class="mc-progress mc-progress-xp">
+                    <div class="mc-progress-bar" style="width: 30%"></div>
+                    <span class="mc-progress-label">Уровень 15</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-item">
+            <h3>Подсказки</h3>
+            <div style="display: flex; gap: 20px; justify-content: center; margin: 20px 0;">
+                <button class="mc-btn mc-tooltip" data-tooltip="Алмазный меч - Атака: 7">⚔️</button>
+
+                <div class="mc-tooltip mc-tooltip-right" data-tooltip="Увеличивает скорость копания">
+                    🔧 Эффективность V
+                </div>
+
+                <div class="mc-tooltip mc-tooltip-bottom" data-tooltip="Восстанавливает здоровье">
+                    ❤️ Регенерация
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Утилиты -->
+    <section class="demo-section">
+        <h2>⚙️ Утилиты</h2>
+
+        <div class="demo-controls">
+            <button class="mc-btn sound-btn" id="play-sound">Звук кнопки</button>
+            <button class="mc-btn mc-btn-grass sound-btn" id="play-block">Звук блока</button>
+            <button class="mc-btn mc-btn-redstone sound-btn" id="play-error">Звук ошибки</button>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-item">
+                <h3>Темы</h3>
+                <div style="display: flex; gap: 20px; justify-content: center; margin: 20px 0;">
+                    <div class="theme-preview theme-default" data-theme="default" title="Стандартная тема"></div>
+                    <div class="theme-preview theme-dark" data-theme="dark" title="Тёмная тема"></div>
+                    <div class="theme-preview theme-neon" data-theme="neon" title="Неоновая тема"></div>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h3>Анимации</h3>
+                <div style="display: flex; gap: 10px; justify-content: center; margin: 20px 0;">
+                    <button class="mc-btn mc-animate-pulse">Pulse</button>
+                    <button class="mc-btn mc-animate-bounce">Bounce</button>
+                    <button class="mc-btn mc-animate-shake">Shake</button>
+                </div>
+            </div>
+
+            <div class="demo-item">
+                <h3>Отзывчивость</h3>
+                <div style="margin: 20px 0;">
+                    <div class="mc-d-flex mc-flex-col mc-flex-md-row mc-gap-2">
+                        <div class="mc-w-full mc-w-md-1/2 mc-bg-grass mc-p-2">Колонка 1</div>
+                        <div class="mc-w-full mc-w-md-1/2 mc-bg-diamond mc-p-2">Колонка 2</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальные окна -->
+    <section class="demo-section">
+        <h2>📦 Модальные окна</h2>
+
+        <div class="demo-controls">
+            <button class="mc-btn mc-btn-grass" id="open-modal">Открыть модальное окно</button>
+            <button class="mc-btn mc-btn-gold" id="open-toast">Показать уведомление</button>
+        </div>
+    </section>
+</div>
+
+<!-- Модальное окно -->
+<div class="mc-modal" id="demo-modal">
+    <div class="mc-modal-content mc-modal-sm">
+        <div class="mc-modal-header">
+            <h3 class="mc-modal-title">Демо модальное окно</h3>
+            <button class="mc-modal-close">&times;</button>
+        </div>
+        <div class="mc-modal-body">
+            <p>Это демонстрация модального окна MinecraftUI. Здесь может быть любая информация!</p>
+            <div class="mc-form-group" style="margin-top: 20px;">
+                <label class="mc-label">Ваше мнение:
+                <textarea class="mc-textarea" placeholder="Напишите что-нибудь..." rows="3"></textarea>
+                </label>
+            </div>
+        </div>
+        <div class="mc-modal-footer">
+            <button class="mc-btn mc-btn-redstone" id="close-modal">Закрыть</button>
+            <button class="mc-btn mc-btn-grass">Сохранить</button>
+        </div>
+    </div>
+</div>
+
+<!-- Контейнер для уведомлений -->
+<div class="toast-container" id="toast-container"></div>
+
+<script type="module" src="index.js"></script>
+</body>
+</html>

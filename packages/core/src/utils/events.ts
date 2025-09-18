@@ -1,11 +1,26 @@
 // Event handling utilities
 
-export type EventCallback<T = any> = (data: T) => void;
+export type UIEventCallback<T = any> = (data: T) => void;
 
-export class EventEmitter<T extends Record<string, any> = {}> {
-    private events = new Map<keyof T, Set<EventCallback>>();
+export interface UIEvents {
+    'button:click': { element: HTMLElement; variant?: string };
+    'modal:open': { modalId?: string };
+    'modal:close': { modalId?: string };
+    'tab:change': { oldTab: string; newTab: string };
+    'theme:change': { theme: string; previousTheme: string };
+    'tooltip:show': { element: HTMLElement; content: string };
+    'tooltip:hide': { element: HTMLElement };
+    'form:submit': { form: HTMLFormElement; data: FormData };
+    'form:error': { form: HTMLFormElement; errors: string[] };
+}
 
-    public on<K extends keyof T>(event: K, callback: EventCallback<T[K]>): () => void {
+export class UIEventEmitter {
+    private events = new Map<keyof UIEvents, Set<UIEventCallback>>();
+
+    public on<K extends keyof UIEvents>(
+        event: K,
+        callback: UIEventCallback<UIEvents[K]>
+    ): () => void {
         if (!this.events.has(event)) {
             this.events.set(event, new Set());
         }
@@ -22,20 +37,23 @@ export class EventEmitter<T extends Record<string, any> = {}> {
         };
     }
 
-    public emit<K extends keyof T>(event: K, data: T[K]): void {
+    public emit<K extends keyof UIEvents>(event: K, data: UIEvents[K]): void {
         const callbacks = this.events.get(event);
         if (callbacks) {
             callbacks.forEach(callback => {
                 try {
                     callback(data);
                 } catch (error) {
-                    console.error(`Error in event callback for ${String(event)}:`, error);
+                    console.error(`Error in UI event callback for ${String(event)}:`, error);
                 }
             });
         }
     }
 
-    public off<K extends keyof T>(event: K, callback?: EventCallback<T[K]>): void {
+    public off<K extends keyof UIEvents>(
+        event: K,
+        callback?: UIEventCallback<UIEvents[K]>
+    ): void {
         if (!callback) {
             this.events.delete(event);
             return;
@@ -50,8 +68,11 @@ export class EventEmitter<T extends Record<string, any> = {}> {
         }
     }
 
-    public once<K extends keyof T>(event: K, callback: EventCallback<T[K]>): void {
-        const onceCallback = (data: T[K]) => {
+    public once<K extends keyof UIEvents>(
+        event: K,
+        callback: UIEventCallback<UIEvents[K]>
+    ): void {
+        const onceCallback = (data: UIEvents[K]) => {
             callback(data);
             this.off(event, onceCallback);
         };

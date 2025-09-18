@@ -23,5 +23,7 @@
     "rimraf": "^5.0.0",
     "typescript": "^5.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@minecraft-ui/core": "^1.0.0"
+  }
 }
