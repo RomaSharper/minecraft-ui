@@ -1,0 +1,109 @@
+// Chips - Material Design 3
+
+@import '../core/variables';
+
+.mc-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 $mc-space-4;
+  border-radius: $mc-radius-lg;
+  background: $mc-surface-container;
+  color: $mc-on-surface-variant;
+  font-family: $mc-font-family-body;
+  font-size: $mc-label-large-size;
+  font-weight: $mc-font-weight-medium;
+  border: 1px solid $mc-outline;
+  cursor: pointer;
+  user-select: none;
+  transition: all $mc-duration-short4 $mc-easing-standard;
+
+  &:hover {
+    background: rgba($mc-on-surface, $mc-hover-opacity);
+  }
+
+  &.mc-chip-selected {
+    background: $mc-secondary;
+    color: $mc-on-secondary;
+    border-color: transparent;
+  }
+
+  &.mc-chip-assist {
+    border-color: $mc-outline;
+
+    &:hover {
+      background: $mc-surface-container-high;
+    }
+  }
+
+  &.mc-chip-filter {
+    &.mc-chip-selected {
+      background: $mc-secondary-container;
+      color: $mc-on-secondary;
+
+      .mc-chip-checkmark {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.mc-chip-input {
+    &.mc-chip-selected {
+      background: $mc-primary;
+      color: $mc-on-primary;
+    }
+  }
+
+  &.mc-chip-suggestion {
+    border: 1px solid $mc-outline;
+    background: $mc-surface;
+  }
+
+  .mc-chip-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: $mc-space-2;
+    flex-shrink: 0;
+  }
+
+  .mc-chip-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: $mc-radius-full;
+    margin-left: -$mc-space-2;
+    margin-right: $mc-space-2;
+    flex-shrink: 0;
+  }
+
+  .mc-chip-checkmark {
+    width: 16px;
+    height: 16px;
+    margin-right: $mc-space-2;
+    opacity: 0;
+    transition: opacity $mc-duration-short2 $mc-easing-standard;
+  }
+
+  .mc-chip-remove {
+    width: 18px;
+    height: 18px;
+    margin-left: $mc-space-2;
+    margin-right: -$mc-space-1;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: $mc-radius-full;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+
+    &:hover {
+      background: rgba($mc-on-surface, $mc-hover-opacity);
+    }
+  }
+
+  &:disabled {
+    opacity: $mc-disabled-opacity;
+    cursor: not-allowed;
+  }
+}

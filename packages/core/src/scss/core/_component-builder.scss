@@ -1,0 +1,66 @@
+// Миксины для быстрого создания компонентов
+
+@import './variables';
+
+// Миксин для создания кнопок любого стиля
+@mixin mc-create-button(
+  $name,
+  $bg-color,
+  $text-color: null,
+  $border-color: null,
+  $hover-bg: null,
+  $active-bg: null
+) {
+  .mc-btn-#{$name} {
+    $text: if($text-color, $text-color, if(lightness($bg-color) > 50%, $mc-on-surface, $mc-on-primary));
+    $border: if($border-color, $border-color, $bg-color);
+    $hover: if($hover-bg, $hover-bg, lighten($bg-color, 8%));
+    $active: if($active-bg, $active-bg, darken($bg-color, 8%));
+
+    background: $bg-color;
+    color: $text;
+    border-color: $border;
+
+    &:hover:not(:disabled) {
+      background: $hover;
+    }
+
+    &:active:not(:disabled) {
+      background: $active;
+    }
+  }
+}
+
+// Миксин для создания карточек
+@mixin mc-create-card($name, $bg-color, $border-color: null, $text-color: null) {
+  .mc-card-#{$name} {
+    background: $bg-color;
+    border-color: if($border-color, $border-color, $bg-color);
+    color: if($text-color, $text-color, $mc-on-surface);
+
+    .mc-card-header {
+      background: darken($bg-color, 5%);
+    }
+  }
+}
+
+// Миксин для создания прогресс-баров
+@mixin mc-create-progress($name, $color, $glow: false) {
+  .mc-progress-#{$name} {
+    .mc-progress-bar {
+      background: $color;
+
+      @if $glow {
+        box-shadow: 0 0 8px rgba($color, 0.4);
+      }
+    }
+  }
+}
+
+// Миксин для создания значков
+@mixin mc-create-badge($name, $bg-color, $text-color: null) {
+  .mc-badge-#{$name} .mc-badge-content {
+    background: $bg-color;
+    color: if($text-color, $text-color, if(lightness($bg-color) > 50%, $mc-on-surface, $mc-on-primary));
+  }
+}

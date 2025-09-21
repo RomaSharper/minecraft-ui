@@ -33,15 +33,13 @@ import '@minecraft-ui/core/dist/minecraft-ui.css';
 // Инициализация MinecraftUI
 const ui = new MinecraftUI({
     theme: 'default',
-    sounds: true,
     pixelated: true
 });
 
 // Использование утилит
-import { minecraftSounds, themeManager } from '@minecraft-ui/core';
+import { themeManager } from '@minecraft-ui/core';
 
-minecraftSounds.playButtonClick();
-themeManager.applyTheme('dark');
+themeManager.applyTheme('java');
 ```
 
 ### **SCSS Integration**
@@ -53,7 +51,7 @@ themeManager.applyTheme('dark');
 
 // Изменение переменных
 $mc-grass: #00FF00; // Более светлая трава
-$mc-ui-bg: #2C2C2C; // Более тёмный задний фон
+$mc-background: #2C2C2C; // Более тёмный задний фон
 
 // Импортировать всё
 @import '@minecraft-ui/core/src/scss/minecraft-ui';
@@ -108,28 +106,7 @@ $mc-ui-bg: #2C2C2C; // Более тёмный задний фон
 * **Цвета**: `.mc-text-*`, `.mc-bg-*`
 * **Типография**: `.mc-text-*`, `.mc-font-*`
 
-## 🎵 **Утилиты JavaScript**
-
-### **Звуковая система**
-
-```javascript
-import { minecraftSounds } from '@minecraft-ui/core';
-
-// Встроенные звуки
-minecraftSounds.playBlockBreak();
-minecraftSounds.playBlockPlace();
-minecraftSounds.playButtonClick();
-minecraftSounds.playError();
-minecraftSounds.playSuccess();
-
-// Кастомные звуки
-minecraftSounds.playCustomSound({
-    frequency: 440,
-    duration: 0.2,
-    type: 'square',
-    volume: 0.5
-});
-```
+## **Утилиты JavaScript**
 
 ### **Менеджер тем**
 
@@ -195,9 +172,9 @@ $mc-diamond: #00BCD4;
 $mc-redstone: #F44336;
 
 // Цвета UI
-$mc-ui-bg: #3E3E3E;
-$mc-ui-text: #FFFFFF;
-$mc-ui-border: #8B8B8B;
+$mc-background: #3E3E3E;
+$mc-on-background: #FFFFFF;
+$mc-stone: #8B8B8B;
 
 // Цвета состояний
 $mc-success: $mc-grass;
@@ -220,10 +197,10 @@ $mc-space-4: 32px;
 #### **Типография**
 
 ```scss
-$mc-font-family-base: 'Courier New', 'Monaco', 'Menlo', monospace;
+$mc-font-family-body: 'Courier New', 'Monaco', 'Menlo', monospace;
 $mc-font-size-xs: 10px;
 $mc-font-size-sm: 12px;
-$mc-font-size-base: 14px;
+$mc-body-medium-size: 14px;
 $mc-font-size-lg: 16px;
 $mc-font-size-xl: 20px;
 ```
@@ -380,35 +357,6 @@ MinecraftUI использует подход mobile-first с этими бре�
 </nav>
 ```
 
-## 🎵 **Интеграция аудио**
-
-### **Особенности Web Audio API**
-
-* **Пиксельные звуковые эффекты**: Прямоугольные генераторы для создания ретро-атмосферы
-* **Динамическая регулировка громкости**: Регулируемые узлы усиления
-* **Частотная модуляция**: Создание пользовательских звуковых эффектов
-* **Запасной вариант**: Не работает, когда звук не поддерживается
-
-### **Создание пользовательских звуков**
-
-```javascript
-import { MinecraftSounds } from '@minecraft-ui/core';
-
-const sounds = new MinecraftSounds();
-
-// Создать пользовательский звук "повышения уровня"
-sounds.playCustomSound({
-    frequency: 440, // Нота A4
-    duration: 0.3,
-    type: 'sine',
-    volume: 0.4
-});
-
-setTimeout(() => {
-    sounds.playCustomSound({ frequency: 660, duration: 0.2 });
-}, 100);
-```
-
 ## 📦 **Информация о сборке**
 
 | **Файл**             | **Размер (Сжатый)** | **Описание**                     |
@@ -423,7 +371,6 @@ setTimeout(() => {
 
 ```javascript
 // Импортируйте только те функции, что вам нужны
-import { minecraftSounds } from '@minecraft-ui/core/sounds';
 import { themeManager } from '@minecraft-ui/core/theme';
 import { Validator } from '@minecraft-ui/core/validation';
 ```
@@ -444,32 +391,6 @@ npm run test:watch
 
 # Проверка синтаксиса для SCSS и TypeScript
 npm run lint
-```
-
-### **Написание тестов**
-
-```javascript
-import { MinecraftSounds, DOMUtils } from '@minecraft-ui/core';
-
-describe('MinecraftSounds', () => {
-    let sounds;
-
-    beforeEach(() => {
-        sounds = new MinecraftSounds();
-    });
-    
-    it('кнопка воспроизведения должна проиграть звук без ошибок', () => {
-        expect(() => sounds.playButtonClick()).not.toThrow();
-    });
-    
-    it('должна быть обработка неподдерживаемых браузеров', () => {
-        // Симуляция неподдерживаемого окружения
-        global.AudioContext = undefined;
-        
-        const soundsNoSupport = new MinecraftSounds();
-        expect(soundsNoSupport.soundsSupported).toBe(false);
-    });
-});
 ```
 
 ## 🔧 **Разработка**
@@ -545,18 +466,7 @@ import '@minecraft-ui/core/dist/minecraft-ui.css';
 <link rel="stylesheet" href="путь/к/minecraft-ui.css">
 ```
 
-2. Звуки не проигрываются
-
-```javascript
-// Проверьте поддержку браузера
-if (minecraftSounds.soundsSupported) {
-    minecraftSounds.playButtonClick();
-} else {
-    console.log('Звуки не поддерживаются в вашем браузере');
-}
-```
-
-3. На компоненты некорректно накладываются стили
+2. На компоненты некорректно накладываются стили
 
 ```html
 <!-- Всегда заворачивайте элементы в блок с классом mc-base -->
@@ -565,7 +475,7 @@ if (minecraftSounds.soundsSupported) {
 </div>
 ```
 
-4. SCSS ошибка компиляции
+3SCSS ошибка компиляции
 
 ```scss
 // Убедитесь, что первым делом импортируете переменные

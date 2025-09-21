@@ -1,0 +1,263 @@
+// Сложные готовые макеты
+
+@import '../core/variables';
+@import '../core/keyframes';
+
+// Макет игрового интерфейса
+.mc-game-ui {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  font-family: $mc-font-family-body;
+  z-index: $mc-z-docked;
+
+  // Верхняя панель (здоровье, голод, опыт)
+  .mc-game-ui-top {
+    position: absolute;
+    top: $mc-space-4;
+    left: $mc-space-4;
+    right: $mc-space-4;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: auto;
+
+    .mc-player-stats {
+      display: flex;
+      flex-direction: column;
+      gap: $mc-space-2;
+
+      .mc-stat {
+        display: flex;
+        align-items: center;
+        gap: $mc-space-2;
+        background: rgba($mc-surface, 0.9);
+        padding: $mc-space-2 $mc-space-3;
+        border-radius: $mc-radius-lg;
+        backdrop-filter: blur(8px);
+
+        .mc-stat-icon {
+          width: 20px;
+          height: 20px;
+        }
+
+        .mc-stat-progress {
+          width: 120px;
+          height: 8px;
+        }
+      }
+    }
+
+    .mc-game-info {
+      text-align: right;
+      color: $mc-on-surface;
+
+      .mc-coordinates {
+        font-family: $mc-font-family-mono;
+        font-size: $mc-body-small-size;
+        background: rgba($mc-surface, 0.8);
+        padding: $mc-space-1 $mc-space-2;
+        border-radius: $mc-radius-sm;
+        margin-bottom: $mc-space-2;
+      }
+    }
+  }
+
+  // Нижняя панель (инвентарь хотбар)
+  .mc-game-ui-bottom {
+    position: absolute;
+    bottom: $mc-space-4;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: auto;
+
+    .mc-hotbar {
+      display: flex;
+      background: rgba($mc-surface, 0.9);
+      border-radius: $mc-radius-lg;
+      padding: $mc-space-2;
+      backdrop-filter: blur(8px);
+      gap: $mc-space-1;
+
+      .mc-hotbar-slot {
+        width: 48px;
+        height: 48px;
+        border-radius: $mc-radius-sm;
+        border: 2px solid transparent;
+        background: rgba($mc-surface-variant, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all $mc-duration-short2 $mc-easing-standard;
+
+        &:hover {
+          background: rgba($mc-surface-variant, 0.8);
+        }
+
+        &.mc-hotbar-slot-selected {
+          border-color: $mc-primary;
+          background: rgba($mc-primary, 0.2);
+        }
+
+        .mc-item-icon {
+          font-size: 24px;
+        }
+
+        .mc-item-count {
+          position: absolute;
+          bottom: 2px;
+          right: 2px;
+          font-size: 10px;
+          font-weight: bold;
+          background: rgba(0, 0, 0, 0.7);
+          color: white;
+          border-radius: $mc-radius-xs;
+          padding: 1px 3px;
+          min-width: 12px;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  // Боковые панели
+  .mc-game-ui-left,
+  .mc-game-ui-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: auto;
+  }
+
+  .mc-game-ui-left {
+    left: $mc-space-4;
+  }
+
+  .mc-game-ui-right {
+    right: $mc-space-4;
+  }
+
+  // Центральные уведомления
+  .mc-game-ui-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: auto;
+
+    .mc-notification {
+      background: rgba($mc-surface, 0.9);
+      color: $mc-on-surface;
+      padding: $mc-space-4 $mc-space-6;
+      border-radius: $mc-radius-xl;
+      backdrop-filter: blur(12px);
+      margin-bottom: $mc-space-4;
+      animation: slideInScale $mc-duration-medium2 $mc-easing-emphasized;
+
+      &.mc-notification-achievement {
+        background: linear-gradient(135deg,
+                rgba($mc-gold, 0.9),
+                rgba($mc-gold, 0.7)
+        );
+        color: black;
+        font-weight: $mc-font-weight-bold;
+
+        .mc-notification-title {
+          font-size: $mc-title-medium-size;
+          margin-bottom: $mc-space-1;
+        }
+      }
+    }
+  }
+}
+
+// Макет панели администратора
+.mc-admin-panel {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar main"
+    "sidebar footer";
+  min-height: 100vh;
+  background: $mc-background;
+
+  .mc-admin-sidebar {
+    grid-area: sidebar;
+    background: $mc-surface-container-low;
+    border-right: 1px solid $mc-outline-variant;
+    overflow-y: auto;
+  }
+
+  .mc-admin-header {
+    grid-area: header;
+    background: $mc-surface;
+    border-bottom: 1px solid $mc-outline-variant;
+    padding: $mc-space-4 $mc-space-6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .mc-admin-title {
+      font-size: $mc-headline-small-size;
+      font-weight: $mc-font-weight-regular;
+      color: $mc-on-surface;
+      margin: 0;
+    }
+
+    .mc-admin-actions {
+      display: flex;
+      gap: $mc-space-2;
+    }
+  }
+
+  .mc-admin-main {
+    grid-area: main;
+    padding: $mc-space-6;
+    overflow-y: auto;
+
+    .mc-admin-section {
+      margin-bottom: $mc-space-8;
+
+      .mc-admin-section-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: $mc-space-4;
+
+        .mc-admin-section-title {
+          font-size: $mc-title-large-size;
+          font-weight: $mc-font-weight-regular;
+          color: $mc-on-background;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .mc-admin-footer {
+    grid-area: footer;
+    background: $mc-surface-variant;
+    border-top: 1px solid $mc-outline-variant;
+    padding: $mc-space-3 $mc-space-6;
+    font-size: $mc-body-small-size;
+    color: $mc-on-surface-variant;
+  }
+
+  @include mc-media-down(lg) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "main"
+      "footer";
+
+    .mc-admin-sidebar {
+      display: none;
+    }
+  }
+}

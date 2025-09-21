@@ -1,181 +1,238 @@
-// Bedrock Edition Theme - современная версия Minecraft
-
+@import '../core/mixins';
 @import '../core/functions';
 @import '../core/variables';
 
 .mc-theme-bedrock {
-  // Bedrock Edition цветовая палитра
-  --mc-bedrock-gui-background: #2D2D30;
-  --mc-bedrock-gui-surface: #383838;
-  --mc-bedrock-gui-elevated: #404040;
-  --mc-bedrock-button: #48484A;
-  --mc-bedrock-button-hover: #5A5A5C;
-  --mc-bedrock-button-pressed: #363638;
-  --mc-bedrock-accent: #00B4D8;
-  --mc-bedrock-accent-hover: #0077BE;
-  --mc-bedrock-success: #4CAF50;
-  --mc-bedrock-warning: #FF9800;
-  --mc-bedrock-error: #F44336;
-  --mc-bedrock-text-primary: #FFFFFF;
-  --mc-bedrock-text-secondary: #B3B3B3;
-  --mc-bedrock-text-disabled: #666666;
-  --mc-bedrock-border: #555555;
-  --mc-bedrock-border-light: #777777;
+  // ================================
+  // ОСНОВНЫЕ ЦВЕТА
+  // ================================
+  $mc-primary: #00B4D8;
+  $mc-secondary: $mc-emerald;
+  $mc-success: $mc-grass;
+  $mc-warning: $mc-gold;
+  $mc-error: $mc-redstone;
+  $mc-info: #00B4D8;
 
-  // Общие стили
-  background: linear-gradient(135deg, #1E1E1E, #2A2A2A);
-  color: var(--mc-bedrock-text-primary);
-  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  // Bedrock dark theme
+  $mc-surface: #2D2D30;
+  $mc-surface-variant: #383838;
+  $mc-surface-container: #404040;
+  $mc-on-surface: #FFFFFF;
+  $mc-on-surface-variant: #B3B3B3;
+  $mc-background: #1E1E1E;
+  $mc-on-background: #FFFFFF;
+  $mc-outline: #555555;
 
-  .mc-card,
-  .mc-modal-content {
-    background: var(--mc-bedrock-gui-background);
-    border: 1px solid var(--mc-bedrock-border);
-    border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-    color: var(--mc-bedrock-text-primary);
+  // ================================
+  // ТИПОГРАФИКА
+  // ================================
+  $mc-font-family-display: 'Segoe UI Variable', 'Roboto', system-ui, sans-serif;
+  $mc-font-family-body: $mc-font-family-display;
 
-    .mc-card-header,
-    .mc-modal-header {
-      background: var(--mc-bedrock-gui-elevated);
-      color: var(--mc-bedrock-text-primary);
-      border-bottom: 1px solid var(--mc-bedrock-border);
-      border-radius: 8px 8px 0 0;
-      font-weight: 600;
-      font-size: 16px;
-    }
-  }
+  // Standard sizes
+  $mc-body-large-size: 16px;
+  $mc-body-medium-size: 14px;
+  $mc-body-small-size: 12px;
+  $mc-title-medium-size: 16px;
+  $mc-title-small-size: 14px;
+  $mc-label-large-size: 14px;
 
-  // Современные кнопки Bedrock Edition
+  // ================================
+  // РАДИУСЫ (Bedrock = rounded)
+  // ================================
+  $mc-radius-sm: 4px;
+  $mc-radius-md: 8px;
+  $mc-radius-lg: 12px;
+  $mc-radius-xl: 16px;
+  $mc-button-radius: 12px;
+  $mc-card-radius: 12px;
+  $mc-input-radius: 4px;
+
+  // ================================
+  // ТЕНИ (Bedrock = soft)
+  // ================================
+  $mc-elevation-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+  $mc-elevation-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+  $mc-elevation-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+
+  // ================================
+  // АНИМАЦИИ (Bedrock = smooth)
+  // ================================
+  $mc-duration-short2: 100ms;
+  $mc-duration-short4: 200ms;
+  $mc-duration-medium2: 300ms;
+  $mc-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  // ================================
+  // РАЗМЕРЫ (Bedrock = spacious)
+  // ================================
+  $mc-button-height-md: 40px;
+  $mc-button-height-lg: 48px;
+  $mc-input-height-md: 40px;
+  $mc-slot-size-md: 48px;
+  $mc-nav-height: 64px;
+
+  // ================================
+  // ПРИМЕНЯЕМ СТИЛИ
+  // ================================
+  background: linear-gradient(135deg, $mc-background, #2A2A2A);
+  color: $mc-on-background;
+  font-family: $mc-font-family-body;
+  font-size: $mc-body-medium-size;
+
+  // ================================
+  // КНОПКИ
+  // ================================
   .mc-btn {
-    background: var(--mc-bedrock-button);
-    color: var(--mc-bedrock-text-primary);
-    border: 1px solid var(--mc-bedrock-border-light);
-    border-radius: 4px;
+    background: #48484A;
+    color: $mc-on-surface;
+    border: 1px solid #777777;
+    border-radius: $mc-button-radius;
+    font-family: $mc-font-family-body;
+    font-size: $mc-body-medium-size;
     font-weight: 500;
-    text-shadow: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease;
+    height: $mc-button-height-md;
+    box-shadow: $mc-elevation-1;
+    transition: all $mc-duration-short4 $mc-easing-standard;
 
     &:hover:not(:disabled) {
-      background: var(--mc-bedrock-button-hover);
-      border-color: var(--mc-bedrock-border-light);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      background: #5A5A5C;
       transform: translateY(-1px);
+      box-shadow: $mc-elevation-3;
     }
 
     &:active:not(:disabled) {
-      background: var(--mc-bedrock-button-pressed);
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+      background: #363638;
       transform: translateY(1px);
+      box-shadow: $mc-elevation-1;
     }
 
-    &:disabled {
-      background: #333333;
-      color: var(--mc-bedrock-text-disabled);
-      border-color: #444444;
-      box-shadow: none;
-      cursor: not-allowed;
+    // Button variants with gradients
+    &.mc-btn-primary {
+      background: linear-gradient(135deg, $mc-primary, darken($mc-primary, 15%));
+      border-color: mc-lighten($mc-primary, 10%);
+      color: white;
+    }
+
+    &.mc-btn-grass {
+      background: linear-gradient(135deg, $mc-grass, darken($mc-grass, 15%));
+      border-color: mc-lighten($mc-grass, 10%);
+      color: white;
+    }
+
+    &.mc-btn-gold {
+      background: linear-gradient(135deg, $mc-gold, darken($mc-gold, 15%));
+      border-color: mc-lighten($mc-gold, 10%);
+      color: black;
+    }
+
+    &.mc-btn-diamond {
+      background: linear-gradient(135deg, $mc-diamond, darken($mc-diamond, 15%));
+      border-color: mc-lighten($mc-diamond, 10%);
+      color: white;
+    }
+
+    &.mc-btn-redstone {
+      background: linear-gradient(135deg, $mc-redstone, darken($mc-redstone, 15%));
+      border-color: mc-lighten($mc-redstone, 10%);
+      color: white;
     }
   }
 
-  // Акцентные кнопки Bedrock
-  .mc-btn-primary {
-    background: linear-gradient(135deg, var(--mc-bedrock-accent), #0077BE);
-    border-color: var(--mc-bedrock-accent);
+  // ================================
+  // КАРТОЧКИ
+  // ================================
+  .mc-card {
+    background: $mc-surface;
+    border: 1px solid $mc-outline;
+    border-radius: $mc-card-radius;
+    box-shadow: $mc-elevation-2;
+    color: $mc-on-surface;
 
-    &:hover:not(:disabled) {
-      background: linear-gradient(135deg, var(--mc-bedrock-accent-hover), #005A8B);
+    .mc-card-header {
+      background: $mc-surface-container;
+      border-bottom: 1px solid $mc-outline;
+      border-radius: $mc-card-radius $mc-card-radius 0 0;
+      font-size: $mc-title-medium-size;
+      font-weight: 600;
     }
   }
 
-  .mc-btn-grass {
-    background: linear-gradient(135deg, #4CAF50, #388E3C);
-    border-color: #66BB6A;
-  }
-
-  .mc-btn-gold {
-    background: linear-gradient(135deg, #FFC107, #FFA000);
-    color: #1A1A1A;
-    border-color: #FFD54F;
-  }
-
-  .mc-btn-diamond {
-    background: linear-gradient(135deg, #00BCD4, #0097A7);
-    border-color: #26C6DA;
-  }
-
-  .mc-btn-redstone {
-    background: linear-gradient(135deg, #F44336, #D32F2F);
-    border-color: #EF5350;
-  }
-
-  // Формы Bedrock Edition
+  // ================================
+  // ФОРМЫ
+  // ================================
   .mc-input,
   .mc-textarea,
   .mc-select {
-    background: var(--mc-bedrock-gui-surface);
-    color: var(--mc-bedrock-text-primary);
-    border: 1px solid var(--mc-bedrock-border);
-    border-radius: 4px;
-    padding: 10px 12px;
-    transition: all 0.2s ease;
+    background: $mc-surface-variant;
+    border: 1px solid $mc-outline;
+    border-radius: $mc-input-radius;
+    color: $mc-on-surface;
+    height: $mc-input-height-md;
+    font-family: $mc-font-family-body;
+    font-size: $mc-body-medium-size;
+    transition: all $mc-duration-short4 $mc-easing-standard;
 
     &:focus {
-      background: var(--mc-bedrock-gui-elevated);
-      border-color: var(--mc-bedrock-accent);
+      background: $mc-surface-container;
+      border-color: $mc-primary;
       box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.2);
       outline: none;
     }
 
     &::placeholder {
-      color: var(--mc-bedrock-text-secondary);
+      color: $mc-on-surface-variant;
     }
   }
 
-  // Современный инвентарь Bedrock
+  // ================================
+  // ИНВЕНТАРЬ
+  // ================================
   .mc-inventory {
-    background: var(--mc-bedrock-gui-background);
-    border: 1px solid var(--mc-bedrock-border);
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    background: $mc-surface;
+    border: 1px solid $mc-outline;
+    border-radius: $mc-card-radius;
+    box-shadow: $mc-elevation-2;
 
     .mc-slot {
-      background: var(--mc-bedrock-gui-surface);
-      border: 1px solid var(--mc-bedrock-border);
+      background: $mc-surface-variant;
+      border: 1px solid $mc-outline;
       border-radius: 4px;
-      transition: all 0.2s ease;
+      width: $mc-slot-size-md;
+      height: $mc-slot-size-md;
+      transition: all $mc-duration-short4 $mc-easing-standard;
 
       &:hover {
-        background: var(--mc-bedrock-gui-elevated);
-        border-color: var(--mc-bedrock-border-light);
+        background: $mc-surface-container;
         transform: scale(1.05);
       }
 
       &.occupied {
-        background: var(--mc-bedrock-gui-elevated);
-        border-color: var(--mc-bedrock-accent);
+        background: $mc-surface-container;
+        border-color: $mc-primary;
         box-shadow: inset 0 0 4px rgba(0, 180, 216, 0.3);
       }
 
       &.selected {
         background: rgba(0, 180, 216, 0.2);
-        border: 2px solid var(--mc-bedrock-accent);
+        border: 2px solid $mc-primary;
         box-shadow: 0 0 8px rgba(0, 180, 216, 0.4);
       }
     }
   }
 
-  // Прогресс бары Bedrock Edition
+  // ================================
+  // ПРОГРЕСС БАРЫ
+  // ================================
   .mc-progress {
-    background: var(--mc-bedrock-gui-surface);
-    border: 1px solid var(--mc-bedrock-border);
+    background: $mc-surface-variant;
+    border: 1px solid $mc-outline;
     border-radius: 10px;
     overflow: hidden;
 
     .mc-progress-bar {
       border-radius: 8px;
-      transition: width 0.3s ease, background 0.2s ease;
+      transition: width $mc-duration-medium2 $mc-easing-standard;
 
       &.mc-progress-health {
         background: linear-gradient(90deg, #E53E3E, #C53030);
@@ -194,79 +251,35 @@
     }
   }
 
-  // Навигация Bedrock Edition
+  // ================================
+  // НАВИГАЦИЯ
+  // ================================
   .mc-navbar {
-    background: var(--mc-bedrock-gui-background);
-    border: 1px solid var(--mc-bedrock-border);
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    background: $mc-surface;
+    border: 1px solid $mc-outline;
+    border-radius: $mc-card-radius;
+    box-shadow: $mc-elevation-2;
+    height: $mc-nav-height;
 
     .mc-navbar-brand {
-      color: var(--mc-bedrock-accent);
+      color: $mc-primary;
       font-weight: 600;
     }
 
     .mc-nav-link {
-      color: var(--mc-bedrock-text-secondary);
+      color: $mc-on-surface-variant;
       border-radius: 4px;
-      transition: all 0.2s ease;
+      transition: all $mc-duration-short4 $mc-easing-standard;
 
       &:hover {
-        color: var(--mc-bedrock-text-primary);
-        background: var(--mc-bedrock-gui-surface);
+        color: $mc-on-surface;
+        background: $mc-surface-variant;
       }
 
       &.active {
-        color: var(--mc-bedrock-text-primary);
-        background: var(--mc-bedrock-accent);
+        color: $mc-on-surface;
+        background: $mc-primary;
       }
-    }
-  }
-
-  // Тултипы Bedrock Edition
-  .mc-tooltip::before {
-    background: rgba(45, 45, 48, 0.95);
-    color: var(--mc-bedrock-text-primary);
-    border: 1px solid var(--mc-bedrock-border);
-    border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(8px);
-    font-size: 12px;
-    font-weight: 500;
-  }
-
-  // Табы Bedrock Edition
-  .mc-tabs {
-    .mc-tab-nav {
-      background: transparent;
-      border: none;
-
-      .mc-tab-button {
-        background: transparent;
-        color: var(--mc-bedrock-text-secondary);
-        border: none;
-        border-bottom: 2px solid transparent;
-        border-radius: 4px 4px 0 0;
-        padding: 12px 20px;
-        transition: all 0.2s ease;
-
-        &:hover:not(.active) {
-          color: var(--mc-bedrock-text-primary);
-          background: var(--mc-bedrock-gui-surface);
-        }
-
-        &.active {
-          color: var(--mc-bedrock-text-primary);
-          background: var(--mc-bedrock-gui-background);
-          border-bottom-color: var(--mc-bedrock-accent);
-        }
-      }
-    }
-
-    .mc-tab-content {
-      background: var(--mc-bedrock-gui-background);
-      border: 1px solid var(--mc-bedrock-border);
-      border-radius: 0 8px 8px 8px;
     }
   }
 }

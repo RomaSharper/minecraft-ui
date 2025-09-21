@@ -1,0 +1,104 @@
+// List - Material Design 3
+
+@import '../core/variables';
+
+.mc-list {
+  margin: 0;
+  padding: $mc-space-2 0;
+  list-style: none;
+  background: $mc-surface;
+
+  .mc-list-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 56px;
+    padding: $mc-space-2 $mc-space-4;
+    color: $mc-on-surface;
+    cursor: pointer;
+    transition: background-color $mc-duration-short2 $mc-easing-standard;
+
+    &:hover {
+      background: rgba($mc-on-surface, $mc-hover-opacity);
+    }
+
+    &:focus {
+      background: rgba($mc-on-surface, $mc-focus-opacity);
+      outline: none;
+    }
+
+    &.mc-list-item-selected {
+      background: rgba($mc-primary, $mc-selected-opacity);
+      color: $mc-primary;
+    }
+
+    &.mc-list-item-activated {
+      background: rgba($mc-secondary, $mc-activated-opacity);
+    }
+
+    .mc-list-item-leading {
+      margin-right: $mc-space-4;
+      flex-shrink: 0;
+    }
+
+    .mc-list-item-content {
+      flex: 1;
+      min-width: 0;
+
+      .mc-list-item-headline {
+        font-size: $mc-body-large-size;
+        font-weight: $mc-font-weight-regular;
+        color: $mc-on-surface;
+        margin: 0;
+      }
+
+      .mc-list-item-supporting-text {
+        font-size: $mc-body-medium-size;
+        color: $mc-on-surface-variant;
+        margin: $mc-space-1 0 0;
+      }
+
+      .mc-list-item-overline {
+        font-size: $mc-label-medium-size;
+        color: $mc-on-surface-variant;
+        margin: 0 0 $mc-space-1;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    .mc-list-item-trailing {
+      margin-left: $mc-space-4;
+      flex-shrink: 0;
+    }
+
+    &.mc-list-item-two-line {
+      min-height: 72px;
+      align-items: flex-start;
+      padding-top: $mc-space-3;
+      padding-bottom: $mc-space-3;
+    }
+
+    &.mc-list-item-three-line {
+      min-height: 88px;
+      align-items: flex-start;
+      padding-top: $mc-space-3;
+      padding-bottom: $mc-space-3;
+    }
+  }
+
+  &.mc-list-dense {
+    .mc-list-item {
+      min-height: 40px;
+      padding: $mc-space-1 $mc-space-4;
+
+      &.mc-list-item-two-line {
+        min-height: 56px;
+      }
+
+      &.mc-list-item-three-line {
+        min-height: 72px;
+      }
+    }
+  }
+}

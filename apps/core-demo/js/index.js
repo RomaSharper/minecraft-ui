@@ -1,32 +1,29 @@
-import { MinecraftUI, minecraftSounds, themeManager } from '/packages/core/dist/index.esm.js';
+import { MinecraftUI, themeManager } from '/packages/core/dist/index.esm.js';
 
 // Инициализация MinecraftUI
 const ui = new MinecraftUI({
     theme: 'default',
-    sounds: true,
     pixelated: true,
     animations: true
 });
 
-// Управление звуками
-document.getElementById('play-sound').addEventListener('click', () => {
-    if (minecraftSounds.soundsSupported) {
-        minecraftSounds.playButtonClick();
-    } else {
-        showToast('🔇 Звуки не поддерживаются в вашем браузере', 'warning');
-    }
+// Анимации при наведении
+ui.add('mouse:enter', '@all-cards', (data) => {
+    data.element?.style.setProperty('transform', 'translateY(-2px)');
+    data.element?.style.setProperty('transition', 'transform 0.2s ease');
 });
 
-document.getElementById('play-block').addEventListener('click', () => {
-    if (minecraftSounds.soundsSupported) {
-        minecraftSounds.playBlockPlace();
-    }
+ui.add('mouse:leave', '@all-cards', (data) => {
+    data.element?.style.setProperty('transform', 'translateY(0)');
 });
 
-document.getElementById('play-error').addEventListener('click', () => {
-    if (minecraftSounds.soundsSupported) {
-        minecraftSounds.playError();
-    }
+// Базовая поддержка геймпада
+ui.add('gamepad:connected', '@world', (data) => {
+    console.log('Gamepad connected', data);
+});
+
+ui.add('gamepad:disconnected', '@world', (data) => {
+    console.log('Gamepad disconnected', data);
 });
 
 // Смена тем
@@ -56,43 +53,26 @@ document.querySelectorAll('.mc-tab-button').forEach(button => {
         // Добавляем активный класс текущей кнопке и вкладке
         button.classList.add('active');
         document.getElementById(tabId).classList.add('active');
-
-        // Проигрываем звук переключения
-        if (minecraftSounds.soundsSupported) {
-            minecraftSounds.playButtonClick();
-        }
     });
 });
 
 // Модальное окно
 document.getElementById('open-modal').addEventListener('click', () => {
     document.getElementById('demo-modal').classList.add('mc-modal-open');
-    if (minecraftSounds.soundsSupported) {
-        minecraftSounds.playInventoryOpen();
-    }
 });
 
 document.getElementById('close-modal').addEventListener('click', () => {
     document.getElementById('demo-modal').classList.remove('mc-modal-open');
-    if (minecraftSounds.soundsSupported) {
-        minecraftSounds.playInventoryClose();
-    }
 });
 
 document.querySelector('.mc-modal-close').addEventListener('click', () => {
     document.getElementById('demo-modal').classList.remove('mc-modal-open');
-    if (minecraftSounds.soundsSupported) {
-        minecraftSounds.playInventoryClose();
-    }
 });
 
 // Закрытие модального окна по клику вне его
 document.getElementById('demo-modal').addEventListener('click', (e) => {
     if (e.target === document.getElementById('demo-modal')) {
         document.getElementById('demo-modal').classList.remove('mc-modal-open');
-        if (minecraftSounds.soundsSupported) {
-            minecraftSounds.playInventoryClose();
-        }
     }
 });
 
@@ -114,11 +94,54 @@ function showToast(message, type = 'info') {
     setTimeout(() => {
         toast.style.opacity = '0';
         toast.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-            toast.remove();
-        }, 300);
+        setTimeout(() => toast.remove(), 300);
     }, 3000);
 }
+
+document.getElementById('fill-btn').addEventListener('click', () => {
+    const items = ['⚔️', '🛡️', '🏹', '🍖', '🍞', '💎', '⭐'];
+    const inventory = document.getElementById('inventory');
+
+    // Clear existing
+    inventory.innerHTML = '';
+
+    // Create 36 slots (4 rows of 9)
+    for (let i = 0; i < 36; i++) {
+        const slot = document.createElement('div');
+        slot.style.cssText = `
+            width: 40px;
+            height: 40px; 
+            display: flex;
+            align-items: center;
+            border: 1px solid #666; 
+            justify-content: center;
+            background: rgba(0,0,0,0.1);
+            cursor: pointer; font-size: 18px;
+        `;
+
+        // Random item or empty
+        if (Math.random() > 0.4) {
+            slot.textContent = items[Math.floor(Math.random() * items.length)];
+            slot.style.background = 'rgba(255, 255, 255, 0.1)';
+        }
+
+        // Add click event
+        slot.addEventListener('click', () => {
+            if (slot.textContent) {
+                slot.textContent = '';
+                slot.style.background = 'rgba(0,0,0,0.1)';
+            } else {
+                slot.textContent = items[Math.floor(Math.random() * items.length)];
+                slot.style.background = 'rgba(255,255,255,0.1)';
+            }
+        });
+
+        inventory.appendChild(slot);
+    }
+});
+
+document.getElementById('clear-btn').addEventListener('click', () =>
+    document.getElementById('inventory').innerHTML = '');
 
 // Уведомления
 document.getElementById('open-toast').addEventListener('click', () => {
@@ -129,12 +152,9 @@ document.getElementById('open-toast').addEventListener('click', () => {
         '⚡ Быстро и удобно!',
         '🎨 Красиво и стильно!'
     ];
-    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+    const randomMessage = messages[
+        Math.floor(Math.random() * messages.length)];
     showToast(randomMessage, 'success');
-
-    if (minecraftSounds.soundsSupported) {
-        minecraftSounds.playNotification();
-    }
 });
 
 // Демонстрация анимаций - подсветка случайных элементов
@@ -169,13 +189,6 @@ document.querySelectorAll('.mc-input, .mc-textarea, .mc-select').forEach(input =
 document.querySelectorAll('.mc-slot').forEach(slot => {
     slot.addEventListener('click', () => {
         slot.classList.toggle('selected');
-        if (minecraftSounds.soundsSupported) {
-            if (slot.classList.contains('selected')) {
-                minecraftSounds.playBlockPlace();
-            } else {
-                minecraftSounds.playBlockBreak();
-            }
-        }
     });
 });
 
@@ -183,10 +196,8 @@ document.querySelectorAll('.mc-slot').forEach(slot => {
 console.log('🎮 MinecraftUI Demo загружена!');
 console.log('Доступные функции:', {
     MinecraftUI: ui,
-    minecraftSounds,
     themeManager,
-    currentTheme: themeManager.getCurrentTheme(),
-    soundsSupported: minecraftSounds.soundsSupported
+    currentTheme: themeManager.getCurrentTheme()
 });
 
 // Показать стартовое уведомление

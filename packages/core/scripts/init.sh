@@ -19,14 +19,14 @@ touch src/scss/minecraft-ui.scss
 echo "🎨 Created SCSS files"
 
 # Create JS structure
-touch src/js/{sounds.ts,dom.ts,theme.ts,validation.ts,events.ts}
+touch src/js/{dom.ts,theme.ts,validation.ts,events.ts}
 touch src/index.ts
 touch src/types/index.ts
 
 echo "⚡ Created TypeScript files"
 
 # Create test files
-touch tests/{sounds.test.ts,dom.test.ts,theme.test.ts,validation.test.ts}
+touch tests/{dom.test.ts,theme.test.ts,validation.test.ts}
 
 echo "🧪 Created test files"
 

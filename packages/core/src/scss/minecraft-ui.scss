@@ -1,35 +1,55 @@
 // MinecraftUI Core Styles
 // Main entry point for all styles
 
-// 1. Core variables and functions
+// 1. Base styles
+@use 'base/animations';
+@use 'base/reset';
+@use 'base/typography';
+
+// 2. Component styles
+@use 'components/badges';
+@use 'components/bottom-sheet';
+@use 'components/buttons';
+@use 'components/calendar';
+@use 'components/cards';
+@use 'components/checkbox';
+@use 'components/chips';
+@use 'components/complex-layouts';
+@use 'components/data-table';
+@use 'components/divider';
+@use 'components/fab';
+@use 'components/forms';
+@use 'components/inventory';
+@use 'components/list';
+@use 'components/modals';
+@use 'components/navigation';
+@use 'components/navigation-drawer';
+@use 'components/progress';
+@use 'components/radio';
+@use 'components/segmented-button';
+@use 'components/snackbar';
+@use 'components/stepper';
+@use 'components/switches';
+@use 'components/tabs';
+@use 'components/toasts';
+@use 'components/tooltips';
+
+// 3. Core variables and functions
+@use 'core/component-builder';
+@use 'core/functions';
+@use 'core/keyframes';
 @use 'core/mixins';
 @use 'core/variables';
-@use 'core/functions';
 
-// 2. Base styles
-@use 'base/reset';
-@use 'base/animations';
-
-// 3. Component styles
-@use 'components/buttons';
-@use 'components/cards';
-@use 'components/forms';
-@use 'components/navigation';
-@use 'components/modals';
-@use 'components/progress';
-@use 'components/tabs';
-@use 'components/inventory';
-@use 'components/tooltips';
-@use 'components/toasts';
-
-// 4. Layout utilities
-@use 'utilities/spacing';
-@use 'utilities/typography';
-@use 'utilities/colors';
-@use 'utilities/layout';
-@use 'utilities/responsive';
-
-// 5. Themes
+// 4. Themes
+@use 'themes/bedrock';
 @use 'themes/default';
 @use 'themes/java';
-@use 'themes/bedrock';
+
+// 5. Layout utilities
+@import 'utilities/colors';
+@import 'utilities/component-generator';
+@import 'utilities/layout';
+@import 'utilities/quick-components';
+@import 'utilities/responsive';
+@import 'utilities/spacing';

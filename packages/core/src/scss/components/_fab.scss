@@ -1,0 +1,112 @@
+// Floating Action Button - Material Design 3
+
+@import '../core/variables';
+
+.mc-fab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: $mc-radius-lg;
+  font-family: $mc-font-family-body;
+  font-weight: $mc-font-weight-medium;
+  cursor: pointer;
+  user-select: none;
+  text-decoration: none;
+  transition: all $mc-duration-short4 $mc-easing-standard;
+  box-shadow: $mc-elevation-3;
+
+  &:hover {
+    box-shadow: $mc-elevation-4;
+  }
+
+  &:active {
+    box-shadow: $mc-elevation-2;
+  }
+
+  &.mc-fab-primary {
+    background: $mc-primary-container;
+    color: $mc-on-primary-container;
+
+    &:hover {
+      background: rgba($mc-on-primary-container, $mc-hover-opacity);
+    }
+  }
+
+  &.mc-fab-secondary {
+    background: $mc-secondary-container;
+    color: $mc-on-secondary-container;
+
+    &:hover {
+      background: rgba($mc-on-secondary-container, $mc-hover-opacity);
+    }
+  }
+
+  &.mc-fab-surface {
+    background: $mc-surface-container-high;
+    color: $mc-primary;
+
+    &:hover {
+      background: rgba($mc-primary, $mc-hover-opacity);
+    }
+  }
+
+  &.mc-fab-small {
+    width: 40px;
+    height: 40px;
+
+    .mc-fab-icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &.mc-fab-medium {
+    width: 56px;
+    height: 56px;
+
+    .mc-fab-icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &.mc-fab-large {
+    width: 96px;
+    height: 96px;
+
+    .mc-fab-icon {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  &.mc-fab-extended {
+    height: 56px;
+    padding: 0 $mc-space-4;
+    min-width: 80px;
+    gap: $mc-space-2;
+
+    .mc-fab-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .mc-fab-label {
+      font-size: $mc-label-large-size;
+      line-height: $mc-label-large-height;
+    }
+  }
+
+  .mc-fab-icon {
+    flex-shrink: 0;
+  }
+
+  &:disabled {
+    background: rgba($mc-on-surface, $mc-disabled-opacity);
+    color: rgba($mc-on-surface, $mc-disabled-opacity);
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+}

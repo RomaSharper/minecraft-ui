@@ -1,0 +1,133 @@
+// Calendar/Date Picker - Material Design 3
+
+@import '../core/variables';
+
+.mc-calendar {
+  background: $mc-surface-container;
+  border-radius: $mc-radius-xl;
+  padding: $mc-space-4;
+  box-shadow: $mc-elevation-2;
+  font-family: $mc-font-family-body;
+  max-width: 320px;
+
+  .mc-calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $mc-space-4;
+
+    .mc-calendar-title {
+      font-size: $mc-title-medium-size;
+      font-weight: $mc-font-weight-medium;
+      color: $mc-on-surface;
+      margin: 0;
+    }
+
+    .mc-calendar-nav {
+      display: flex;
+      gap: $mc-space-1;
+
+      .mc-calendar-nav-button {
+        width: 40px;
+        height: 40px;
+        border: none;
+        background: none;
+        border-radius: $mc-radius-full;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $mc-on-surface;
+        transition: background-color $mc-duration-short2 $mc-easing-standard;
+
+        &:hover {
+          background: rgba($mc-on-surface, $mc-hover-opacity);
+        }
+      }
+    }
+  }
+
+  .mc-calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: $mc-space-1;
+    margin-bottom: $mc-space-2;
+
+    .mc-calendar-weekday {
+      text-align: center;
+      font-size: $mc-body-small-size;
+      color: $mc-on-surface-variant;
+      padding: $mc-space-2;
+      font-weight: $mc-font-weight-medium;
+    }
+  }
+
+  .mc-calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: $mc-space-1;
+
+    .mc-calendar-day {
+      aspect-ratio: 1;
+      border: none;
+      background: none;
+      border-radius: $mc-radius-full;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $mc-body-medium-size;
+      color: $mc-on-surface;
+      position: relative;
+      transition: all $mc-duration-short2 $mc-easing-standard;
+
+      &:hover {
+        background: rgba($mc-on-surface, $mc-hover-opacity);
+      }
+
+      &.mc-calendar-day-other-month {
+        color: $mc-on-surface-variant;
+        opacity: 0.4;
+      }
+
+      &.mc-calendar-day-today {
+        background: $mc-primary;
+        color: $mc-on-primary;
+      }
+
+      &.mc-calendar-day-selected {
+        background: $mc-primary;
+        color: $mc-on-primary;
+      }
+
+      &.mc-calendar-day-range-start,
+      &.mc-calendar-day-range-end {
+        background: $mc-primary;
+        color: $mc-on-primary;
+      }
+
+      &.mc-calendar-day-in-range {
+        background: rgba($mc-primary, 0.12);
+        color: $mc-on-surface;
+      }
+
+      &:disabled {
+        color: rgba($mc-on-surface, $mc-disabled-opacity);
+        cursor: not-allowed;
+
+        &:hover {
+          background: none;
+        }
+      }
+    }
+  }
+
+  .mc-calendar-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $mc-space-2;
+    margin-top: $mc-space-4;
+    padding-top: $mc-space-4;
+    border-top: 1px solid $mc-outline-variant;
+  }
+}

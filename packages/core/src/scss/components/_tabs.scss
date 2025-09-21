@@ -5,73 +5,109 @@
 @import '../core/variables';
 
 .mc-tabs {
-  margin: $mc-space-3 0;
+  display: flex;
+  flex-direction: column;
 
-  .mc-tab-nav {
+  .mc-tab-list {
     display: flex;
-    background: $mc-ui-bg-dark;
-    @include mc-block-border($mc-ui-border);
-    margin-bottom: 0;
-    list-style: none;
+    background: $mc-surface;
+    border-bottom: 1px solid $mc-outline-variant;
+    margin: 0;
     padding: 0;
+    list-style: none;
+    position: relative;
 
-    .mc-tab-button {
-      display: block;
-      padding: $mc-space-2 $mc-space-3;
-      background: mc-darken($mc-ui-bg, 5%);
-      color: $mc-ui-text;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: $mc-outline-variant;
+      z-index: 0;
+    }
+
+    .mc-tab {
+      position: relative;
+      background: none;
       border: none;
-      border-right: $mc-border-width solid $mc-ui-border;
+      padding: $mc-space-4 $mc-space-6;
+      font-family: $mc-font-family-body;
+      font-size: $mc-title-small-size;
+      font-weight: $mc-font-weight-medium;
+      color: $mc-on-surface-variant;
       cursor: pointer;
-      font-family: $mc-font-family-base;
-      font-size: $mc-font-size-base;
-      transition: $mc-transition-background;
+      transition: all $mc-duration-short4 $mc-easing-standard;
+      border-radius: $mc-radius-md $mc-radius-md 0 0;
+      z-index: 1;
 
-      &:last-child {
-        border-right: none;
+      .mc-tab-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: $mc-space-2;
+        vertical-align: middle;
       }
 
-      &:hover:not(.active) {
-        background: $mc-ui-hover;
+      &:hover:not(.mc-tab-active) {
+        background: rgba($mc-on-surface, $mc-hover-opacity);
+        color: $mc-on-surface;
       }
 
-      &:active {
-        @include mc-block-pressed($mc-ui-border);
-        transform: translate(1px, 1px);
+      &:focus {
+        outline: 2px solid $mc-primary;
+        outline-offset: -2px;
       }
 
-      &.active {
-        background: $mc-ui-bg;
-        border-bottom-color: $mc-ui-bg;
-        position: relative;
-        z-index: 1;
+      &.mc-tab-active {
+        color: $mc-primary;
+        background: $mc-surface-container;
 
         &::after {
           content: '';
           position: absolute;
-          bottom: -#{$mc-border-width};
+          bottom: -1px;
           left: 0;
           right: 0;
-          height: $mc-border-width;
-          background: $mc-ui-bg;
+          height: 3px;
+          background: $mc-primary;
+          border-radius: $mc-radius-full $mc-radius-full 0 0;
         }
+      }
+
+      &:disabled {
+        opacity: $mc-disabled-opacity;
+        cursor: not-allowed;
+
+        &:hover {
+          background: none;
+        }
+      }
+
+      .mc-tab-badge {
+        margin-left: $mc-space-1;
       }
     }
   }
 
-  .mc-tab-content {
-    background: $mc-ui-bg;
-    @include mc-block-border($mc-ui-border);
-    border-top: none;
-    padding: $mc-space-3;
-    min-height: 200px;
+  .mc-tab-panels {
+    background: $mc-surface;
 
-    .mc-tab-pane {
+    .mc-tab-panel {
       display: none;
+      padding: $mc-space-6;
+      color: $mc-on-surface;
+      font-size: $mc-body-medium-size;
+      line-height: $mc-body-medium-height;
+      animation: mcTabPanelIn $mc-duration-medium2 $mc-easing-standard;
 
-      &.active {
+      &.mc-tab-panel-active {
         display: block;
-        animation: mcFadeIn $mc-transition-duration-slow ease-out;
+      }
+
+      &:focus {
+        outline: 2px solid $mc-primary;
+        outline-offset: -2px;
       }
     }
   }

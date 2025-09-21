@@ -210,19 +210,13 @@
     <section class="demo-section">
         <h2>🎮 Игровые компоненты</h2>
 
-        <div class="demo-item">
-            <h3>Инвентарь</h3>
-            <div class="inventory-demo">
-                <div class="mc-slot occupied">⚔️</div>
-                <div class="mc-slot occupied">🛡️<span class="mc-slot-count">1</span></div>
-                <div class="mc-slot occupied">🍖<span class="mc-slot-count">16</span></div>
-                <div class="mc-slot occupied">🔥<span class="mc-slot-count">3</span></div>
-                <div class="mc-slot occupied">💎<span class="mc-slot-count">5</span></div>
-                <div class="mc-slot occupied">🌰<span class="mc-slot-count">32</span></div>
-                <div class="mc-slot occupied">🧭</div>
-                <div class="mc-slot occupied">📜</div>
-                <div class="mc-slot selected">✨</div>
+        <div class="demo-item" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <h2>Инвентарь</h2>
+            <div id="inventory" style="display: grid; grid-template-columns: repeat(9, 40px); gap: 2px;">
+                <!-- Слоты генерируются с помощью JavaScript -->
             </div>
+            <button class="mc-btn" id="fill-btn">Заполнить инвентарь</button>
+            <button class="mc-btn" id="clear-btn">Очистить инвентарь</button>
         </div>
 
         <div class="demo-item">
@@ -267,12 +261,6 @@
     <!-- Утилиты -->
     <section class="demo-section">
         <h2>⚙️ Утилиты</h2>
-
-        <div class="demo-controls">
-            <button class="mc-btn sound-btn" id="play-sound">Звук кнопки</button>
-            <button class="mc-btn mc-btn-grass sound-btn" id="play-block">Звук блока</button>
-            <button class="mc-btn mc-btn-redstone sound-btn" id="play-error">Звук ошибки</button>
-        </div>
 
         <div class="demo-grid">
             <div class="demo-item">

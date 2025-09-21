@@ -1,0 +1,81 @@
+// Switch - Material Design 3
+
+@import '../core/variables';
+
+.mc-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 32px;
+
+  .mc-switch-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+
+  .mc-switch-track {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $mc-surface-variant;
+    border: 2px solid $mc-outline;
+    border-radius: $mc-radius-full;
+    transition: all $mc-duration-short4 $mc-easing-standard;
+
+    &::before {
+      position: absolute;
+      content: "";
+      height: 24px;
+      width: 24px;
+      left: 2px;
+      bottom: 2px;
+      background: $mc-outline;
+      border-radius: $mc-radius-full;
+      transition: all $mc-duration-short4 $mc-easing-emphasized;
+    }
+  }
+
+  .mc-switch-input:checked + .mc-switch-track {
+    background: $mc-primary;
+    border-color: $mc-primary;
+
+    &::before {
+      background: $mc-on-primary;
+      transform: translateX(20px);
+    }
+  }
+
+  .mc-switch-input:focus + .mc-switch-track {
+    box-shadow: 0 0 0 8px rgba($mc-primary, $mc-focus-opacity);
+  }
+
+  .mc-switch-input:disabled + .mc-switch-track {
+    opacity: $mc-disabled-opacity;
+    cursor: not-allowed;
+  }
+
+  &.mc-switch-with-icons {
+    .mc-switch-track {
+      &::after {
+        position: absolute;
+        content: "✓";
+        color: $mc-surface-variant;
+        font-size: 16px;
+        top: 50%;
+        left: 6px;
+        transform: translateY(-50%);
+        opacity: 0;
+        transition: opacity $mc-duration-short2 $mc-easing-standard;
+      }
+    }
+
+    .mc-switch-input:checked + .mc-switch-track::after {
+      opacity: 1;
+    }
+  }
+}

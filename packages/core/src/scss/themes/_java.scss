@@ -1,117 +1,186 @@
-// Java Edition Theme - классическая версия Minecraft
-
+@import '../core/mixins';
 @import '../core/functions';
 @import '../core/variables';
 
 .mc-theme-java {
-  // Java Edition цветовая палитра
-  --mc-java-gui-background: #C6C6C6;
-  --mc-java-gui-border-light: #FFFFFF;
-  --mc-java-gui-border-dark: #555555;
-  --mc-java-button: #C6C6C6;
-  --mc-java-button-hover: #E6E6E6;
-  --mc-java-button-pressed: #A6A6A6;
-  --mc-java-slot: #8B8B8B;
-  --mc-java-slot-border: #373737;
-  --mc-java-text: #404040;
-  --mc-java-text-white: #FFFFFF;
-  --mc-java-text-shadow: rgba(0, 0, 0, 0.25);
-  --mc-java-hotbar: #3C3C3C;
-  --mc-java-selected-slot: #FFFFFF;
+  // ================================
+  // ОСНОВНЫЕ ЦВЕТА
+  // ================================
+  $mc-primary: $mc-diamond;
+  $mc-secondary: $mc-gold;
+  $mc-success: $mc-grass;
+  $mc-warning: $mc-gold;
+  $mc-error: $mc-redstone;
+  $mc-info: $mc-diamond;
 
-  // Контейнеры и карточки
-  background: #8AB2B2; // Классический серо-голубой фон
-  color: var(--mc-java-text);
-  font-family: 'Courier New', monospace;
+  // Java Edition UI colors
+  $mc-surface: #C6C6C6;
+  $mc-surface-variant: #B0B0B0;
+  $mc-surface-container: #D6D6D6;
+  $mc-on-surface: #404040;
+  $mc-background: #8AB2B2;
+  $mc-on-background: #2C3E3E;
+  $mc-outline: #555555;
 
-  .mc-card,
-  .mc-modal-content {
-    background: var(--mc-java-gui-background);
-    border: 2px solid;
-    border-color: var(--mc-java-gui-border-light) var(--mc-java-gui-border-dark)
-    var(--mc-java-gui-border-dark) var(--mc-java-gui-border-light);
-    color: var(--mc-java-text);
-    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+  // ================================
+  // ТИПОГРАФИКА
+  // ================================
+  $mc-font-family-display: 'Courier New', 'Monaco', 'Menlo', monospace;
+  $mc-font-family-body: $mc-font-family-display;
 
-    .mc-card-header,
-    .mc-modal-header {
-      background: linear-gradient(to bottom, #E0E0E0, #C0C0C0);
-      color: var(--mc-java-text);
-      border-bottom: 1px solid var(--mc-java-gui-border-dark);
-      text-shadow: 1px 1px 0 var(--mc-java-text-shadow);
-      font-weight: normal;
-    }
-  }
+  // Compact Java sizes
+  $mc-body-large-size: 13px;
+  $mc-body-medium-size: 12px;
+  $mc-body-small-size: 11px;
+  $mc-title-medium-size: 13px;
+  $mc-title-small-size: 12px;
+  $mc-label-large-size: 12px;
 
-  // Кнопки в стиле Java Edition
+  // ================================
+  // РАДИУСЫ (Java = sharp)
+  // ================================
+  $mc-radius-xs: 0px;
+  $mc-radius-sm: 0px;
+  $mc-radius-md: 0px;
+  $mc-radius-lg: 0px;
+  $mc-button-radius: 0px;
+  $mc-card-radius: 0px;
+  $mc-input-radius: 0px;
+
+  // ================================
+  // ТЕНИ (Java = hard)
+  // ================================
+  $mc-elevation-1: 2px 2px 0px rgba(0, 0, 0, 0.3);
+  $mc-elevation-2: 3px 3px 0px rgba(0, 0, 0, 0.3);
+  $mc-elevation-3: 4px 4px 0px rgba(0, 0, 0, 0.3);
+
+  // ================================
+  // АНИМАЦИИ (Java = snappy)
+  // ================================
+  $mc-duration-short2: 50ms;
+  $mc-duration-short4: 100ms;
+  $mc-duration-medium2: 150ms;
+  $mc-easing-standard: ease;
+
+  // ================================
+  // РАЗМЕРЫ (Java = compact)
+  // ================================
+  $mc-button-height-md: 32px;
+  $mc-button-height-lg: 40px;
+  $mc-input-height-md: 32px;
+  $mc-slot-size-md: 32px;
+  $mc-nav-height: 48px;
+
+  // ================================
+  // ПРИМЕНЯЕМ СТИЛИ
+  // ================================
+  background: $mc-background;
+  color: $mc-on-background;
+  font-family: $mc-font-family-body;
+  font-size: $mc-body-medium-size;
+
+  // Java-specific rendering
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+
+  // ================================
+  // КНОПКИ
+  // ================================
   .mc-btn {
-    background: var(--mc-java-button);
-    color: var(--mc-java-text);
+    background: $mc-surface;
+    color: $mc-on-surface;
     border: 2px solid;
-    border-color: var(--mc-java-gui-border-light) var(--mc-java-gui-border-dark)
-    var(--mc-java-gui-border-dark) var(--mc-java-gui-border-light);
-    text-shadow: none;
-    font-weight: normal;
-    transition: all 0.1s ease;
+    border-color: #FFFFFF #555555 #555555 #FFFFFF;
+    border-radius: $mc-button-radius;
+    font-family: $mc-font-family-body;
+    font-size: $mc-body-medium-size;
+    height: $mc-button-height-md;
+    box-shadow: $mc-elevation-1;
+    transition: all $mc-duration-short2 $mc-easing-standard;
 
     &:hover:not(:disabled) {
-      background: var(--mc-java-button-hover);
+      background: mc-lighten($mc-surface, 8%);
       border-color: #FFFFFF #999999 #999999 #FFFFFF;
     }
 
     &:active:not(:disabled) {
-      background: var(--mc-java-button-pressed);
-      border-color: var(--mc-java-gui-border-dark) var(--mc-java-gui-border-light)
-      var(--mc-java-gui-border-light) var(--mc-java-gui-border-dark);
-      transform: none; // Java не имеет "вдавливания"
+      background: mc-darken($mc-surface, 8%);
+      border-color: #555555 #FFFFFF #FFFFFF #555555;
+      transform: none; // Java doesn't "sink"
     }
 
-    &:disabled {
-      background: #999999;
-      color: #666666;
-      border-color: #BBBBBB #777777 #777777 #BBBBBB;
+    // Button variants
+    &.mc-btn-primary {
+      background: linear-gradient(to bottom, $mc-primary, darken($mc-primary, 15%));
+      color: white;
+      border-color: mc-lighten($mc-primary, 15%) darken($mc-primary, 25%) darken($mc-primary, 25%) lighten($mc-primary, 15%);
+      text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+    }
+
+    &.mc-btn-grass {
+      background: linear-gradient(to bottom, $mc-grass, darken($mc-grass, 15%));
+      color: white;
+      border-color: mc-lighten($mc-grass, 15%) darken($mc-grass, 25%) darken($mc-grass, 25%) lighten($mc-grass, 15%);
+      text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+    }
+
+    &.mc-btn-gold {
+      background: linear-gradient(to bottom, $mc-gold, darken($mc-gold, 15%));
+      color: black;
+      border-color: mc-lighten($mc-gold, 15%) darken($mc-gold, 25%) darken($mc-gold, 25%) lighten($mc-gold, 15%);
+      text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.3);
+    }
+
+    &.mc-btn-diamond {
+      background: linear-gradient(to bottom, $mc-diamond, darken($mc-diamond, 15%));
+      color: white;
+      border-color: mc-lighten($mc-diamond, 15%) darken($mc-diamond, 25%) darken($mc-diamond, 25%) lighten($mc-diamond, 15%);
+      text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+    }
+
+    &.mc-btn-redstone {
+      background: linear-gradient(to bottom, $mc-redstone, darken($mc-redstone, 15%));
+      color: white;
+      border-color: mc-lighten($mc-redstone, 15%) darken($mc-redstone, 25%) darken($mc-redstone, 25%) lighten($mc-redstone, 15%);
+      text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
     }
   }
 
-  // Специальные кнопки Java Edition
-  .mc-btn-grass {
-    background: linear-gradient(to bottom, #7CB342, #689F35);
-    color: var(--mc-java-text-white);
-    border-color: #8CCA52 #5A8D2D #5A8D2D #8CCA52;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+  // ================================
+  // КАРТОЧКИ
+  // ================================
+  .mc-card {
+    background: $mc-surface;
+    border: 2px solid;
+    border-color: #FFFFFF #555555 #555555 #FFFFFF;
+    border-radius: $mc-card-radius;
+    box-shadow: $mc-elevation-2;
+    color: $mc-on-surface;
+
+    .mc-card-header {
+      background: linear-gradient(to bottom, lighten($mc-surface, 10%), $mc-surface);
+      border-bottom: 1px solid #555555;
+      font-size: $mc-title-medium-size;
+      font-weight: normal;
+    }
   }
 
-  .mc-btn-stone {
-    background: linear-gradient(to bottom, #7F7F7F, #666666);
-    color: var(--mc-java-text-white);
-    border-color: #999999 #4D4D4D #4D4D4D #999999;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
-  }
-
-  .mc-btn-wood {
-    background: linear-gradient(to bottom, #9C7F47, #8B6914);
-    color: var(--mc-java-text-white);
-    border-color: #B8955A #785A11 #785A11 #B8955A;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
-  }
-
-  .mc-btn-diamond {
-    background: linear-gradient(to bottom, #5DCFDE, #0F9BAA);
-    color: var(--mc-java-text-white);
-    border-color: #7DDFEE #0D8597 #0D8597 #7DDFEE;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
-  }
-
-  // Формы Java Edition
+  // ================================
+  // ФОРМЫ
+  // ================================
   .mc-input,
   .mc-textarea,
   .mc-select {
-    background: var(--mc-java-text-white);
-    color: var(--mc-java-text);
+    background: #FFFFFF;
     border: 2px inset;
-    border-color: var(--mc-java-gui-border-dark) var(--mc-java-gui-border-light)
-    var(--mc-java-gui-border-light) var(--mc-java-gui-border-dark);
-    padding: 6px 8px;
+    border-color: #555555 #FFFFFF #FFFFFF #555555;
+    border-radius: $mc-input-radius;
+    color: $mc-on-surface;
+    height: $mc-input-height-md;
+    font-family: $mc-font-family-body;
+    font-size: $mc-body-medium-size;
 
     &:focus {
       background: #F0F8FF;
@@ -119,20 +188,24 @@
     }
   }
 
-  // Инвентарь Java Edition
+  // ================================
+  // ИНВЕНТАРЬ
+  // ================================
   .mc-inventory {
-    background: var(--mc-java-gui-background);
+    background: $mc-surface;
     border: 2px solid;
-    border-color: var(--mc-java-gui-border-light) var(--mc-java-gui-border-dark)
-    var(--mc-java-gui-border-dark) var(--mc-java-gui-border-light);
+    border-color: #FFFFFF #555555 #555555 #FFFFFF;
+    border-radius: 0;
 
     .mc-slot {
-      background: var(--mc-java-slot);
-      border: 1px solid var(--mc-java-slot-border);
+      background: #8B8B8B;
+      border: 1px solid #373737;
+      border-radius: 0;
+      width: $mc-slot-size-md;
+      height: $mc-slot-size-md;
 
       &:hover {
         background: #AAAAAA;
-        border-color: #555555;
       }
 
       &.occupied {
@@ -141,63 +214,56 @@
       }
 
       &.selected {
-        background: var(--mc-java-selected-slot);
-        border: 2px solid var(--mc-java-text);
-        box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+        background: #FFFFFF;
+        border: 2px solid #404040;
       }
     }
   }
 
-  // Хотбар Java Edition
-  .mc-inventory-hotbar {
-    background: var(--mc-java-hotbar);
-    border: 3px solid;
-    border-color: var(--mc-java-gui-border-light) var(--mc-java-gui-border-dark)
-    var(--mc-java-gui-border-dark) var(--mc-java-gui-border-light);
-
-    .mc-slot {
-      background: var(--mc-java-slot);
-      border: 1px solid #1A1A1A;
-
-      &.selected {
-        border: 2px solid var(--mc-java-selected-slot);
-        background: #B5B5B5;
-      }
-    }
-  }
-
-  // Прогресс бары Java Edition
+  // ================================
+  // ПРОГРЕСС БАРЫ
+  // ================================
   .mc-progress {
-    background: var(--mc-java-gui-background);
+    background: $mc-surface;
     border: 1px inset;
-    border-color: var(--mc-java-gui-border-dark) var(--mc-java-gui-border-light)
-    var(--mc-java-gui-border-light) var(--mc-java-gui-border-dark);
+    border-color: #555555 #FFFFFF #FFFFFF #555555;
+    border-radius: 0;
 
     .mc-progress-bar {
       &.mc-progress-health {
         background: linear-gradient(to bottom, #FF0000, #CC0000);
-        border-right: 1px solid #990000;
       }
 
       &.mc-progress-hunger {
         background: linear-gradient(to bottom, #CC6600, #996600);
-        border-right: 1px solid #663300;
       }
 
       &.mc-progress-xp {
         background: linear-gradient(to bottom, #7FFF00, #5FBF00);
-        border-right: 1px solid #3F7F00;
       }
     }
   }
 
-  // Тултипы Java Edition
-  .mc-tooltip::before {
-    background: rgba(0, 0, 0, 0.94);
-    color: var(--mc-java-text-white);
-    border: 1px solid #5000FF;
-    box-shadow: none;
-    padding: 4px 6px;
-    font-size: 12px;
+  // ================================
+  // НАВИГАЦИЯ
+  // ================================
+  .mc-navbar {
+    background: $mc-surface;
+    border: 2px solid;
+    border-color: #FFFFFF #555555 #555555 #FFFFFF;
+    height: $mc-nav-height;
+
+    .mc-nav-link {
+      color: $mc-on-surface;
+
+      &:hover {
+        background: mc-lighten($mc-surface, 8%);
+      }
+
+      &.active {
+        background: $mc-primary;
+        color: white;
+      }
+    }
   }
 }

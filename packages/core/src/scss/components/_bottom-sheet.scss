@@ -1,0 +1,86 @@
+// Bottom Sheet - Material Design 3
+
+@import '../core/variables';
+
+.mc-bottom-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: $mc-surface-container-low;
+  border-radius: $mc-radius-xl $mc-radius-xl 0 0;
+  z-index: $mc-z-modal;
+  transform: translateY(100%);
+  transition: transform $mc-duration-medium3 $mc-easing-emphasized-decelerate;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+
+  &.mc-bottom-sheet-open {
+    transform: translateY(0);
+  }
+
+  .mc-bottom-sheet-drag-handle {
+    width: 32px;
+    height: 4px;
+    background: $mc-on-surface-variant;
+    border-radius: $mc-radius-full;
+    margin: $mc-space-3 auto $mc-space-2;
+    opacity: 0.4;
+  }
+
+  .mc-bottom-sheet-header {
+    padding: 0 $mc-space-6 $mc-space-4;
+    border-bottom: 1px solid $mc-outline-variant;
+
+    .mc-bottom-sheet-title {
+      font-size: $mc-headline-small-size;
+      font-weight: $mc-font-weight-regular;
+      color: $mc-on-surface;
+      margin: 0;
+    }
+  }
+
+  .mc-bottom-sheet-content {
+    padding: $mc-space-6;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .mc-bottom-sheet-actions {
+    padding: $mc-space-4 $mc-space-6 $mc-space-6;
+    display: flex;
+    justify-content: flex-end;
+    gap: $mc-space-2;
+    border-top: 1px solid $mc-outline-variant;
+  }
+
+  @include mc-media-up(md) {
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    max-width: 640px;
+    border-radius: $mc-radius-xl;
+
+    &.mc-bottom-sheet-open {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+}
+
+.mc-bottom-sheet-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: $mc-z-overlay;
+  opacity: 0;
+  transition: opacity $mc-duration-medium2 $mc-easing-standard;
+  pointer-events: none;
+
+  &.mc-bottom-sheet-backdrop-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

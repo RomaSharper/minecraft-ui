@@ -19,11 +19,11 @@
   display: flex;
   align-items: flex-start;
   padding: $mc-space-3;
-  background: $mc-ui-bg;
-  @include mc-block-border($mc-ui-border);
+  background: $mc-background;
+  @include mc-block-border($mc-stone);
   pointer-events: auto;
   transform: translateX(100%);
-  transition: transform $mc-transition-duration-slow $mc-transition-timing-function;
+  transition: transform $mc-duration-long2 $mc-easing-standard;
   margin-bottom: $mc-space-2;
 
   &.mc-toast-show {
@@ -51,20 +51,20 @@
       justify-content: center;
       font-weight: $mc-font-weight-bold;
       font-size: $mc-font-size-sm;
-      color: $mc-ui-text;
+      color: $mc-on-background;
     }
 
     .mc-toast-title {
       flex: 1;
       font-weight: $mc-font-weight-bold;
-      color: $mc-ui-text;
+      color: $mc-on-background;
       margin: 0;
     }
 
     .mc-toast-close {
       background: none;
       border: none;
-      color: $mc-ui-text-muted;
+      color: $mc-on-background-muted;
       cursor: pointer;
       font-size: $mc-font-size-lg;
       line-height: 1;
@@ -76,13 +76,13 @@
       justify-content: center;
 
       &:hover {
-        color: $mc-ui-text;
+        color: $mc-on-background;
       }
     }
   }
 
   .mc-toast-body {
-    color: $mc-ui-text;
+    color: $mc-on-background;
     font-size: $mc-font-size-sm;
     line-height: $mc-line-height-base;
   }
@@ -104,7 +104,7 @@
   .mc-toast-icon {
     background: $mc-warning;
     @include mc-block-border($mc-warning);
-    color: $mc-ui-text-dark;
+    color: $mc-on-background-dark;
   }
 
   .mc-toast-title {

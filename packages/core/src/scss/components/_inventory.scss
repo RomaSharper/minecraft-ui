@@ -7,8 +7,8 @@
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   gap: $mc-inventory-gap;
-  background: $mc-ui-bg;
-  @include mc-block-border($mc-ui-border);
+  background: $mc-background;
+  @include mc-block-border($mc-stone);
   padding: $mc-space-2;
   margin: $mc-space-3 0;
 
@@ -16,28 +16,28 @@
     aspect-ratio: 1;
     width: $mc-inventory-slot-size;
     height: $mc-inventory-slot-size;
-    background: $mc-ui-bg-dark;
-    @include mc-block-inset($mc-ui-border);
+    background: $mc-background;
+    @include mc-block-inset($mc-stone);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     font-size: $mc-font-size-lg;
     position: relative;
-    transition: $mc-transition-background;
+    transition: $mc-duration-medium1;
 
     &:hover {
       background: $mc-ui-hover;
     }
 
     &:active {
-      @include mc-block-pressed($mc-ui-border);
+      @include mc-block-pressed($mc-stone);
       transform: translate(1px, 1px);
     }
 
     &.occupied {
-      background: mc-lighten($mc-ui-bg-dark, 5%);
-      @include mc-block-outset($mc-ui-border);
+      background: mc-lighten($mc-background, 5%);
+      @include mc-block-outset($mc-stone);
     }
 
     &.selected {
@@ -67,7 +67,7 @@
       right: 2px;
       font-size: $mc-font-size-xs;
       font-weight: $mc-font-weight-bold;
-      color: $mc-ui-text;
+      color: $mc-on-background;
       background: rgba(0, 0, 0, 0.7);
       padding: 1px 3px;
       border-radius: 2px;

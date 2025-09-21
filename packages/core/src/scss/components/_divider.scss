@@ -1,0 +1,30 @@
+// Divider - Material Design 3
+
+@import '../core/variables';
+
+.mc-divider {
+  border: none;
+  height: 1px;
+  background: $mc-outline-variant;
+  margin: $mc-space-4 0;
+
+  &.mc-divider-vertical {
+    width: 1px;
+    height: auto;
+    margin: 0 $mc-space-4;
+    align-self: stretch;
+  }
+
+  &.mc-divider-inset {
+    margin-left: $mc-space-4;
+  }
+
+  &.mc-divider-middle-inset {
+    margin-left: $mc-space-4;
+    margin-right: $mc-space-4;
+  }
+
+  &.mc-divider-full-width {
+    margin: $mc-space-4 0;
+  }
+}

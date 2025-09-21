@@ -1,0 +1,105 @@
+// Быстрые компоненты через утилитарные классы
+
+@import '../core/mixins';
+@import '../core/variables';
+
+// Быстрые кнопки
+.mc-btn-quick {
+  @include mc-button-base();
+  background: $mc-surface-variant;
+  color: $mc-on-surface-variant;
+
+  &:hover {
+    background: $mc-surface-container-high;
+  }
+}
+
+// Быстрые карточки
+.mc-card-quick {
+  @include mc-card-base();
+}
+
+// Быстрые анимации
+.mc-animate-fade-in { @include mc-animate-in('fade'); }
+.mc-animate-slide-up { @include mc-animate-in('slide-up'); }
+.mc-animate-scale { @include mc-animate-in('scale'); }
+
+// Быстрые утилиты позиционирования
+.mc-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mc-center-absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// Быстрые тени
+.mc-shadow-1 { @include mc-modern-elevation(1); }
+.mc-shadow-2 { @include mc-modern-elevation(2); }
+.mc-shadow-3 { @include mc-modern-elevation(3); }
+.mc-shadow-4 { @include mc-modern-elevation(4); }
+.mc-shadow-5 { @include mc-modern-elevation(5); }
+
+// Быстрые границы
+.mc-border { border: 1px solid $mc-outline-variant; }
+.mc-border-top { border-top: 1px solid $mc-outline-variant; }
+.mc-border-bottom { border-bottom: 1px solid $mc-outline-variant; }
+.mc-border-left { border-left: 1px solid $mc-outline-variant; }
+.mc-border-right { border-right: 1px solid $mc-outline-variant; }
+
+// Быстрые радиусы
+.mc-rounded-none { border-radius: $mc-radius-none; }
+.mc-rounded-xs { border-radius: $mc-radius-xs; }
+.mc-rounded-sm { border-radius: $mc-radius-sm; }
+.mc-rounded-md { border-radius: $mc-radius-md; }
+.mc-rounded-lg { border-radius: $mc-radius-lg; }
+.mc-rounded-xl { border-radius: $mc-radius-xl; }
+.mc-rounded-2xl { border-radius: $mc-radius-2xl; }
+.mc-rounded-3xl { border-radius: $mc-radius-3xl; }
+.mc-rounded-full { border-radius: $mc-radius-full; }
+
+// Быстрые цвета фона
+.mc-bg-surface { background: $mc-surface; }
+.mc-bg-surface-variant { background: $mc-surface-variant; }
+.mc-bg-surface-container { background: $mc-surface-container; }
+.mc-bg-primary { background: $mc-primary; color: $mc-on-primary; }
+.mc-bg-secondary { background: $mc-secondary; color: $mc-on-secondary; }
+.mc-bg-success { background: $mc-success; color: $mc-on-success; }
+.mc-bg-warning { background: $mc-warning; color: $mc-on-warning; }
+.mc-bg-error { background: $mc-error; color: $mc-on-error; }
+
+// Быстрая типографика
+.mc-text-display-large {
+  font-size: $mc-display-large-size;
+  line-height: $mc-display-large-height;
+  font-weight: $mc-display-large-weight;
+}
+
+.mc-text-headline-medium {
+  font-size: $mc-headline-medium-size;
+  line-height: $mc-headline-medium-height;
+  font-weight: $mc-headline-medium-weight;
+}
+
+.mc-text-body-large {
+  font-size: $mc-body-large-size;
+  line-height: $mc-body-large-height;
+  font-weight: $mc-body-large-weight;
+}
+
+.mc-text-body-medium {
+  font-size: $mc-body-medium-size;
+  line-height: $mc-body-medium-height;
+  font-weight: $mc-body-medium-weight;
+}
+
+.mc-text-label-large {
+  font-size: $mc-label-large-size;
+  line-height: $mc-label-large-height;
+  font-weight: $mc-label-large-weight;
+}

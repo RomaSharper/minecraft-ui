@@ -1,0 +1,67 @@
+// Segmented Button - Material Design 3
+
+@import '../core/variables';
+
+.mc-segmented-button {
+  display: inline-flex;
+  border: 1px solid $mc-outline;
+  border-radius: $mc-radius-full;
+  background: $mc-surface;
+  overflow: hidden;
+
+  .mc-segment {
+    position: relative;
+    background: none;
+    border: none;
+    padding: $mc-space-2 $mc-space-6;
+    font-family: $mc-font-family-body;
+    font-size: $mc-label-large-size;
+    font-weight: $mc-font-weight-medium;
+    color: $mc-on-surface;
+    cursor: pointer;
+    transition: all $mc-duration-short2 $mc-easing-standard;
+    border-right: 1px solid $mc-outline;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    &:hover {
+      background: rgba($mc-on-surface, $mc-hover-opacity);
+    }
+
+    &:focus {
+      background: rgba($mc-on-surface, $mc-focus-opacity);
+      outline: none;
+    }
+
+    &.mc-segment-selected {
+      background: $mc-secondary-container;
+      color: $mc-on-secondary-container;
+    }
+
+    .mc-segment-icon {
+      width: 18px;
+      height: 18px;
+      margin-right: $mc-space-2;
+    }
+
+    &:disabled {
+      opacity: $mc-disabled-opacity;
+      cursor: not-allowed;
+    }
+  }
+
+  &.mc-segmented-button-density-comfortable {
+    .mc-segment {
+      padding: $mc-space-3 $mc-space-6;
+    }
+  }
+
+  &.mc-segmented-button-density-compact {
+    .mc-segment {
+      padding: $mc-space-1 $mc-space-4;
+      font-size: $mc-label-medium-size;
+    }
+  }
+}

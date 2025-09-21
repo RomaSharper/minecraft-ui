@@ -2,10 +2,10 @@
 
 import {MinecraftTheme, themeManager} from "./utils/theme";
 import {MinecraftCommandSystem, CommandCallback, CommandSelector, CommandParams} from './utils/commands';
+import {DOMUtils} from "./utils/dom";
+import {Validator} from "./utils/validation";
 
 // Export utilities
-
-export * from './utils/sounds';
 export * from './utils/dom';
 export * from './utils/theme';
 export * from './utils/validation';
@@ -14,7 +14,6 @@ export * from './utils/commands';
 // Export types
 export interface MinecraftUIConfig {
     theme?: MinecraftTheme;
-    sounds?: boolean;
     pixelated?: boolean;
     animations?: boolean;
     autoCommands?: boolean;
@@ -22,13 +21,14 @@ export interface MinecraftUIConfig {
 
 // Global MinecraftUI class
 export class MinecraftUI {
-    private config: MinecraftUIConfig;
+    private readonly config: MinecraftUIConfig;
+    private DOMUtils: typeof DOMUtils = DOMUtils;
+    private Validator: typeof Validator = Validator;
     private commandSystem = new MinecraftCommandSystem();
 
     constructor(config: MinecraftUIConfig = {}) {
         this.config = {
             theme: 'java',
-            sounds: true,
             pixelated: true,
             animations: true,
             autoCommands: true,
@@ -66,18 +66,18 @@ export class MinecraftUI {
     // Инициализация команд по умолчанию
     private initDefaultCommands(): void {
         // Команды для кнопок
-        this.add('button:click', '@all-buttons', (data) => {
+        this.add('mouse:click', '@all-buttons', data => {
             console.log('Button clicked:', data.element?.textContent);
         });
 
         // Команды для модальных окон
-        this.add('modal:show', '.mc-modal', (data) => {
-            console.log('Modal shown');
+        this.add('modal:show', '.mc-modal', data => {
+            console.log('Modal shown:', data);
         });
 
         // Команды для форм
-        this.add('form:submit', 'form', (data) => {
-            console.log('Form submitted');
+        this.add('form:submit', 'form', data => {
+            console.log('Form submitted:', data);
         });
     }
 
@@ -87,7 +87,7 @@ export class MinecraftUI {
 
     /**
      * Добавить команду (аналог /ui add)
-     * @param commandType - тип команды (например: 'button:click', 'modal:open')
+     * @param commandType - тип команды (например: 'mouse:click', 'modal:open')
      * @param selector - селектор элементов (например: '@all-buttons', '.my-button')
      * @param callback - функция обратного вызова
      * @param params - дополнительные параметры
@@ -157,29 +157,6 @@ export class MinecraftUI {
     }
 
     /**
-     * Включить/выключить звуки (аналог /ui sounds)
-     * @param enabled - включить звуки
-     */
-    public sounds(enabled: boolean): void {
-        this.config.sounds = enabled;
-        if (!enabled) {
-            // Отключить все звуковые команды
-            this.remove('button:click');
-            this.remove('button:hover');
-        } else {
-            // Переинициализировать звуковые команды
-            this.initDefaultCommands();
-        }
-    }
-
-    /**
-     * Получить конфигурацию (аналог /ui config)
-     */
-    public getConfig(): MinecraftUIConfig {
-        return { ...this.config };
-    }
-
-    /**
      * Получить статистику команд (аналог /ui stats)
      */
     public stats(): Record<string, number> {
@@ -201,7 +178,7 @@ export class MinecraftUI {
      * Быстрое добавление события клика
      */
     public onClick(selector: CommandSelector, callback: CommandCallback, params?: CommandParams): () => void {
-        return this.add('button:click', selector, callback, params);
+        return this.add('mouse:click', selector, callback, params);
     }
 
     /**

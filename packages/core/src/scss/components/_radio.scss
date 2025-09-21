@@ -1,0 +1,69 @@
+// Radio Button - Material Design 3
+
+@import '../core/variables';
+
+.mc-radio {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  margin: $mc-space-2 0;
+
+  .mc-radio-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .mc-radio-button {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 2px solid $mc-on-surface-variant;
+    border-radius: $mc-radius-full;
+    margin-right: $mc-space-3;
+    transition: all $mc-duration-short2 $mc-easing-standard;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      background: $mc-primary;
+      border-radius: $mc-radius-full;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform $mc-duration-short2 $mc-easing-standard;
+    }
+  }
+
+  .mc-radio-input:checked + .mc-radio-button {
+    border-color: $mc-primary;
+
+    &::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  .mc-radio-input:focus + .mc-radio-button {
+    box-shadow: 0 0 0 8px rgba($mc-primary, $mc-focus-opacity);
+  }
+
+  .mc-radio-input:disabled + .mc-radio-button {
+    border-color: rgba($mc-on-surface, $mc-disabled-opacity);
+    cursor: not-allowed;
+
+    &::after {
+      background: rgba($mc-on-surface, $mc-disabled-opacity);
+    }
+  }
+
+  .mc-radio-label {
+    font-family: $mc-font-family-body;
+    font-size: $mc-body-large-size;
+    color: $mc-on-surface;
+    cursor: pointer;
+  }
+}

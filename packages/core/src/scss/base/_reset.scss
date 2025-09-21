@@ -10,21 +10,21 @@
 }
 
 html {
-  font-size: $mc-font-size-base;
+  font-size: $mc-body-medium-size;
   -webkit-text-size-adjust: 100%;
   line-height: $mc-line-height-base;
-  font-family: $mc-font-family-base !important;
+  font-family: $mc-font-family-body !important;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
   margin: 0;
-  color: $mc-ui-text;
-  background: $mc-ui-bg;
-  font-size: $mc-font-size-base;
+  color: $mc-on-background;
+  background: $mc-background;
+  font-size: $mc-body-medium-size;
   line-height: $mc-line-height-base;
   font-weight: $mc-font-weight-normal;
-  font-family: $mc-font-family-base !important;
+  font-family: $mc-font-family-body !important;
   @include mc-pixelated();
 }
 

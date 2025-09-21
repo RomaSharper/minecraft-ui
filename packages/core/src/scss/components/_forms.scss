@@ -3,117 +3,124 @@
 @import '../core/mixins';
 @import '../core/variables';
 
-.mc-form-group {
-  margin-bottom: $mc-form-group-margin;
-}
+.mc-form-field {
+  margin-bottom: $mc-space-6;
 
-.mc-label {
-  display: block;
-  margin-bottom: $mc-space-1;
-  font-weight: $mc-font-weight-bold;
-  font-size: $mc-font-size-base;
-  color: $mc-ui-text;
+  .mc-form-label {
+    display: block;
+    font-size: $mc-body-small-size;
+    font-weight: $mc-font-weight-medium;
+    color: $mc-on-surface-variant;
+    margin-bottom: $mc-space-2;
+
+    &.mc-form-label-required::after {
+      content: " *";
+      color: $mc-error;
+    }
+  }
+
+  .mc-form-supporting-text {
+    font-size: $mc-body-small-size;
+    color: $mc-on-surface-variant;
+    margin-top: $mc-space-1;
+  }
+
+  .mc-form-error-text {
+    font-size: $mc-body-small-size;
+    color: $mc-error;
+    margin-top: $mc-space-1;
+  }
+
+  &.mc-form-field-error {
+    .mc-form-label {
+      color: $mc-error;
+    }
+  }
 }
 
 .mc-input,
 .mc-textarea,
 .mc-select {
-  @include mc-form-control-base();
-  @include mc-block-inset($mc-ui-border);
+  width: 100%;
+  height: $mc-input-height-md;
+  padding: 0 $mc-input-padding-x;
+  font-family: $mc-font-family-body;
+  font-size: $mc-body-large-size;
+  color: $mc-on-surface;
+  background: $mc-surface;
+  border: 1px solid $mc-outline;
+  border-radius: $mc-input-radius;
+  transition: all $mc-duration-short4 $mc-easing-standard;
 
+  &::placeholder {
+    color: $mc-on-surface-variant;
+    opacity: 1;
+  }
+
+  &:hover {
+    border-color: $mc-on-surface;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $mc-primary;
+    box-shadow: 0 0 0 2px rgba($mc-primary, 0.2);
+  }
+
+  &:disabled {
+    opacity: $mc-disabled-opacity;
+    background: $mc-surface-variant;
+    cursor: not-allowed;
+  }
+
+  // Size variants
   &.mc-input-sm {
-    padding: $mc-space-1;
-    font-size: $mc-font-size-sm;
+    height: $mc-input-height-sm;
+    font-size: $mc-body-medium-size;
   }
 
   &.mc-input-lg {
-    padding: $mc-space-3;
-    font-size: $mc-font-size-lg;
+    height: $mc-input-height-lg;
+    font-size: $mc-body-large-size;
+  }
+
+  // State variants
+  &.mc-input-error {
+    border-color: $mc-error;
+
+    &:focus {
+      border-color: $mc-error;
+      box-shadow: 0 0 0 2px rgba($mc-error, 0.2);
+    }
+  }
+
+  &.mc-input-success {
+    border-color: $mc-success;
+
+    &:focus {
+      border-color: $mc-success;
+      box-shadow: 0 0 0 2px rgba($mc-success, 0.2);
+    }
   }
 }
 
 .mc-textarea {
+  height: auto;
   min-height: 80px;
+  padding: $mc-space-3 $mc-input-padding-x;
   resize: vertical;
+  line-height: $mc-body-large-height;
 }
 
 .mc-select {
   cursor: pointer;
-  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23ffffff" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg width="12" height="8" viewBox="0 0 12 8" xmlns="http://www.w3.org/2000/svg"><path d="M6 8L0 2h12z" fill="%23666"/></svg>');
   background-repeat: no-repeat;
-  background-position: right 12px center;
+  background-position: right $mc-space-3 center;
   background-size: 12px;
-  padding-right: 40px;
-}
+  padding-right: $mc-space-8;
 
-// Form validation states
-.mc-input-success,
-.mc-textarea-success,
-.mc-select-success {
-  @include mc-form-validation-state($mc-success);
-}
-
-.mc-input-warning,
-.mc-textarea-warning,
-.mc-select-warning {
-  @include mc-form-validation-state($mc-warning);
-}
-
-.mc-input-error,
-.mc-textarea-error,
-.mc-select-error {
-  @include mc-form-validation-state($mc-error);
-}
-
-// Form feedback
-.mc-form-help {
-  margin-top: $mc-space-1;
-  font-size: $mc-font-size-sm;
-  color: $mc-ui-text-muted;
-}
-
-.mc-form-error {
-  margin-top: $mc-space-1;
-  font-size: $mc-font-size-sm;
-  color: $mc-error;
-}
-
-.mc-form-success {
-  margin-top: $mc-space-1;
-  font-size: $mc-font-size-sm;
-  color: $mc-success;
-}
-
-// Checkbox and radio
-.mc-checkbox,
-.mc-radio {
-  display: inline-flex;
-  align-items: center;
-  margin-bottom: $mc-space-2;
-  cursor: pointer;
-
-  input[type="checkbox"],
-  input[type="radio"] {
-    width: 18px;
-    height: 18px;
-    margin-right: $mc-space-2;
-    cursor: pointer;
-    @include mc-block-inset($mc-ui-border);
-
-    &:checked {
-      background: $mc-info;
-      @include mc-block-border($mc-info);
-    }
-
-    &:focus {
-      @include mc-focus-ring($mc-info);
-    }
-  }
-
-  .mc-checkbox-label,
-  .mc-radio-label {
-    font-size: $mc-font-size-base;
-    color: $mc-ui-text;
-    cursor: pointer;
+  &:focus {
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg width="12" height="8" viewBox="0 0 12 8" xmlns="http://www.w3.org/2000/svg"><path d="M6 0l6 6H0z" fill="%2300BCD4"/></svg>');
   }
 }

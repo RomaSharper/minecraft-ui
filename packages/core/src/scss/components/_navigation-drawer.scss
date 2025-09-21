@@ -1,0 +1,111 @@
+// Navigation Drawer - Material Design 3
+
+@import '../core/variables';
+
+.mc-navigation-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  background: $mc-surface-container;
+  border-right: 1px solid $mc-outline-variant;
+  transform: translateX(-100%);
+  transition: transform $mc-duration-medium3 $mc-easing-emphasized;
+  z-index: $mc-z-modal;
+  overflow-y: auto;
+
+  &.mc-navigation-drawer-open {
+    transform: translateX(0);
+  }
+
+  .mc-navigation-drawer-header {
+    padding: $mc-space-6 $mc-space-4 $mc-space-4;
+    border-bottom: 1px solid $mc-outline-variant;
+
+    .mc-navigation-drawer-headline {
+      font-size: $mc-title-small-size;
+      font-weight: $mc-font-weight-medium;
+      color: $mc-on-surface-variant;
+      margin: 0;
+    }
+
+    .mc-navigation-drawer-supporting-text {
+      font-size: $mc-body-medium-size;
+      color: $mc-on-surface-variant;
+      margin: $mc-space-1 0 0;
+    }
+  }
+
+  .mc-navigation-drawer-content {
+    padding: $mc-space-3 0;
+
+    .mc-navigation-drawer-section {
+      margin-bottom: $mc-space-4;
+
+      .mc-navigation-drawer-section-header {
+        padding: $mc-space-2 $mc-space-4;
+        font-size: $mc-title-small-size;
+        font-weight: $mc-font-weight-medium;
+        color: $mc-on-surface-variant;
+        margin: 0 0 $mc-space-2;
+      }
+    }
+
+    .mc-navigation-drawer-item {
+      display: flex;
+      align-items: center;
+      padding: $mc-space-2 $mc-space-4;
+      color: $mc-on-surface-variant;
+      text-decoration: none;
+      font-size: $mc-label-large-size;
+      font-weight: $mc-font-weight-medium;
+      border-radius: 0 $mc-radius-full $mc-radius-full 0;
+      margin-right: $mc-space-3;
+      transition: all $mc-duration-short2 $mc-easing-standard;
+      position: relative;
+
+      .mc-navigation-drawer-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: $mc-space-3;
+        flex-shrink: 0;
+      }
+
+      .mc-navigation-drawer-badge {
+        margin-left: auto;
+      }
+
+      &:hover {
+        background: rgba($mc-on-surface, $mc-hover-opacity);
+      }
+
+      &.mc-navigation-drawer-item-active {
+        background: $mc-secondary;
+        color: $mc-on-secondary;
+
+        .mc-navigation-drawer-icon {
+          color: $mc-on-secondary;
+        }
+      }
+    }
+  }
+}
+
+.mc-navigation-drawer-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: $mc-z-overlay;
+  opacity: 0;
+  transition: opacity $mc-duration-medium2 $mc-easing-standard;
+  pointer-events: none;
+
+  &.mc-navigation-drawer-backdrop-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

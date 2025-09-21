@@ -33,15 +33,13 @@ import '@minecraft-ui/core/dist/minecraft-ui.css';
 // Initialize MinecraftUI
 const ui = new MinecraftUI({
     theme: 'default',
-    sounds: true,
     pixelated: true
 });
 
 // Use utilities
-import { minecraftSounds, themeManager } from '@minecraft-ui/core';
+import { themeManager } from '@minecraft-ui/core';
 
-minecraftSounds.playButtonClick();
-themeManager.applyTheme('dark');
+themeManager.applyTheme('java');
 ```
 
 ### **SCSS Integration**
@@ -53,12 +51,12 @@ themeManager.applyTheme('dark');
 
 // Customize variables
 $mc-grass: #00FF00; // Brighter grass
-$mc-ui-bg: #2C2C2C; // Darker background
+$mc-background: #2C2C2C; // Darker background
 
 // Import everything
 @import '@minecraft-ui/core/src/scss/minecraft-ui';
 
-// Create custom components
+// Create custom templates
 .my-custom-button {
     @include mc-button-variant(#purple, white);
     @include mc-block-border(#purple);
@@ -70,7 +68,6 @@ $mc-ui-bg: #2C2C2C; // Darker background
 ### ✨ **What's Included**
 
 * 🎮 **Minecraft-styled Components**: Buttons, cards, forms, navigation, modals, and more
-* 🎵 Sound Effects: Web Audio API-based sound utilities
 * 🎭 Multiple Themes: Default, dark, and neon themes
 * 📱 Responsive Design: Mobile-first approach with Minecraft aesthetics
 * 🔧 Customizable: SCSS variables and mixins for easy theming
@@ -108,28 +105,7 @@ $mc-ui-bg: #2C2C2C; // Darker background
 * **Colors**: `.mc-text-*`, `.mc-bg-*`
 * **Typography**: `.mc-text-*`, `.mc-font-*`
 
-## 🎵 **JavaScript Utilities**
-
-### **Sound System**
-
-```javascript
-import { minecraftSounds } from '@minecraft-ui/core';
-
-// Predefined sounds
-minecraftSounds.playBlockBreak();
-minecraftSounds.playBlockPlace();
-minecraftSounds.playButtonClick();
-minecraftSounds.playError();
-minecraftSounds.playSuccess();
-
-// Custom sounds
-minecraftSounds.playCustomSound({
-    frequency: 440,
-    duration: 0.2,
-    type: 'square',
-    volume: 0.5
-});
-```
+## **JavaScript Utilities**
 
 ### **Theme Management**
 
@@ -195,9 +171,9 @@ $mc-diamond: #00BCD4;
 $mc-redstone: #F44336;
 
 // UI colors
-$mc-ui-bg: #3E3E3E;
-$mc-ui-text: #FFFFFF;
-$mc-ui-border: #8B8B8B;
+$mc-background: #3E3E3E;
+$mc-on-background: #FFFFFF;
+$mc-stone: #8B8B8B;
 
 // State colors
 $mc-success: $mc-grass;
@@ -220,10 +196,10 @@ $mc-space-4: 32px;
 #### **Typography**
 
 ```scss
-$mc-font-family-base: 'Courier New', 'Monaco', 'Menlo', monospace;
+$mc-font-family-body: 'Courier New', 'Monaco', 'Menlo', monospace;
 $mc-font-size-xs: 10px;
 $mc-font-size-sm: 12px;
-$mc-font-size-base: 14px;
+$mc-body-medium-size: 14px;
 $mc-font-size-lg: 16px;
 $mc-font-size-xl: 20px;
 ```
@@ -379,36 +355,6 @@ MinecraftUI uses a mobile-first approach with these breakpoints:
 </nav>
 ```
 
-## 🎵 **Audio Integration**
-
-### **Web Audio API Features**
-
-* **Pixelated Sound Effects**: Square wave oscillators for retro feel
-* **Dynamic Volume Control**: Adjustable gain nodes
-* **Frequency Modulation**: Create custom sound effects
-* **Graceful Fallbacks**: Silent operation when audio isn't supported
-
-### **Custom Sound Creation**
-
-```javascript
-import { MinecraftSounds } from '@minecraft-ui/core';
-
-const sounds = new MinecraftSounds();
-
-// Create a custom "level up" sound
-sounds.playCustomSound({
-    frequency: 440, // A4 note
-    duration: 0.3,
-    type: 'sine',
-    volume: 0.4
-});
-
-// Chain sounds for complex effects
-setTimeout(() => {
-    sounds.playCustomSound({ frequency: 660, duration: 0.2 });
-}, 100);
-```
-
 ## 📦 **Bundle Information**
 
 | **File**             | **Size (Gzipped)** | **Description**                   |
@@ -423,7 +369,6 @@ setTimeout(() => {
 
 ```javascript
 // Import only what you need
-import { minecraftSounds } from '@minecraft-ui/core/sounds';
 import { themeManager } from '@minecraft-ui/core/theme';
 import { Validator } from '@minecraft-ui/core/validation';
 ```
@@ -444,32 +389,6 @@ npm run test:watch
 
 # Lint SCSS and TypeScript
 npm run lint
-```
-
-### **Writing Tests**
-
-```javascript
-import { MinecraftSounds, DOMUtils } from '@minecraft-ui/core';
-
-describe('MinecraftSounds', () => {
-    let sounds;
-
-    beforeEach(() => {
-        sounds = new MinecraftSounds();
-    });
-    
-    it('should play button sound without errors', () => {
-        expect(() => sounds.playButtonClick()).not.toThrow();
-    });
-    
-    it('should handle unsupported browsers gracefully', () => {
-        // Mock unsupported environment
-        global.AudioContext = undefined;
-        
-        const soundsNoSupport = new MinecraftSounds();
-        expect(soundsNoSupport.soundsSupported).toBe(false);
-    });
-});
 ```
 
 ## 🔧 **Development**
@@ -545,18 +464,7 @@ import '@minecraft-ui/core/dist/minecraft-ui.css';
 <link rel="stylesheet" href="path/to/minecraft-ui.css">
 ```
 
-2. Sounds not playing
-
-```javascript
-// Check browser support
-if (minecraftSounds.soundsSupported) {
-    minecraftSounds.playButtonClick();
-} else {
-    console.log('Audio not supported in this browser');
-}
-```
-
-3. Components not styled correctly
+2. Components not styled correctly
 
 ```html
 <!-- Always wrap content in mc-base -->
@@ -565,7 +473,7 @@ if (minecraftSounds.soundsSupported) {
 </div>
 ```
 
-4. SCSS compilation errors
+3. SCSS compilation errors
 
 ```scss
 // Make sure to import variables first

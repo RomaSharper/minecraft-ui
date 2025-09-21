@@ -1,172 +1,309 @@
-// MinecraftUI Core Variables
+// MinecraftUI - Полностью переработанная система переменных
+
+@import './mixins';
 
 // ================================
-// COLOR PALETTE
+// БАЗОВАЯ ЦВЕТОВАЯ ПАЛИТРА
 // ================================
 
-// Minecraft block colors
-$mc-grass: #7CB342 !default;
-$mc-dirt: #8D6E63 !default;
-$mc-stone: #9E9E9E !default;
-$mc-cobblestone: #757575 !default;
-$mc-wood: #8D6E63 !default;
-$mc-leaves: #4CAF50 !default;
-$mc-water: #2196F3 !default;
-$mc-lava: #FF5722 !default;
-$mc-gold: #FFC107 !default;
-$mc-iron: #ECEFF1 !default;
-$mc-diamond: #00BCD4 !default;
-$mc-redstone: #F44336 !default;
-$mc-coal: #424242 !default;
-$mc-sand: #FDD835 !default;
-$mc-snow: #FAFAFA !default;
-$mc-night: #1A1A1A !default;
+// Minecraft блоки (источники цветов)
+$mc-grass: #7CB342;
+$mc-stone: #9E9E9E;
+$mc-dirt: #8D6E63;
+$mc-wood: #8B4513;
+$mc-gold: #FFC107;
+$mc-diamond: #00BCD4;
+$mc-redstone: #F44336;
+$mc-emerald: #50C878;
+$mc-lapis: #1E40AF;
+$mc-netherite: #654740;
+$mc-obsidian: #0F0F23;
+$mc-quartz: #F5F5DC;
+$mc-amethyst: #9966CC;
 
-// UI base colors
-$mc-ui-bg: #3E3E3E !default;
-$mc-ui-bg-dark: #2E2E2E !default;
-$mc-ui-bg-light: #4E4E4E !default;
-$mc-ui-border: #8B8B8B !default;
-$mc-ui-border-light: #ABABAB !default;
-$mc-ui-border-dark: #5B5B5B !default;
-$mc-ui-hover: #5E5E5E !default;
-$mc-ui-active: #1E1E1E !default;
-$mc-ui-text: #FFFFFF !default;
-$mc-ui-text-dark: #3E3E3E !default;
-$mc-ui-text-muted: #AAAAAA !default;
+// ================================
+// СЕМАНТИЧЕСКИЕ ПЕРЕМЕННЫЕ (по функциям)
+// ================================
+
+// Primary colors (основные цвета интерфейса)
+$mc-primary: $mc-diamond !default;
+$mc-primary-variant: mc-darken($mc-primary, 15%) !default;
+$mc-primary-container: mc-darken($mc-primary, 20%) !default;
+$mc-on-primary: #FFFFFF !default;
+
+$mc-secondary: $mc-emerald !default;
+$mc-secondary-variant: mc-darken($mc-secondary, 15%) !default;
+$mc-secondary-container: mc-darken($mc-secondary, 20%) !default;
+$mc-on-secondary: #FFFFFF !default;
+
+// Surface colors (поверхности)
+$mc-surface: #2D2D30 !default;
+$mc-surface-variant: #383838 !default;
+$mc-surface-container: #404040 !default;
+$mc-surface-container-high: #484848 !default;
+$mc-surface-container-highest: #505050 !default;
+$mc-on-surface: #FFFFFF !default;
+$mc-on-surface-variant: #B3B3B3 !default;
+
+// Background colors
+$mc-background: #1E1E1E !default;
+$mc-on-background: #FFFFFF !default;
 
 // State colors
 $mc-success: $mc-grass !default;
 $mc-warning: $mc-gold !default;
 $mc-error: $mc-redstone !default;
 $mc-info: $mc-diamond !default;
+$mc-on-success: #FFFFFF !default;
+$mc-on-warning: #000000 !default;
+$mc-on-error: #FFFFFF !default;
+$mc-on-info: #FFFFFF !default;
+
+// Interactive states
+$mc-hover-opacity: 0.08 !default;
+$mc-focus-opacity: 0.12 !default;
+$mc-selected-opacity: 0.12 !default;
+$mc-activated-opacity: 0.12 !default;
+$mc-pressed-opacity: 0.12 !default;
+$mc-dragged-opacity: 0.16 !default;
+$mc-disabled-opacity: 0.38 !default;
+
+// Outline colors
+$mc-outline: #555555 !default;
+$mc-outline-variant: #777777 !default;
 
 // ================================
-// TYPOGRAPHY
+// ТИПОГРАФИКА
 // ================================
 
-// Font families (pixel-style fonts)
-$mc-font-family-base: 'Minecraft', 'Courier New', 'Monaco', 'Menlo', 'Consolas', monospace !default;
-$mc-font-family-heading: $mc-font-family-base !default;
-
-// Font sizes
-$mc-font-size-xs: 10px !default;
-$mc-font-size-sm: 12px !default;
-$mc-font-size-base: 14px !default;
-$mc-font-size-md: $mc-font-size-base !default;
-$mc-font-size-lg: 16px !default;
-$mc-font-size-xl: 20px !default;
-$mc-font-size-2xl: 24px !default;
-$mc-font-size-3xl: 32px !default;
+// Font families
+$mc-font-family-display: 'Minecraft', 'Segoe UI Variable', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif !default;
+$mc-font-family-body: $mc-font-family-display !default;
+$mc-font-family-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Courier New', monospace !default;
 
 // Font weights
-$mc-font-weight-normal: 400 !default;
+$mc-font-weight-regular: 400 !default;
+$mc-font-weight-medium: 500 !default;
+$mc-font-weight-semibold: 600 !default;
 $mc-font-weight-bold: 700 !default;
 
-// Line heights
-$mc-line-height-base: 1.5 !default;
-$mc-line-height-sm: 1.25 !default;
-$mc-line-height-lg: 1.75 !default;
+// Typography scale (Material Design 3)
+$mc-display-large-size: 57px !default;
+$mc-display-large-height: 64px !default;
+$mc-display-large-weight: $mc-font-weight-regular !default;
+
+$mc-display-medium-size: 45px !default;
+$mc-display-medium-height: 52px !default;
+$mc-display-medium-weight: $mc-font-weight-regular !default;
+
+$mc-display-small-size: 36px !default;
+$mc-display-small-height: 44px !default;
+$mc-display-small-weight: $mc-font-weight-regular !default;
+
+$mc-headline-large-size: 32px !default;
+$mc-headline-large-height: 40px !default;
+$mc-headline-large-weight: $mc-font-weight-regular !default;
+
+$mc-headline-medium-size: 28px !default;
+$mc-headline-medium-height: 36px !default;
+$mc-headline-medium-weight: $mc-font-weight-regular !default;
+
+$mc-headline-small-size: 24px !default;
+$mc-headline-small-height: 32px !default;
+$mc-headline-small-weight: $mc-font-weight-regular !default;
+
+$mc-title-large-size: 22px !default;
+$mc-title-large-height: 28px !default;
+$mc-title-large-weight: $mc-font-weight-regular !default;
+
+$mc-title-medium-size: 16px !default;
+$mc-title-medium-height: 24px !default;
+$mc-title-medium-weight: $mc-font-weight-medium !default;
+
+$mc-title-small-size: 14px !default;
+$mc-title-small-height: 20px !default;
+$mc-title-small-weight: $mc-font-weight-medium !default;
+
+$mc-body-large-size: 16px !default;
+$mc-body-large-height: 24px !default;
+$mc-body-large-weight: $mc-font-weight-regular !default;
+
+$mc-body-medium-size: 14px !default;
+$mc-body-medium-height: 20px !default;
+$mc-body-medium-weight: $mc-font-weight-regular !default;
+
+$mc-body-small-size: 12px !default;
+$mc-body-small-height: 16px !default;
+$mc-body-small-weight: $mc-font-weight-regular !default;
+
+$mc-label-large-size: 14px !default;
+$mc-label-large-height: 20px !default;
+$mc-label-large-weight: $mc-font-weight-medium !default;
+
+$mc-label-medium-size: 12px !default;
+$mc-label-medium-height: 16px !default;
+$mc-label-medium-weight: $mc-font-weight-medium !default;
+
+$mc-label-small-size: 11px !default;
+$mc-label-small-height: 16px !default;
+$mc-label-small-weight: $mc-font-weight-medium !default;
 
 // ================================
-// SPACING
+// SPACING SYSTEM
 // ================================
 
-// Base unit (8px grid like Minecraft blocks)
-$mc-spacer: 8px !default;
+// Base unit (4px increments для лучшей точности)
+$mc-base-unit: 4px !default;
 
 // Spacing scale
 $mc-space-0: 0 !default;
-$mc-space-1: $mc-spacer !default; // 8px
-$mc-space-2: $mc-spacer * 2 !default; // 16px
-$mc-space-3: $mc-spacer * 3 !default; // 24px
-$mc-space-4: $mc-spacer * 4 !default; // 32px
-$mc-space-5: $mc-spacer * 5 !default; // 40px
-$mc-space-6: $mc-spacer * 6 !default; // 48px
-$mc-space-8: $mc-spacer * 8 !default; // 64px
+$mc-space-1: $mc-base-unit !default;     // 4px
+$mc-space-2: $mc-base-unit * 2 !default; // 8px
+$mc-space-3: $mc-base-unit * 3 !default; // 12px
+$mc-space-4: $mc-base-unit * 4 !default; // 16px
+$mc-space-5: $mc-base-unit * 5 !default; // 20px
+$mc-space-6: $mc-base-unit * 6 !default; // 24px
+$mc-space-7: $mc-base-unit * 7 !default; // 28px
+$mc-space-8: $mc-base-unit * 8 !default; // 32px
+$mc-space-10: $mc-base-unit * 10 !default; // 40px
+$mc-space-12: $mc-base-unit * 12 !default; // 48px
+$mc-space-16: $mc-base-unit * 16 !default; // 64px
+$mc-space-20: $mc-base-unit * 20 !default; // 80px
+$mc-space-24: $mc-base-unit * 24 !default; // 96px
 
 // Component specific spacing
-$mc-btn-padding-y: $mc-space-2 !default;
-$mc-btn-padding-x: $mc-space-3 !default;
-$mc-btn-padding-sm-y: $mc-space-1 !default;
-$mc-btn-padding-sm-x: $mc-space-2 !default;
-$mc-btn-padding-lg-y: $mc-space-3 !default;
-$mc-btn-padding-lg-x: $mc-space-4 !default;
-
-$mc-card-padding: $mc-space-3 !default;
-$mc-modal-padding: $mc-space-3 !default;
-$mc-form-group-margin: $mc-space-3 !default;
+$mc-container-padding: $mc-space-4 !default;
+$mc-section-gap: $mc-space-8 !default;
+$mc-component-gap: $mc-space-4 !default;
 
 // ================================
-// BORDERS
+// ELEVATION SYSTEM
 // ================================
 
-// Border widths
-$mc-border-width: 2px !default;
-$mc-border-width-thick: 4px !default;
-
-// Border radius (minimal for pixel art style)
-$mc-border-radius-base: 0px !default;
-$mc-border-radius-sm: 2px !default;
-$mc-border-radius-md: 4px !default;
-
-// ================================
-// SHADOWS AND EFFECTS
-// ================================
-
-// Block shadow effect (3D appearance)
-$mc-shadow-light: rgba(255, 255, 255, 0.3) !default;
-$mc-shadow-dark: rgba(0, 0, 0, 0.3) !default;
-
-// Box shadows
-$mc-box-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1) !default;
-$mc-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !default;
-$mc-box-shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.15) !default;
+// Elevation levels (Material Design 3)
+$mc-elevation-0: none !default;
+$mc-elevation-1: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15) !default;
+$mc-elevation-2: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15) !default;
+$mc-elevation-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15) !default;
+$mc-elevation-4: 0 2px 3px 0 rgba(0, 0, 0, 0.3), 0 6px 10px 4px rgba(0, 0, 0, 0.15) !default;
+$mc-elevation-5: 0 4px 4px 0 rgba(0, 0, 0, 0.3), 0 8px 12px 6px rgba(0, 0, 0, 0.15) !default;
 
 // ================================
-// TRANSITIONS
+// BORDER RADIUS SYSTEM
 // ================================
 
-// Transition durations
-$mc-transition-duration-fast: 0.1s !default;
-$mc-transition-duration-base: 0.2s !default;
-$mc-transition-duration-slow: 0.3s !default;
+$mc-radius-none: 0 !default;
+$mc-radius-xs: 2px !default;
+$mc-radius-sm: 4px !default;
+$mc-radius-md: 8px !default;
+$mc-radius-lg: 12px !default;
+$mc-radius-xl: 16px !default;
+$mc-radius-2xl: 20px !default;
+$mc-radius-3xl: 24px !default;
+$mc-radius-full: 9999px !default;
 
-// Transition timing functions
-$mc-transition-timing-function: ease !default;
-
-// Common transitions
-$mc-transition-color: color $mc-transition-duration-base $mc-transition-timing-function !default;
-$mc-transition-background: background-color $mc-transition-duration-base $mc-transition-timing-function !default;
-$mc-transition-border: border-color $mc-transition-duration-base $mc-transition-timing-function !default;
-$mc-transition-transform: transform $mc-transition-duration-fast $mc-transition-timing-function !default;
-$mc-transition-all: all $mc-transition-duration-base $mc-transition-timing-function !default;
-
-// ================================
-// Z-INDEX SCALE
-// ================================
-
-$mc-z-index-dropdown: 1000 !default;
-$mc-z-index-sticky: 1010 !default;
-$mc-z-index-fixed: 1020 !default;
-$mc-z-index-modal-backdrop: 1040 !default;
-$mc-z-index-modal: 1050 !default;
-$mc-z-index-popover: 1060 !default;
-$mc-z-index-tooltip: 1070 !default;
-$mc-z-index-toast: 1080 !default;
+// Component specific radius
+$mc-button-radius: $mc-radius-lg !default;
+$mc-card-radius: $mc-radius-lg !default;
+$mc-input-radius: $mc-radius-sm !default;
+$mc-dialog-radius: $mc-radius-xl !default;
 
 // ================================
-// BREAKPOINTS (Responsive)
+// ANIMATION SYSTEM
 // ================================
 
-$mc-breakpoint-xs: 0 !default;
-$mc-breakpoint-sm: 576px !default;
-$mc-breakpoint-md: 768px !default;
-$mc-breakpoint-lg: 992px !default;
-$mc-breakpoint-xl: 1200px !default;
-$mc-breakpoint-xxl: 1400px !default;
+// Duration tokens
+$mc-duration-short1: 50ms !default;   // Micro-interactions
+$mc-duration-short2: 100ms !default;  // Simple transitions
+$mc-duration-short3: 150ms !default;  // Complex transitions
+$mc-duration-short4: 200ms !default;  // Entering animations
+$mc-duration-medium1: 250ms !default; // Complex animations
+$mc-duration-medium2: 300ms !default; // Large animations
+$mc-duration-medium3: 350ms !default; // Entering complex
+$mc-duration-medium4: 400ms !default; // Exiting animations
+$mc-duration-long1: 450ms !default;   // Large complex
+$mc-duration-long2: 500ms !default;   // Large entering
+$mc-duration-long3: 550ms !default;   // Large exiting
+$mc-duration-long4: 600ms !default;   // Extra large
 
-// Breakpoints map for easier iteration
+// Easing tokens
+$mc-easing-linear: cubic-bezier(0, 0, 1, 1) !default;
+$mc-easing-standard: cubic-bezier(0.2, 0, 0, 1) !default;
+$mc-easing-standard-accelerate: cubic-bezier(0.3, 0, 1, 1) !default;
+$mc-easing-standard-decelerate: cubic-bezier(0, 0, 0, 1) !default;
+$mc-easing-emphasized: cubic-bezier(0.2, 0, 0, 1) !default;
+$mc-easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15) !default;
+$mc-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1) !default;
+
+// ================================
+// COMPONENT DIMENSIONS
+// ================================
+
+// Button dimensions
+$mc-button-height-sm: 32px !default;
+$mc-button-height-md: 40px !default;
+$mc-button-height-lg: 48px !default;
+$mc-button-padding-x-sm: $mc-space-3 !default;
+$mc-button-padding-x-md: $mc-space-6 !default;
+$mc-button-padding-x-lg: $mc-space-8 !default;
+
+// Input dimensions
+$mc-input-height-sm: 32px !default;
+$mc-input-height-md: 40px !default;
+$mc-input-height-lg: 48px !default;
+$mc-input-padding-x: $mc-space-4 !default;
+
+// Card dimensions
+$mc-card-padding: $mc-space-6 !default;
+
+// Modal dimensions
+$mc-modal-max-width: 560px !default;
+$mc-modal-max-height: 80vh !default;
+$mc-modal-padding: $mc-space-6 !default;
+
+// Navigation dimensions
+$mc-nav-height: 64px !default;
+$mc-nav-padding-x: $mc-space-6 !default;
+
+// Inventory dimensions
+$mc-slot-size-sm: 32px !default;
+$mc-slot-size-md: 40px !default;
+$mc-slot-size-lg: 48px !default;
+$mc-inventory-gap: $mc-space-1 !default;
+
+// Progress dimensions
+$mc-progress-height-sm: 4px !default;
+$mc-progress-height-md: 6px !default;
+$mc-progress-height-lg: 8px !default;
+
+// ================================
+// Z-INDEX SYSTEM
+// ================================
+
+$mc-z-hide: -1 !default;
+$mc-z-base: 0 !default;
+$mc-z-docked: 10 !default;
+$mc-z-dropdown: 1000 !default;
+$mc-z-sticky: 1100 !default;
+$mc-z-banner: 1200 !default;
+$mc-z-overlay: 1300 !default;
+$mc-z-modal: 1400 !default;
+$mc-z-popover: 1500 !default;
+$mc-z-skiplink: 1600 !default;
+$mc-z-toast: 1700 !default;
+$mc-z-tooltip: 1800 !default;
+
+// ================================
+// BREAKPOINT SYSTEM
+// ================================
+
+$mc-breakpoint-xs: 0px !default;
+$mc-breakpoint-sm: 600px !default;
+$mc-breakpoint-md: 905px !default;
+$mc-breakpoint-lg: 1240px !default;
+$mc-breakpoint-xl: 1440px !default;
+$mc-breakpoint-xxl: 1920px !default;
+
 $mc-breakpoints: (
         xs: $mc-breakpoint-xs,
         sm: $mc-breakpoint-sm,
@@ -177,27 +314,21 @@ $mc-breakpoints: (
 ) !default;
 
 // ================================
-// COMPONENT SPECIFIC VARIABLES
+// CONTAINER SYSTEM
 // ================================
 
-// Progress bars
-$mc-progress-height: 20px !default;
-$mc-progress-bg: $mc-ui-bg-dark !default;
+$mc-container-max-widths: (
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1140px,
+        xxl: 1320px
+) !default;
 
-// Inventory
-$mc-inventory-slot-size: 48px !default;
-$mc-inventory-gap: 2px !default;
+// ================================
+// THEME SYSTEM TOKENS
+// ================================
 
-// Modal
-$mc-modal-backdrop-opacity: 0.8 !default;
-$mc-modal-max-width: 90vw !default;
-$mc-modal-max-height: 90vh !default;
-
-// Tooltips
-$mc-tooltip-bg: $mc-ui-bg !default;
-$mc-tooltip-color: $mc-ui-text !default;
-$mc-tooltip-padding: $mc-space-1 $mc-space-2 !default;
-
-// Toast notifications
-$mc-toast-width: 320px !default;
-$mc-toast-offset: 20px !default;
+// Theme variants akan override these variables
+$mc-theme-java: false !default;
+$mc-theme-bedrock: true !default;

@@ -1,0 +1,86 @@
+// Checkbox - Material Design 3
+
+@import '../core/variables';
+
+.mc-checkbox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  margin: $mc-space-2 0;
+
+  .mc-checkbox-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .mc-checkbox-button {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 2px solid $mc-on-surface-variant;
+    border-radius: $mc-radius-xs;
+    margin-right: $mc-space-3;
+    transition: all $mc-duration-short2 $mc-easing-standard;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 2px;
+      width: 6px;
+      height: 10px;
+      border: solid $mc-on-primary;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg) scale(0);
+      transition: transform $mc-duration-short2 $mc-easing-standard;
+    }
+  }
+
+  .mc-checkbox-input:checked + .mc-checkbox-button {
+    background: $mc-primary;
+    border-color: $mc-primary;
+
+    &::after {
+      transform: rotate(45deg) scale(1);
+    }
+  }
+
+  .mc-checkbox-input:indeterminate + .mc-checkbox-button {
+    background: $mc-primary;
+    border-color: $mc-primary;
+
+    &::after {
+      left: 4px;
+      top: 8px;
+      width: 10px;
+      height: 0;
+      border: solid $mc-on-primary;
+      border-width: 0 0 2px 0;
+      transform: rotate(0deg) scale(1);
+    }
+  }
+
+  .mc-checkbox-input:focus + .mc-checkbox-button {
+    box-shadow: 0 0 0 8px rgba($mc-primary, $mc-focus-opacity);
+  }
+
+  .mc-checkbox-input:disabled + .mc-checkbox-button {
+    border-color: rgba($mc-on-surface, $mc-disabled-opacity);
+    background: rgba($mc-on-surface, $mc-disabled-opacity);
+    cursor: not-allowed;
+
+    &::after {
+      border-color: rgba($mc-surface, 1);
+    }
+  }
+
+  .mc-checkbox-label {
+    font-family: $mc-font-family-body;
+    font-size: $mc-body-large-size;
+    color: $mc-on-surface;
+    cursor: pointer;
+  }
+}

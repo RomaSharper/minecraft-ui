@@ -4,55 +4,102 @@
 @import '../core/variables';
 
 .mc-card {
-  display: block;
-  background: $mc-ui-bg;
-  @include mc-block-border($mc-ui-border);
-  padding: $mc-card-padding;
-  margin-bottom: $mc-space-3;
+  @include mc-card-base(
+          $padding: $mc-card-padding,
+          $radius: $mc-card-radius,
+          $elevation: 1
+  );
+
+  background: $mc-surface;
+  color: $mc-on-surface;
+  border: 1px solid $mc-outline-variant;
   overflow: hidden;
 
   .mc-card-header {
-    background: $mc-ui-bg-dark;
     margin: (-$mc-card-padding) (-$mc-card-padding) $mc-card-padding (-$mc-card-padding);
-    padding: $mc-space-2 $mc-card-padding;
-    @include mc-block-border($mc-ui-border);
-    font-weight: $mc-font-weight-bold;
-    font-size: $mc-font-size-lg;
-    color: $mc-ui-text;
-  }
+    padding: $mc-space-4 $mc-card-padding;
+    background: $mc-surface-container;
+    border-bottom: 1px solid $mc-outline-variant;
 
-  .mc-card-body {
-    color: $mc-ui-text;
-    line-height: $mc-line-height-base;
+    .mc-card-title {
+      font-size: $mc-title-large-size;
+      font-weight: $mc-font-weight-regular;
+      color: $mc-on-surface;
+      margin: 0 0 $mc-space-1 0;
+    }
 
-    &:not(:last-child) {
-      margin-bottom: $mc-space-3;
+    .mc-card-subtitle {
+      font-size: $mc-body-medium-size;
+      color: $mc-on-surface-variant;
+      margin: 0;
+    }
+
+    .mc-card-actions-header {
+      margin-left: auto;
+      display: flex;
+      gap: $mc-space-1;
     }
   }
 
-  .mc-card-footer {
-    margin: $mc-card-padding (-$mc-card-padding) (-$mc-card-padding) (-$mc-card-padding);
-    padding: $mc-space-2 $mc-card-padding;
-    color: mc-lighten($mc-ui-text, 3%);
-    background: mc-darken($mc-ui-bg, 3%);
-    @include mc-block-border($mc-ui-border);
-    border-top-color: mc-darken($mc-ui-border, 10%);
-    border-left-color: mc-darken($mc-ui-border, 10%);
+  .mc-card-media {
+    width: 100%;
+    height: 200px;
+    background: $mc-surface-variant;
+    background-size: cover;
+    background-position: center;
+    margin: (-$mc-card-padding) (-$mc-card-padding) $mc-card-padding (-$mc-card-padding);
   }
-}
 
-// Card variants
-.mc-card-grass {
-  @include mc-card-variant($mc-grass, $mc-grass);
-  color: $mc-ui-text;
-}
+  .mc-card-content {
+    font-size: $mc-body-medium-size;
+    line-height: $mc-body-medium-height;
+    color: $mc-on-surface;
 
-.mc-card-stone {
-  @include mc-card-variant($mc-stone, $mc-stone);
-  color: $mc-ui-text-dark;
-}
+    p {
+      margin: 0 0 $mc-space-3 0;
 
-.mc-card-gold {
-  @include mc-card-variant($mc-gold, $mc-gold);
-  color: $mc-ui-text-dark;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .mc-card-actions {
+    margin: $mc-card-padding (-$mc-card-padding) (-$mc-card-padding) (-$mc-card-padding);
+    padding: $mc-space-3 $mc-card-padding;
+    display: flex;
+    gap: $mc-space-2;
+    align-items: center;
+    border-top: 1px solid $mc-outline-variant;
+
+    &.mc-card-actions-full-width {
+      .mc-btn {
+        flex: 1;
+      }
+    }
+
+    &.mc-card-actions-center {
+      justify-content: center;
+    }
+
+    &.mc-card-actions-end {
+      justify-content: flex-end;
+    }
+  }
+
+  // Card variants
+  &.mc-card-outlined {
+    border: 2px solid $mc-outline;
+    box-shadow: none;
+  }
+
+  &.mc-card-elevated {
+    box-shadow: $mc-elevation-3;
+    border: none;
+  }
+
+  &.mc-card-filled {
+    background: $mc-surface-container-highest;
+    border: none;
+  }
 }

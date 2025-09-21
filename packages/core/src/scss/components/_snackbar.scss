@@ -1,0 +1,71 @@
+// Snackbar - Material Design 3
+
+@import '../core/variables';
+@import '../core/functions';
+
+.mc-snackbar {
+  position: fixed;
+  bottom: $mc-space-4;
+  left: $mc-space-4;
+  right: $mc-space-4;
+  background: mc-inverse($mc-surface);
+  color: mc-inverse($mc-on-surface);
+  border-radius: $mc-radius-sm;
+  padding: $mc-space-4;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  box-shadow: $mc-elevation-3;
+  font-family: $mc-font-family-body;
+  font-size: $mc-body-medium-size;
+  z-index: $mc-z-toast;
+  transform: translateY(100%);
+  transition: transform $mc-duration-medium2 $mc-easing-emphasized;
+
+  &.mc-snackbar-show {
+    transform: translateY(0);
+  }
+
+  .mc-snackbar-content {
+    flex: 1;
+    margin-right: $mc-space-3;
+  }
+
+  .mc-snackbar-action {
+    background: none;
+    border: none;
+    color: mc-inverse($mc-primary);
+    font-family: $mc-font-family-body;
+    font-size: $mc-label-large-size;
+    font-weight: $mc-font-weight-medium;
+    padding: $mc-space-2 $mc-space-3;
+    border-radius: $mc-radius-sm;
+    cursor: pointer;
+    transition: background-color $mc-duration-short2 $mc-easing-standard;
+
+    &:hover {
+      background: rgba(mc-inverse($mc-primary), $mc-hover-opacity);
+    }
+  }
+
+  .mc-snackbar-close {
+    background: none;
+    border: none;
+    color: mc-inverse($mc-on-surface);
+    width: 24px;
+    height: 24px;
+    border-radius: $mc-radius-full;
+    cursor: pointer;
+    margin-left: $mc-space-2;
+
+    &:hover {
+      background: rgba(mc-inverse($mc-on-surface), $mc-hover-opacity);
+    }
+  }
+
+  @include mc-media-up(sm) {
+    left: auto;
+    right: $mc-space-4;
+    max-width: 344px;
+  }
+}

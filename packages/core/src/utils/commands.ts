@@ -1,7 +1,7 @@
 // Command system inspired by Minecraft commands
 
 export type CommandCallback<T = any> = (data: T) => void;
-export type CommandSelector = string; // Например: 'button[class*="mc-btn"]' или '@all-buttons'
+export type CommandSelector = string;
 
 // Minecraft-style selectors
 export interface MinecraftSelectors {
@@ -9,18 +9,25 @@ export interface MinecraftSelectors {
     '@all-inputs': string;
     '@all-cards': string;
     '@all-modals': string;
+    '@all-forms': string;
+    '@all-images': string;
+    '@all-links': string;
+    '@all-videos': string;
+    '@all-audios': string;
     '@document': string;
-    '@world': string;  // window
+    '@world': string;
 }
 
 // Command parameters similar to Minecraft command structure
 export interface CommandParams {
     selector?: CommandSelector;
-    trigger?: 'click' | 'hover' | 'focus' | 'load' | 'change' | 'submit';
-    target?: 'self' | 'parent' | 'children' | 'siblings';
-    sound?: boolean;
+    trigger?: string;
+    target?: 'self' | 'parent' | 'children' | 'siblings' | 'closest';
     once?: boolean;
     delay?: number;
+    bubbles?: boolean;
+    cancelable?: boolean;
+    passive?: boolean;
 }
 
 export interface CommandData {
@@ -34,26 +41,110 @@ export interface CommandData {
 export class MinecraftCommandSystem {
     private commands = new Map<string, Set<CommandCallback>>();
     private selectors: MinecraftSelectors = {
-        '@all-buttons': '.mc-btn',
-        '@all-inputs': '.mc-input, .mc-textarea, .mc-select',
-        '@all-cards': '.mc-card',
-        '@all-modals': '.mc-modal',
+        '@all-buttons': '.mc-btn, button',
+        '@all-inputs': '.mc-input, .mc-textarea, .mc-select, input, textarea, select',
+        '@all-cards': '.mc-card, .card, [class*="card"]',
+        '@all-modals': '.mc-modal, .modal, [class*="modal"]',
+        '@all-forms': 'form',
+        '@all-images': 'img',
+        '@all-links': 'a',
+        '@all-videos': 'video',
+        '@all-audios': 'audio',
         '@document': 'document',
         '@world': 'window'
     };
 
-    constructor() {
-        this.initAutoCommands();
-    }
+    // Mapping of Minecraft-style commands to DOM events
+    private eventMappings = {
+        // Mouse events
+        'mouse:click': 'click',
+        'mouse:dblclick': 'dblclick',
+        'mouse:down': 'mousedown',
+        'mouse:up': 'mouseup',
+        'mouse:move': 'mousemove',
+        'mouse:over': 'mouseover',
+        'mouse:out': 'mouseout',
+        'mouse:enter': 'mouseenter',
+        'mouse:leave': 'mouseleave',
+        'mouse:wheel': 'wheel',
+        'mouse:context': 'contextmenu',
 
-    // Основная команда в стиле Minecraft: /ui add <action> <selector> [params]
+        // Keyboard events
+        'key:down': 'keydown',
+        'key:up': 'keyup',
+        'key:press': 'keypress',
+
+        // Form events
+        'form:input': 'input',
+        'form:change': 'change',
+        'form:submit': 'submit',
+        'form:reset': 'reset',
+        'form:focus': 'focus',
+        'form:blur': 'blur',
+        'form:select': 'select',
+        'form:invalid': 'invalid',
+
+        // Document events
+        'doc:load': 'DOMContentLoaded',
+        'doc:ready': 'readystatechange',
+        'doc:scroll': 'scroll',
+        'doc:resize': 'resize',
+        'doc:beforeunload': 'beforeunload',
+        'doc:unload': 'unload',
+
+        // Media events
+        'media:play': 'play',
+        'media:pause': 'pause',
+        'media:ended': 'ended',
+        'media:timeupdate': 'timeupdate',
+        'media:volumechange': 'volumechange',
+        'media:waiting': 'waiting',
+        'media:canplay': 'canplay',
+
+        // Drag and drop events
+        'drag:start': 'dragstart',
+        'drag:end': 'dragend',
+        'drag:enter': 'dragenter',
+        'drag:leave': 'dragleave',
+        'drag:over': 'dragover',
+        'drag:drop': 'drop',
+
+        // Touch events
+        'touch:start': 'touchstart',
+        'touch:move': 'touchmove',
+        'touch:end': 'touchend',
+        'touch:cancel': 'touchcancel',
+
+        // Animation events
+        'anim:start': 'animationstart',
+        'anim:end': 'animationend',
+        'anim:iteration': 'animationiteration',
+
+        // Transition events
+        'transition:start': 'transitionstart',
+        'transition:end': 'transitionend',
+        'transition:run': 'transitionrun',
+        'transition:cancel': 'transitioncancel',
+
+        // Clipboard events
+        'clipboard:copy': 'copy',
+        'clipboard:cut': 'cut',
+        'clipboard:paste': 'paste',
+
+        // Visibility events
+        'visibility:change': 'visibilitychange',
+        'page:show': 'pageshow',
+        'page:hide': 'pagehide',
+    };
+
+    // Основная команда: /ui add <action> <selector> [params]
     public execute(
-        action: 'add' | 'remove' | 'trigger' | 'clear',
+        action: 'add' | 'remove' | 'trigger' | 'clear' | 'list',
         commandType: string,
         selectorOrCallback?: CommandSelector | CommandCallback,
         callbackOrParams?: CommandCallback | CommandParams,
         params?: CommandParams
-    ): () => void {
+    ): any {
         switch (action) {
             case 'add':
                 return this.addCommand(
@@ -72,13 +163,16 @@ export class MinecraftCommandSystem {
             case 'clear':
                 return () => this.clearCommands(commandType);
 
+            case 'list':
+                return this.listCommands(commandType);
+
             default:
                 console.warn(`Unknown command action: ${action}`);
                 return () => {};
         }
     }
 
-    // Добавить команду - /ui add event button:click callback
+    // Добавить команду
     private addCommand(
         commandType: string,
         selector: CommandSelector,
@@ -109,14 +203,12 @@ export class MinecraftCommandSystem {
     // Удалить команду
     private removeCommand(commandType: string, callback?: CommandCallback): void {
         if (!callback) {
-            // Удалить все команды данного типа
             Array.from(this.commands.keys())
                 .filter(key => key.startsWith(commandType))
                 .forEach(key => this.commands.delete(key));
             return;
         }
 
-        // Удалить конкретный callback
         this.commands.forEach((callbacks, key) => {
             if (key.startsWith(commandType)) {
                 callbacks.delete(callback);
@@ -157,6 +249,12 @@ export class MinecraftCommandSystem {
             .forEach(key => this.commands.delete(key));
     }
 
+    // Список команд
+    private listCommands(filter?: string): string[] {
+        const commands = Array.from(this.commands.keys());
+        return filter ? commands.filter(cmd => cmd.startsWith(filter)) : commands;
+    }
+
     // Привязка к DOM событиям
     private bindDOMEvent(
         commandType: string,
@@ -165,17 +263,22 @@ export class MinecraftCommandSystem {
         params: CommandParams
     ): void {
         const resolvedSelector = this.resolveSelector(selector);
-        const eventType = this.extractEventType(commandType);
+        const eventType = this.getEventType(commandType);
 
         if (!eventType || !resolvedSelector) return;
+
+        // Для кастомных событий
+        if (eventType.startsWith('custom:')) {
+            this.bindCustomEvent(commandType, resolvedSelector, callback, params);
+            return;
+        }
 
         const eventTarget = this.getEventTarget(resolvedSelector);
         const eventHandler = (event: Event) => {
             const element = event.target as HTMLElement;
 
-            // Проверить, подходит ли элемент под селектор
             if (resolvedSelector !== 'document' && resolvedSelector !== 'window') {
-                if (!element.matches(resolvedSelector)) return;
+                if (!element?.matches(resolvedSelector)) return;
             }
 
             const data: CommandData = {
@@ -186,46 +289,56 @@ export class MinecraftCommandSystem {
                 timestamp: Date.now()
             };
 
-            // Воспроизвести звук если нужно
-            if (params.sound && this.shouldPlaySound(commandType)) {
-                this.playCommandSound(commandType);
-            }
-
-            // Выполнить callback
             callback(data);
 
-            // Удалить если это одноразовая команда
             if (params.once) {
                 eventTarget.removeEventListener(eventType, eventHandler);
             }
         };
 
-        eventTarget.addEventListener(eventType, eventHandler);
+        const options: AddEventListenerOptions = {
+            capture: params.bubbles === false,
+            passive: params.passive ?? true,
+            once: params.once ?? false
+        };
+
+        eventTarget.addEventListener(eventType, eventHandler, options);
     }
 
-    // Разрешить Minecraft-селектор в CSS селектор
+    // Привязка кастомных событий
+    private bindCustomEvent(
+        commandType: string,
+        selector: string,
+        callback: CommandCallback,
+        params: CommandParams
+    ): void {
+        // Реализация кастомных Minecraft-событий
+        switch (commandType) {
+            case 'mc:block-place':
+                this.setupBlockPlaceEvents(selector, callback, params);
+                break;
+            case 'mc:block-break':
+                this.setupBlockBreakEvents(selector, callback, params);
+                break;
+            case 'mc:inventory-open':
+                this.setupInventoryEvents(selector, callback, params);
+                break;
+            default:
+                console.warn(`Unknown custom command: ${commandType}`);
+        }
+    }
+
+    // Получить тип события из команды
+    private getEventType(commandType: string): string | null {
+        return this.eventMappings[commandType as keyof typeof this.eventMappings] || commandType;
+    }
+
+    // Разрешить Minecraft-селектор
     private resolveSelector(selector: CommandSelector): string {
         if (selector.startsWith('@')) {
             return this.selectors[selector as keyof MinecraftSelectors] || selector;
         }
         return selector;
-    }
-
-    // Извлечь тип события из команды
-    private extractEventType(commandType: string): string | null {
-        const parts = commandType.split(':');
-        if (parts.length < 2) return null;
-
-        const eventMap: Record<string, string> = {
-            'click': 'click',
-            'hover': 'mouseenter',
-            'focus': 'focus',
-            'load': 'DOMContentLoaded',
-            'change': 'change',
-            'submit': 'submit'
-        };
-
-        return eventMap[parts[1]] || parts[1];
     }
 
     // Получить цель для события
@@ -235,61 +348,47 @@ export class MinecraftCommandSystem {
         return document;
     }
 
-    // Автоматические команды для UI элементов
-    private initAutoCommands(): void {
-        // Автоматические звуки для кнопок
-        this.execute('add', 'button:click', '@all-buttons', () => {
-            this.playCommandSound('button:click');
-        }, { sound: false }); // звук уже встроен
-
-        // Автоматические звуки при наведении
-        this.execute('add', 'button:hover', '@all-buttons', () => {
-            this.playCommandSound('button:hover');
-        }, { sound: false });
-    }
-
-    // Воспроизвести звук для команды
-    private playCommandSound(commandType: string): void {
-        // Импортируем звуки динамически чтобы избежать циклических зависимостей
-        import('./sounds').then(({ minecraftSounds }) => {
-            switch (commandType) {
-                case 'button:click':
-                    minecraftSounds.playButtonClick();
-                    break;
-                case 'button:hover':
-                    minecraftSounds.playButtonHover();
-                    break;
-                case 'modal:open':
-                    minecraftSounds.playModalOpen();
-                    break;
-                case 'modal:close':
-                    minecraftSounds.playModalClose();
-                    break;
-                default:
-                    minecraftSounds.playNotification();
+    // Кастомные Minecraft-события
+    private setupBlockPlaceEvents(selector: string, callback: CommandCallback, params: CommandParams): void {
+        this.execute('add', 'mouse:down', selector, (data) => {
+            if (data.event?.shiftKey) {
+                callback({
+                    ...data,
+                    params: { ...params, action: 'block-place' }
+                });
             }
         });
     }
 
-
-
-    // Проверить, нужно ли воспроизводить звук
-    private shouldPlaySound(commandType: string): boolean {
-        const soundCommands = ['button:click', 'button:hover', 'modal:open', 'modal:close', 'tab:switch'];
-        return soundCommands.includes(commandType);
+    private setupBlockBreakEvents(selector: string, callback: CommandCallback, params: CommandParams): void {
+        this.execute('add', 'mouse:down', selector, (data) => {
+            if (!data.event?.shiftKey) {
+                callback({
+                    ...data,
+                    params: { ...params, action: 'block-break' }
+                });
+            }
+        });
     }
 
-    // Добавить кастомный селектор
+    private setupInventoryEvents(selector: string, callback: CommandCallback, params: CommandParams): void {
+        this.execute('add', 'key:down', selector, (data) => {
+            const event = data.event as KeyboardEvent;
+            if (event.key === 'e') {
+                callback(data);
+            }
+        });
+    }
+
+    // Утилиты
     public addSelector(name: string, selector: string): void {
         this.selectors[name as keyof MinecraftSelectors] = selector;
     }
 
-    // Получить все активные команды
     public getActiveCommands(): string[] {
         return Array.from(this.commands.keys());
     }
 
-    // Статистика команд
     public getCommandStats(): Record<string, number> {
         const stats: Record<string, number> = {};
         this.commands.forEach((callbacks, key) => {

@@ -4,6 +4,307 @@
 @import './functions';
 @import './variables';
 
+// MinecraftUI Enhanced Mixins - обновленные миксины
+
+// ================================
+// ENHANCED BLOCK EFFECTS
+// ================================
+
+// 3D блок эффект с улучшенной типизацией
+@mixin mc-block-border($color: $mc-outline, $width: $mc-radius-xs, $style: 'raised') {
+  border: $width solid $color;
+
+  @if $style == 'raised' {
+    border-top-color: lighten($color, 20%);
+    border-left-color: lighten($color, 20%);
+    border-bottom-color: darken($color, 20%);
+    border-right-color: darken($color, 20%);
+  } @else if $style == 'inset' {
+    border-top-color: darken($color, 20%);
+    border-left-color: darken($color, 20%);
+    border-bottom-color: lighten($color, 20%);
+    border-right-color: lighten($color, 20%);
+  }
+}
+
+// Современный блок эффект для Bedrock темы
+@mixin mc-modern-elevation($level: 1, $color: rgba(0, 0, 0, 0.2)) {
+  @if $level == 1 {
+    box-shadow: 0 1px 3px $color, 0 1px 2px rgba(0, 0, 0, 0.24);
+  } @else if $level == 2 {
+    box-shadow: 0 3px 6px $color, 0 2px 4px rgba(0, 0, 0, 0.24);
+  } @else if $level == 3 {
+    box-shadow: 0 10px 20px $color, 0 6px 10px rgba(0, 0, 0, 0.24);
+  } @else if $level == 4 {
+    box-shadow: 0 14px 28px $color, 0 10px 20px rgba(0, 0, 0, 0.24);
+  } @else if $level == 5 {
+    box-shadow: 0 19px 38px $color, 0 15px 30px rgba(0, 0, 0, 0.24);
+  }
+}
+
+// ================================
+// TOOLTIPS
+// ================================
+
+@mixin mc-tooltip-base() {
+  position: relative;
+
+  &[data-tooltip]:not([data-tooltip=""]) {
+    &::before,
+    &::after {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity $mc-duration-short4 $mc-easing-standard,
+      transform $mc-duration-short4 $mc-easing-standard;
+      z-index: $mc-z-tooltip;
+      position: absolute;
+    }
+
+    // Тултип контент
+    &::before {
+      content: attr(data-tooltip);
+      background: $mc-surface-container-high;
+      color: $mc-on-surface;
+      padding: $mc-space-2 $mc-space-3;
+      font-size: $mc-body-small-size;
+      font-weight: $mc-font-weight-medium;
+      line-height: $mc-body-small-height;
+      border-radius: $mc-radius-md;
+      box-shadow: $mc-elevation-2;
+      max-width: 200px;
+      white-space: normal;
+      word-wrap: break-word;
+      text-align: center;
+    }
+
+    // Стрелка тултипа
+    &::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border: 6px solid transparent;
+    }
+
+    &:hover::before,
+    &:hover::after {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+}
+
+@mixin mc-tooltip-position($position: 'top', $offset: 8px) {
+  @if $position == 'top' {
+    &::before {
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-#{$offset});
+      margin-bottom: 6px;
+    }
+
+    &::after {
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-top-color: $mc-surface-container-high;
+      margin-bottom: 0;
+    }
+
+    &:hover::before {
+      transform: translateX(-50%) translateY(-#{$offset + 4px});
+    }
+  } @else if $position == 'bottom' {
+    &::before {
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(#{$offset});
+      margin-top: 6px;
+    }
+
+    &::after {
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-bottom-color: $mc-surface-container-high;
+      margin-top: 0;
+    }
+
+    &:hover::before {
+      transform: translateX(-50%) translateY(#{$offset + 4px});
+    }
+  } @else if $position == 'left' {
+    &::before {
+      right: 100%;
+      top: 50%;
+      transform: translateY(-50%) translateX(-#{$offset});
+      margin-right: 6px;
+    }
+
+    &::after {
+      right: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      border-left-color: $mc-surface-container-high;
+      margin-right: 0;
+    }
+
+    &:hover::before {
+      transform: translateY(-50%) translateX(-#{$offset + 4px});
+    }
+  } @else if $position == 'right' {
+    &::before {
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%) translateX(#{$offset});
+      margin-left: 6px;
+    }
+
+    &::after {
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      border-right-color: $mc-surface-container-high;
+      margin-left: 0;
+    }
+
+    &:hover::before {
+      transform: translateY(-50%) translateX(#{$offset + 4px});
+    }
+  }
+}
+
+// ================================
+// COMPONENT MIXINS
+// ================================
+
+// Универсальный миксин для кнопок
+@mixin mc-button-base(
+  $height: $mc-button-height-md,
+  $padding-x: $mc-space-6,
+  $radius: $mc-button-radius,
+  $typography: $mc-label-large-size
+) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: $height;
+  padding: 0 $padding-x;
+  border: none;
+  border-radius: $radius;
+  font-family: $mc-font-family-body;
+  font-size: $typography;
+  font-weight: $mc-font-weight-medium;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  transition: all $mc-duration-short4 $mc-easing-standard;
+  position: relative;
+  overflow: hidden;
+
+  // Ripple effect placeholder
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width $mc-duration-short4 $mc-easing-standard,
+    height $mc-duration-short4 $mc-easing-standard;
+  }
+
+  &:active::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  &:disabled {
+    opacity: $mc-disabled-opacity;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// Миксин для создания карточек
+@mixin mc-card-base(
+  $padding: $mc-card-padding,
+  $radius: $mc-card-radius,
+  $elevation: 1
+) {
+  background: $mc-surface;
+  color: $mc-on-surface;
+  border-radius: $radius;
+  padding: $padding;
+  @include mc-modern-elevation($elevation);
+
+  .mc-card-header {
+    margin: (-$padding) (-$padding) $padding (-$padding);
+    padding: $mc-space-4 $padding;
+    background: $mc-surface-variant;
+    border-radius: $radius $radius 0 0;
+    border-bottom: 1px solid $mc-outline-variant;
+
+    .mc-card-title {
+      font-size: $mc-title-medium-size;
+      font-weight: $mc-font-weight-medium;
+      color: $mc-on-surface;
+      margin: 0;
+    }
+
+    .mc-card-subtitle {
+      font-size: $mc-body-medium-size;
+      color: $mc-on-surface-variant;
+      margin: $mc-space-1 0 0;
+    }
+  }
+
+  .mc-card-content {
+    font-size: $mc-body-medium-size;
+    line-height: $mc-body-medium-height;
+    color: $mc-on-surface;
+  }
+
+  .mc-card-actions {
+    margin: $padding (-$padding) (-$padding) (-$padding);
+    padding: $mc-space-4 $padding;
+    display: flex;
+    gap: $mc-space-2;
+    justify-content: flex-end;
+    border-top: 1px solid $mc-outline-variant;
+  }
+}
+
+// ================================
+// АНИМАЦИОННЫЕ МИКСИНЫ
+// ================================
+
+@mixin mc-animate-in($type: 'fade', $duration: $mc-duration-medium2, $delay: 0s) {
+  animation-duration: $duration;
+  animation-delay: $delay;
+  animation-fill-mode: both;
+  animation-timing-function: $mc-easing-emphasized;
+
+  @if $type == 'fade' {
+    animation-name: mcFadeIn;
+  } @else if $type == 'slide-up' {
+    animation-name: mcSlideUp;
+  } @else if $type == 'slide-down' {
+    animation-name: mcSlideDown;
+  } @else if $type == 'slide-left' {
+    animation-name: mcSlideLeft;
+  } @else if $type == 'slide-right' {
+    animation-name: mcSlideRight;
+  } @else if $type == 'scale' {
+    animation-name: mcScaleIn;
+  } @else if $type == 'rotate' {
+    animation-name: mcRotateIn;
+  }
+}
+
 // ================================
 // PIXEL ART UTILITIES
 // ================================
@@ -21,26 +322,26 @@
 // ================================
 
 // Create 3D block border effect
-@mixin mc-block-border($color: $mc-ui-border, $width: $mc-border-width) {
+@mixin mc-block-border($color: $mc-stone, $width: $mc-radius-xs) {
   border: solid mc-lighten($color, 20%);
   border-right-color: mc-darken($color, 20%);
   border-bottom-color: mc-darken($color, 20%);
 }
 
 // Pressed/active block effect (inverted borders)
-@mixin mc-block-pressed($color: $mc-ui-border, $width: $mc-border-width) {
+@mixin mc-block-pressed($color: $mc-stone, $width: $mc-radius-xs) {
   border: solid mc-darken($color, 20%);
   border-right-color: mc-lighten($color, 20%);
   border-bottom-color: mc-lighten($color, 20%);
 }
 
 // Inset border effect (for inputs)
-@mixin mc-block-inset($color: $mc-ui-border, $width: $mc-border-width) {
+@mixin mc-block-inset($color: $mc-stone, $width: $mc-radius-xs) {
   border: $width inset $color;
 }
 
 // Outset border effect (for raised elements)
-@mixin mc-block-outset($color: $mc-ui-border, $width: $mc-border-width) {
+@mixin mc-block-outset($color: $mc-stone, $width: $mc-radius-xs) {
   border: $width outset $color;
 }
 
@@ -94,13 +395,58 @@
   }
 }
 
+// Контейнер с максимальной шириной
+@mixin mc-container($max-width: null, $padding: $mc-container-padding) {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $padding;
+  padding-right: $padding;
+
+  @if $max-width {
+    max-width: $max-width;
+  } @else {
+    @each $breakpoint, $width in $mc-container-max-widths {
+      @include mc-media-up($breakpoint) {
+        max-width: $width;
+      }
+    }
+  }
+}
+
+// Grid система
+@mixin mc-grid($columns: 12, $gap: $mc-component-gap) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+@mixin mc-grid-item($span: 1, $start: null) {
+  grid-column: #{if($start, $start, 'span')} / #{if($start, span $span, '')};
+}
+
+// ================================
+// THEME MIXINS
+// ================================
+
+// Автоматическое переопределение для тем
+@mixin mc-theme-aware($property, $light-value, $dark-value: null) {
+  #{$property}: $light-value;
+
+  @if $dark-value {
+    .mc-theme-bedrock & {
+      #{$property}: $dark-value;
+    }
+  }
+}
+
 // ================================
 // COMPONENT MIXINS
 // ================================
 
 // Button variant mixin
 @mixin mc-button-variant($bg-color, $text-color: null) {
-  $text: if($text-color, $text-color, if(lightness($bg-color) > 50%, $mc-ui-text-dark, $mc-ui-text));
+  $text: if($text-color, $text-color, if(lightness($bg-color) > 50%, mc-luminance($mc-on-background), $mc-on-background));
 
   background: $bg-color;
   color: $text;
@@ -153,13 +499,13 @@
 // ================================
 
 // Fade in animation
-@mixin mc-fade-in($duration: $mc-transition-duration-slow) {
+@mixin mc-fade-in($duration: $mc-duration-long2) {
   opacity: 0;
-  animation: mcFadeIn $duration $mc-transition-timing-function forwards;
+  animation: mcFadeIn $duration $mc-easing-standard forwards;
 }
 
 // Slide in animation
-@mixin mc-slide-in($direction: up, $distance: 20px, $duration: $mc-transition-duration-slow) {
+@mixin mc-slide-in($direction: up, $distance: 20px, $duration: $mc-duration-long2) {
   $transform: translateY($distance);
 
   @if $direction == down {
@@ -172,7 +518,7 @@
 
   transform: $transform;
   opacity: 0;
-  animation: mcSlideIn#{capitalize($direction)} $duration $mc-transition-timing-function forwards;
+  animation: mcSlideIn#{capitalize($direction)} $duration $mc-easing-standard forwards;
 }
 
 // Pulse animation
@@ -182,7 +528,7 @@
 
 // Shake animation
 @mixin mc-shake($duration: 0.5s) {
-  animation: mcShake $duration $mc-transition-timing-function;
+  animation: mcShake $duration $mc-easing-standard;
 }
 
 // ================================
@@ -260,17 +606,17 @@
   display: block;
   width: 100%;
   padding: $mc-space-2;
-  font-family: $mc-font-family-base;
-  font-size: $mc-font-size-base;
-  line-height: $mc-line-height-base;
-  color: $mc-ui-text;
-  background: $mc-ui-bg-dark;
-  border: $mc-border-width solid $mc-ui-border;
-  transition: $mc-transition-border, $mc-transition-background;
+  font-family: $mc-font-family-body;
+  font-size: $mc-body-medium-size;
+  line-height: $mc-headline-medium-height;
+  color: $mc-on-background;
+  background: $mc-background;
+  border: $mc-radius-xs solid $mc-stone;
+  transition: border $mc-duration-medium1;
 
   &:focus {
     border-color: $mc-info;
-    background: $mc-ui-bg;
+    background: $mc-background;
     outline: none;
   }
 
@@ -280,8 +626,8 @@
   }
 
   &::placeholder {
-    color: $mc-ui-text-muted;
-    opacity: 1;
+    color: $mc-on-background;
+    opacity: 0.7;
   }
 }
 
@@ -297,25 +643,6 @@
 // ================================
 // TYPOGRAPHY MIXINS
 // ================================
-
-// Heading styles
-@mixin mc-heading($level: 1) {
-  $sizes: (
-          1: $mc-font-size-3xl,
-          2: $mc-font-size-2xl,
-          3: $mc-font-size-xl,
-          4: $mc-font-size-lg,
-          5: $mc-font-size-base,
-          6: $mc-font-size-sm
-  );
-
-  font-family: $mc-font-family-heading;
-  font-size: map.get($sizes, $level);
-  font-weight: $mc-font-weight-bold;
-  line-height: $mc-line-height-sm;
-  color: $mc-ui-text;
-  margin-bottom: $mc-space-3;
-}
 
 // Text styles
 @mixin mc-text-style($size: base, $weight: normal, $color: null) {

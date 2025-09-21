@@ -12,10 +12,10 @@
 }
 
 .mc-base {
-  font-family: $mc-font-family-base;
-  font-size: $mc-font-size-base;
+  font-family: $mc-font-family-body;
+  font-size: $mc-body-medium-size;
   line-height: $mc-line-height-base;
-  color: $mc-ui-text;
+  color: $mc-on-background;
   @include mc-pixelated();
 }
 
@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $mc-font-family-heading;
   font-weight: $mc-font-weight-bold;
   line-height: $mc-line-height-sm;
-  color: $mc-ui-text;
+  color: $mc-on-background;
   margin-bottom: $mc-space-3;
 }
 
@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5, h6 {
 // Text utilities
 .mc-text-xs { font-size: $mc-font-size-xs; }
 .mc-text-sm { font-size: $mc-font-size-sm; }
-.mc-text-base { font-size: $mc-font-size-base; }
+.mc-text-base { font-size: $mc-body-medium-size; }
 .mc-text-lg { font-size: $mc-font-size-lg; }
 .mc-text-xl { font-size: $mc-font-size-xl; }
 .mc-text-2xl { font-size: $mc-font-size-2xl; }
@@ -61,7 +61,7 @@ h1, h2, h3, h4, h5, h6 {
 .mc-text-success { color: $mc-success; }
 .mc-text-warning { color: $mc-warning; }
 .mc-text-error { color: $mc-error; }
-.mc-text-muted { color: $mc-ui-text-muted; }
+.mc-text-muted { color: $mc-on-background-muted; }
 
 // Minecraft block colors
 .mc-text-grass { color: $mc-grass; }

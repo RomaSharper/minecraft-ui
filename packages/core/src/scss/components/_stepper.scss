@@ -1,0 +1,148 @@
+// Stepper - Material Design 3
+
+@import '../core/variables';
+@import '../core/keyframes';
+
+.mc-stepper {
+  .mc-stepper-header {
+    display: flex;
+    align-items: center;
+    padding: $mc-space-4 0;
+  }
+
+  .mc-step {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    position: relative;
+
+    &:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 0;
+      left: 60px;
+      height: 1px;
+      background: $mc-outline-variant;
+      transform: translateY(-50%);
+      z-index: $mc-z-base;
+    }
+
+    .mc-step-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: $mc-radius-full;
+      background: $mc-surface-variant;
+      border: 1px solid $mc-outline;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: $mc-font-weight-medium;
+      color: $mc-on-surface-variant;
+      margin-right: $mc-space-3;
+      position: relative;
+      z-index: $mc-z-docked;
+      transition: all $mc-duration-short2 $mc-easing-standard;
+    }
+
+    .mc-step-content {
+      flex: 1;
+
+      .mc-step-label {
+        font-size: $mc-body-large-size;
+        font-weight: $mc-font-weight-medium;
+        color: $mc-on-surface;
+        margin: 0;
+      }
+
+      .mc-step-description {
+        font-size: $mc-body-medium-size;
+        color: $mc-on-surface-variant;
+        margin: $mc-space-1 0 0;
+      }
+    }
+
+    &.mc-step-completed {
+      .mc-step-icon {
+        background: $mc-primary;
+        border-color: $mc-primary;
+        color: $mc-on-primary;
+      }
+
+      &::after {
+        background: $mc-primary;
+      }
+    }
+
+    &.mc-step-active {
+      .mc-step-icon {
+        background: $mc-primary;
+        border-color: $mc-primary;
+        color: $mc-on-primary;
+        box-shadow: 0 0 0 8px rgba($mc-primary, 0.12);
+      }
+
+      .mc-step-label {
+        color: $mc-primary;
+      }
+    }
+
+    &.mc-step-error {
+      .mc-step-icon {
+        background: $mc-error;
+        border-color: $mc-error;
+        color: $mc-on-error;
+      }
+
+      .mc-step-label {
+        color: $mc-error;
+      }
+    }
+  }
+
+  .mc-stepper-content {
+    padding: $mc-space-6 0;
+
+    .mc-step-panel {
+      display: none;
+
+      &.mc-step-panel-active {
+        display: block;
+        animation: mcFadeInUp $mc-duration-medium2 $mc-easing-standard;
+      }
+    }
+  }
+
+  .mc-stepper-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: $mc-space-4 0;
+    border-top: 1px solid $mc-outline-variant;
+  }
+
+  &.mc-stepper-vertical {
+    .mc-stepper-header {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .mc-step {
+      flex-direction: column;
+      align-items: flex-start;
+
+      &:not(:last-child)::after {
+        top: 40px;
+        left: 20px;
+        width: 1px;
+        height: 40px;
+        transform: none;
+      }
+
+      .mc-step-content {
+        margin-left: 60px;
+        margin-top: -40px;
+        padding-bottom: $mc-space-6;
+      }
+    }
+  }
+}

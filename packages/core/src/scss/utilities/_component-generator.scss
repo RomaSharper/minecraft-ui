@@ -1,0 +1,38 @@
+// Автогенерация компонентов на основе цветовой палитры
+
+@import '../core/variables';
+@import '../core/component-builder';
+
+// Генерируем кнопки для всех цветов Minecraft
+@include mc-create-button('grass', $mc-grass, white);
+@include mc-create-button('stone', $mc-stone, white);
+@include mc-create-button('dirt', $mc-dirt, white);
+@include mc-create-button('wood', $mc-wood, white);
+@include mc-create-button('gold', $mc-gold, black);
+@include mc-create-button('diamond', $mc-diamond, white);
+@include mc-create-button('redstone', $mc-redstone, white);
+@include mc-create-button('emerald', $mc-emerald, white);
+@include mc-create-button('lapis', $mc-lapis, white);
+@include mc-create-button('netherite', $mc-netherite, white);
+@include mc-create-button('obsidian', $mc-obsidian, white);
+@include mc-create-button('quartz', $mc-quartz, black);
+@include mc-create-button('amethyst', $mc-amethyst, white);
+
+// Генерируем карточки
+@include mc-create-card('grass', lighten($mc-grass, 40%), $mc-grass);
+@include mc-create-card('diamond', lighten($mc-diamond, 40%), $mc-diamond);
+@include mc-create-card('gold', lighten($mc-gold, 30%), $mc-gold);
+@include mc-create-card('redstone', lighten($mc-redstone, 35%), $mc-redstone);
+
+// Генерируем прогресс-бары
+@include mc-create-progress('health', $mc-redstone, true);
+@include mc-create-progress('hunger', #CD853F, true);
+@include mc-create-progress('xp', $mc-emerald, true);
+@include mc-create-progress('mana', $mc-lapis, true);
+@include mc-create-progress('energy', $mc-gold, true);
+
+// Генерируем значки
+@include mc-create-badge('health', $mc-redstone);
+@include mc-create-badge('mana', $mc-lapis);
+@include mc-create-badge('xp', $mc-emerald);
+@include mc-create-badge('gold', $mc-gold, black);

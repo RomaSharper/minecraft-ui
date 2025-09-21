@@ -1,0 +1,100 @@
+// Data Table - Material Design 3
+
+@import '../core/variables';
+
+.mc-data-table {
+  width: 100%;
+  background: $mc-surface;
+  border-radius: $mc-radius-lg;
+  overflow: hidden;
+  box-shadow: $mc-elevation-1;
+
+  .mc-data-table-header {
+    background: $mc-surface-variant;
+    border-bottom: 1px solid $mc-outline-variant;
+
+    .mc-data-table-row {
+      &:hover {
+        background: none;
+      }
+    }
+
+    .mc-data-table-cell {
+      font-weight: $mc-font-weight-medium;
+      color: $mc-on-surface-variant;
+      padding: $mc-space-4;
+    }
+  }
+
+  .mc-data-table-body {
+    .mc-data-table-row {
+      border-bottom: 1px solid $mc-outline-variant;
+      transition: background-color $mc-duration-short2 $mc-easing-standard;
+
+      &:hover {
+        background: rgba($mc-on-surface, $mc-hover-opacity);
+      }
+
+      &.mc-data-table-row-selected {
+        background: rgba($mc-primary, $mc-selected-opacity);
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .mc-data-table-cell {
+      padding: $mc-space-4;
+      font-size: $mc-body-medium-size;
+      color: $mc-on-surface;
+      vertical-align: middle;
+
+      &.mc-data-table-cell-numeric {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .mc-data-table-sort {
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+
+        .mc-data-table-sort-icon {
+          margin-left: $mc-space-1;
+          width: 16px;
+          height: 16px;
+          opacity: 0.6;
+          transition: transform $mc-duration-short2 $mc-easing-standard;
+
+          &.mc-data-table-sort-desc {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
+
+  .mc-data-table-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $mc-space-4;
+    border-top: 1px solid $mc-outline-variant;
+    font-size: $mc-body-small-size;
+    color: $mc-on-surface-variant;
+
+    .mc-data-table-pagination-info {
+      display: flex;
+      align-items: center;
+      gap: $mc-space-4;
+    }
+
+    .mc-data-table-pagination-controls {
+      display: flex;
+      align-items: center;
+      gap: $mc-space-2;
+    }
+  }
+}

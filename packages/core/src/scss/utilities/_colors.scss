@@ -19,13 +19,13 @@
 .mc-bg-coal { background-color: $mc-coal; }
 
 // UI backgrounds
-.mc-bg-base { background-color: $mc-ui-bg; }
-.mc-bg-dark { background-color: $mc-ui-bg-dark; }
-.mc-bg-light { background-color: $mc-ui-bg-light; }
+.mc-bg-base { background-color: $mc-background; }
+.mc-bg-dark { background-color: $mc-background; }
+.mc-bg-light { background-color: $mc-background-light; }
 
 // Border colors
 .mc-border-primary { border-color: $mc-info; }
 .mc-border-success { border-color: $mc-success; }
 .mc-border-warning { border-color: $mc-warning; }
 .mc-border-error { border-color: $mc-error; }
-.mc-border-base { border-color: $mc-ui-border; }
+.mc-border-base { border-color: $mc-stone; }

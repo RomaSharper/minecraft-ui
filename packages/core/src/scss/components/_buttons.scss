@@ -4,124 +4,112 @@
 @import '../core/variables';
 
 .mc-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: $mc-btn-padding-y $mc-btn-padding-x;
-  font-family: $mc-font-family-base;
-  font-size: $mc-font-size-base;
-  font-weight: $mc-font-weight-bold;
-  line-height: $mc-line-height-base;
-  text-align: center;
-  text-decoration: none;
-  vertical-align: middle;
-  cursor: pointer;
-  user-select: none;
-  background: $mc-ui-bg;
-  color: $mc-ui-text;
-  @include mc-block-border($mc-ui-border);
-  transition: $mc-transition-all;
+  @include mc-button-base(
+          $height: $mc-button-height-md,
+          $padding-x: $mc-button-padding-x-md,
+          $radius: $mc-button-radius,
+          $typography: $mc-label-large-size
+  );
+
+  background: $mc-surface-variant;
+  color: $mc-on-surface-variant;
+  border: 1px solid $mc-outline;
+  font-weight: $mc-font-weight-medium;
 
   &:hover:not(:disabled) {
-    background: $mc-ui-hover;
-    text-decoration: none;
-  }
-
-  &:active:not(:disabled) {
-    @include mc-block-pressed($mc-ui-border);
-    transform: translate(1px, 1px);
+    background: $mc-surface-container-high;
+    box-shadow: $mc-elevation-1;
   }
 
   &:focus {
-    @include mc-focus-ring($mc-info);
+    outline: 2px solid $mc-primary;
+    outline-offset: 2px;
   }
 
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+  &:active:not(:disabled) {
+    background: $mc-surface-container;
+    transform: translateY(1px);
+  }
 
-    &:active {
-      transform: none;
-      @include mc-block-border($mc-ui-border);
+  // Size variants
+  &.mc-btn-sm {
+    height: $mc-button-height-sm;
+    padding: 0 $mc-button-padding-x-sm;
+    font-size: $mc-label-medium-size;
+  }
+
+  &.mc-btn-lg {
+    height: $mc-button-height-lg;
+    padding: 0 $mc-button-padding-x-lg;
+    font-size: $mc-label-large-size;
+  }
+
+  // Style variants
+  &.mc-btn-primary {
+    background: $mc-primary;
+    color: $mc-on-primary;
+    border-color: $mc-primary;
+
+    &:hover:not(:disabled) {
+      background: rgba($mc-primary, 0.9);
     }
   }
-}
 
-// Button variants
-.mc-btn-grass {
-  @include mc-button-variant($mc-grass, $mc-ui-text);
-}
+  &.mc-btn-secondary {
+    background: $mc-secondary;
+    color: $mc-on-secondary;
+    border-color: $mc-secondary;
 
-.mc-btn-stone {
-  @include mc-button-variant($mc-stone, $mc-ui-text-dark);
-}
-
-.mc-btn-gold {
-  @include mc-button-variant($mc-gold, $mc-ui-text-dark);
-}
-
-.mc-btn-diamond {
-  @include mc-button-variant($mc-diamond, $mc-ui-text);
-}
-
-.mc-btn-redstone {
-  @include mc-button-variant($mc-redstone, $mc-ui-text);
-}
-
-.mc-btn-success {
-  @include mc-button-variant($mc-success, $mc-ui-text);
-}
-
-.mc-btn-warning {
-  @include mc-button-variant($mc-warning, $mc-ui-text-dark);
-}
-
-.mc-btn-error {
-  @include mc-button-variant($mc-error, $mc-ui-text);
-}
-
-// Button sizes
-.mc-btn-sm {
-  @include mc-button-size($mc-btn-padding-sm-y, $mc-btn-padding-sm-x, $mc-font-size-sm);
-}
-
-.mc-btn-lg {
-  @include mc-button-size($mc-btn-padding-lg-y, $mc-btn-padding-lg-x, $mc-font-size-lg);
-}
-
-// Button groups
-.mc-btn-group {
-  display: inline-flex;
-  vertical-align: middle;
-
-  .mc-btn {
-    margin-right: -#{$mc-border-width};
-
-    &:first-child {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    &:last-child {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      margin-right: 0;
-    }
-
-    &:not(:first-child):not(:last-child) {
-      border-radius: 0;
-    }
-
-    &:hover,
-    &:focus,
-    &:active {
-      z-index: 1;
+    &:hover:not(:disabled) {
+      background: rgba($mc-secondary, 0.9);
     }
   }
-}
 
-// Block button
-.mc-btn-block {
-  display: block;
-  width: 100%;
+  &.mc-btn-outlined {
+    background: transparent;
+    color: $mc-primary;
+    border-color: $mc-outline;
+
+    &:hover:not(:disabled) {
+      background: rgba($mc-primary, $mc-hover-opacity);
+    }
+  }
+
+  &.mc-btn-text {
+    background: transparent;
+    color: $mc-primary;
+    border: none;
+
+    &:hover:not(:disabled) {
+      background: rgba($mc-primary, $mc-hover-opacity);
+    }
+  }
+
+  // Icon buttons
+  &.mc-btn-icon {
+    width: $mc-button-height-md;
+    padding: 0;
+
+    &.mc-btn-sm {
+      width: $mc-button-height-sm;
+    }
+
+    &.mc-btn-lg {
+      width: $mc-button-height-lg;
+    }
+  }
+
+  .mc-btn-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+
+    &:not(:last-child) {
+      margin-right: $mc-space-2;
+    }
+
+    &:not(:first-child) {
+      margin-left: $mc-space-2;
+    }
+  }
 }
